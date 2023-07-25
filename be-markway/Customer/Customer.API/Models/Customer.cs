@@ -7,5 +7,5 @@ public class ExampleEntity : Entity
 {
 
     [Required]
-    public string? Property { get; set; }
+    public string? Name { get; set; }
 }

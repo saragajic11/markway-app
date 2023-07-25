@@ -6,7 +6,7 @@ namespace Napokon.Customer.API.Models.DTO
     {
         public long? Id { get; init; }
 
-        public string? Property { get; init; }
+        public string? Name { get; init; }
 
         public DateTime DateCreated { get; init; }
 

@@ -7,6 +7,6 @@ namespace Napokon.Customer.API.Models.DTO
     {
         public long? Id { get; set; }
 
-        public string? Property { get; set; }
+        public string? Name { get; set; }
     }
 }
