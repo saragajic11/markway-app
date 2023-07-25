@@ -5,11 +5,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-using Napokon.Microservice.API.Constants;
-using Napokon.Microservice.API.Models;
-using Napokon.Microservice.API.Models.DTO;
-using Napokon.Microservice.API.Services.Core;
-namespace Napokon.Microservice.API.Controllers;
+using Napokon.Customers.API.Constants;
+using Napokon.Customers.API.Models;
+using Napokon.Customers.API.Models.DTO;
+using Napokon.Customers.API.Services.Core;
+namespace Napokon.Customers.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -28,9 +28,9 @@ public class ExampleEntityController : ControllerBase
     [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
     public async Task<IActionResult> GetEntities([FromQuery] PageRequest pageRequest)
     {
-        IList<ExampleEntity> entities = await _entityService.GetAllAsync(pageRequest);
+        IList<Customer> entities = await _entityService.GetAllAsync(pageRequest);
 
-        return Ok(_mapper.Map<IEnumerable<ExampleEntity>, List<ExampleEntityDto>>(entities));
+        return Ok(_mapper.Map<IEnumerable<Customer>, List<ExampleEntityDto>>(entities));
     }
 
     [HttpGet("{id}")]

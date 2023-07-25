@@ -22,7 +22,7 @@ namespace Napokon.Microservice.API.Services
         {
             try
             {
-                ExampleEntity entity = _mapper.Map<ExampleEntity>(dto);
+                Customer entity = _mapper.Map<ExampleEntity>(dto);
 
                 await base.AddAsync(entity);
 

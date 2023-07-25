@@ -2,10 +2,9 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Napokon.Microservice.API.Models;
+namespace Napokon.Customers.API.Models;
 public class Customer : Entity
 {
-
     [Required]
-    public string? Property { get; set; }
+    public string? Name { get; set; }
 }
