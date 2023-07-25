@@ -11,12 +11,12 @@ namespace Napokon.Customer.API.Repository
 
         private Dictionary<string, dynamic> _repositories = new();
 
-        public IExampleEntityRepository Entities { get; private set; }
+        public ICustomerRepository Entities { get; private set; }
 
         public UnitOfWork(CustomerContext context)
         {
             _context = context;
-            Entities = new ExampleEntityRepository(_context);
+            Entities = new CustomerRepository(_context);
         }
 
         public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class

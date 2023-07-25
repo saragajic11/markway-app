@@ -3,8 +3,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-using Napokon.Commons.Configurations;
-
 namespace Napokon.Customer.API.Models
 {
     public class CustomerContext : DbContext
@@ -46,7 +44,7 @@ namespace Napokon.Customer.API.Models
             return await base.SaveChangesAsync(cancellationToken);
         }
 
-        public DbSet<ExampleEntity> Entities { get; set; }
+        public DbSet<Customer> Entities { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

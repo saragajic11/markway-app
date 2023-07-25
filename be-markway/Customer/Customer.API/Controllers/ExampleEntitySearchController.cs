@@ -32,10 +32,10 @@ public class ExampleEntitySearchController : ControllerBase
     [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
     public async Task<IActionResult> SearchEntities([FromQuery] PageRequest pageRequest, [FromQuery] string? term = "")
     {
-        ISearchResponse<ExampleEntityElasticDto> entities = await _elasticSearchService.SearchAllAsync(pageRequest, term);
-        IReadOnlyCollection<ExampleEntityElasticDto> entitiesDocuments = entities.Documents;
+        ISearchResponse<CustomerElasticDto> entities = await _elasticSearchService.SearchAllAsync(pageRequest, term);
+        IReadOnlyCollection<CustomerElasticDto> entitiesDocuments = entities.Documents;
 
-        return Ok(_mapper.Map<IReadOnlyCollection<ExampleEntityElasticDto>, List<ExampleEntityDto>>(entitiesDocuments));
+        return Ok(_mapper.Map<IReadOnlyCollection<CustomerElasticDto>, List<CustomerDto>>(entitiesDocuments));
     }
 
     [HttpPut(Endpoints.SEARCH_REINDEX)]
@@ -45,8 +45,8 @@ public class ExampleEntitySearchController : ControllerBase
         PageRequest pageRequest = new PageRequest();
         pageRequest.PerPage = int.MaxValue;
 
-        IList<ExampleEntity> entities = await _entityService.GetAllAsync(pageRequest);
-        _elasticSearchService.Reindex(_mapper.Map<IList<ExampleEntity>, IList<ExampleEntityElasticDto>>(entities));
+        IList<CustomerEntity> entities = await _entityService.GetAllAsync(pageRequest);
+        _elasticSearchService.Reindex(_mapper.Map<IList<CustomerEntity>, IList<CustomerElasticDto>>(entities));
 
         return Ok();
     }

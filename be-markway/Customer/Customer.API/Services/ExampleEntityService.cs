@@ -8,7 +8,7 @@ using Napokon.Customer.API.Repository.Core;
 using Napokon.Customer.API.Services.Core;
 namespace Napokon.Customer.API.Services
 {
-    public class EntityService : BaseService<ExampleEntity>, IExampleEntityService
+    public class EntityService : BaseService<CustomerEntity>, IExampleEntityService
     {
         private readonly IMapper _mapper;
 
@@ -18,15 +18,15 @@ namespace Napokon.Customer.API.Services
             _mapper = mapper;
         }
 
-        public async Task<ExampleEntity?> AddAsync(ExampleEntityDto dto)
+        public async Task<CustomerEntity?> AddAsync(CustomerDto dto)
         {
             try
             {
-                ExampleEntity entity = _mapper.Map<ExampleEntity>(dto);
+                CustomerEntity entity = _mapper.Map<CustomerEntity>(dto);
 
                 await base.AddAsync(entity);
 
-                ExampleEntityElasticDto entityElasticDto = _mapper.Map<ExampleEntityElasticDto>(entity);
+                CustomerElasticDto entityElasticDto = _mapper.Map<CustomerElasticDto>(entity);
                 _elasticSearchService.IndexDocumentAsync(entityElasticDto);
 
                 return entity;

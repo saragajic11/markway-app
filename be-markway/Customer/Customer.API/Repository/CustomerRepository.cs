@@ -5,9 +5,9 @@ using Napokon.Customer.API.Repository.Core;
 
 namespace Napokon.Customer.API.Repository
 {
-    public class ExampleEntityRepository : BaseRepository<ExampleEntity>, IExampleEntityRepository
+    public class CustomerRepository : BaseRepository<CustomerEntity>, ICustomerRepository
     {
-        public ExampleEntityRepository(CustomerContext context)
+        public CustomerRepository(CustomerContext context)
             : base(context) { }
     }
 }

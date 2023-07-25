@@ -19,14 +19,14 @@ namespace Napokon.Customer.API.Services.Core
             _elasticClient = elasticClient;
         }
 
-        public async Task<IndexResponse> IndexDocumentAsync(ExampleEntityElasticDto entityElasticDto)
+        public async Task<IndexResponse> IndexDocumentAsync(CustomerElasticDto entityElasticDto)
         {
             return await _elasticClient.IndexDocumentAsync(entityElasticDto);
         }
 
-        public async Task<ISearchResponse<ExampleEntityElasticDto>> SearchAllAsync(PageRequest pageRequest, string term)
+        public async Task<ISearchResponse<CustomerElasticDto>> SearchAllAsync(PageRequest pageRequest, string term)
         {
-            return await _elasticClient.SearchAsync<ExampleEntityElasticDto>(
+            return await _elasticClient.SearchAsync<CustomerElasticDto>(
                     search => search.Query(
                         containerDescriptor => containerDescriptor.QueryString(
                             queryDescriptor => queryDescriptor.Query($"*{term}*")
@@ -37,7 +37,7 @@ namespace Napokon.Customer.API.Services.Core
                     .Sort(query => query.Ascending(entity => entity.Id)));
         }
 
-        public async Task Reindex(IList<ExampleEntityElasticDto> entityElasticDtos)
+        public async Task Reindex(IList<CustomerElasticDto> entityElasticDtos)
         {
             _logger.LogWarning("=== Started bulk indexing.");
 

@@ -6,11 +6,11 @@ namespace Napokon.Customer.API.Services.Core
 {
     public interface IExampleEntityService
     {
-        Task<ExampleEntity?> AddAsync(ExampleEntityDto dto);
+        Task<CustomerEntity?> AddAsync(CustomerDto dto);
 
-        Task<IList<ExampleEntity>> GetAllAsync(PageRequest pageRequest);
+        Task<IList<CustomerEntity>> GetAllAsync(PageRequest pageRequest);
 
-        Task<ExampleEntity?> GetAsync(long id);
+        Task<CustomerEntity?> GetAsync(long id);
 
     }
 }

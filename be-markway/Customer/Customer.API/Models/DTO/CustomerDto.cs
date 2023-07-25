@@ -3,7 +3,7 @@
 namespace Napokon.Customer.API.Models.DTO
 {
 
-    public record ExampleEntityDto
+    public record CustomerDto
     {
         public long? Id { get; set; }
 

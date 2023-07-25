@@ -9,7 +9,7 @@ namespace Napokon.Customer.API.Repository.Core
         void Dispose();
         IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
 
-        IExampleEntityRepository Entities { get; }
+        ICustomerRepository Entities { get; }
     }
 }
 

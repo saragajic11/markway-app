@@ -30,7 +30,7 @@ namespace Napokon.Customer.API.Services.Grpc
             ServerCallContext context
         )
         {
-            ExampleEntity entity = await _entityService.GetAsync(request.Id);
+            CustomerEntity entity = await _entityService.GetAsync(request.Id);
 
             return _mapper.Map<EntityReply>(entity);
         }

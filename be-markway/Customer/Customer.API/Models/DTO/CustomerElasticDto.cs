@@ -2,7 +2,7 @@
 
 namespace Napokon.Customer.API.Models.DTO
 {
-    public record ExampleEntityElasticDto
+    public record CustomerElasticDto
     {
         public long? Id { get; init; }
 

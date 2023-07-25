@@ -9,11 +9,11 @@ namespace Napokon.Customer.API.Services.Core
     public interface IElasticSearchService
     {
 
-        Task<IndexResponse> IndexDocumentAsync(ExampleEntityElasticDto entityElasticDto);
+        Task<IndexResponse> IndexDocumentAsync(CustomerElasticDto entityElasticDto);
 
-        Task<ISearchResponse<ExampleEntityElasticDto>> SearchAllAsync(PageRequest pageRequest, string term);
+        Task<ISearchResponse<CustomerElasticDto>> SearchAllAsync(PageRequest pageRequest, string term);
 
-        Task Reindex(IList<ExampleEntityElasticDto> entityElasticDtos);
+        Task Reindex(IList<CustomerElasticDto> entityElasticDtos);
 
     }
 }

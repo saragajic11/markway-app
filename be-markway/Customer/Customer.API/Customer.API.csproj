@@ -11,6 +11,7 @@
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Customer' " />
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="NEST" Version="7.17.5" />
     <PackageReference Include="Redis.OM" Version="0.4.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
@@ -78,10 +79,5 @@
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="Protos\example_entity.proto" GrpcServices="Server" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Commons\Commons.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
   </ItemGroup>
 </Project>

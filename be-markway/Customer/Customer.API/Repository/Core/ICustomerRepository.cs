@@ -4,7 +4,7 @@ using Napokon.Customer.API.Models;
 
 namespace Napokon.Customer.API.Repository.Core
 {
-    public interface IExampleEntityRepository : IBaseRepository<ExampleEntity>
+    public interface ICustomerRepository : IBaseRepository<CustomerEntity>
     {
     }
 }

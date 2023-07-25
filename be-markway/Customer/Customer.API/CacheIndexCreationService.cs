@@ -15,7 +15,7 @@ public class CacheIndexCreationService : IHostedService
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        await _provider.Connection.CreateIndexAsync(typeof(ExampleEntity));
+        await _provider.Connection.CreateIndexAsync(typeof(CustomerEntity));
     }
 
     public Task StopAsync(CancellationToken cancellationToken)

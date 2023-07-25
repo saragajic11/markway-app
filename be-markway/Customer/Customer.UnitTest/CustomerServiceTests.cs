@@ -18,7 +18,7 @@ public class EntityServiceTests
     private readonly Mock<IMapper> _mockMapper;
     private readonly Mock<ILogger<EntityService>> _mockLogger;
     private readonly Mock<IUnitOfWork> _mockUnitOfWork;
-    private readonly Mock<IExampleEntityRepository> _mockEntityRepository;
+    private readonly Mock<ICustomerRepository> _mockEntityRepository;
     private readonly Mock<IElasticSearchService> _elasticSearchService;
 
     public EntityServiceTests()
