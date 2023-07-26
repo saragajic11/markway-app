@@ -19,7 +19,6 @@ public class EntityServiceTests
     private readonly Mock<ILogger<EntityService>> _mockLogger;
     private readonly Mock<IUnitOfWork> _mockUnitOfWork;
     private readonly Mock<IExampleEntityRepository> _mockEntityRepository;
-    private readonly Mock<IElasticSearchService> _elasticSearchService;
 
     public EntityServiceTests()
     {
@@ -27,8 +26,7 @@ public class EntityServiceTests
         _mockLogger = new();
         _mockUnitOfWork = new();
         _mockEntityRepository = new();
-        _elasticSearchService = new();
-        _entityService = new(_mockMapper.Object, _elasticSearchService.Object, _mockUnitOfWork.Object, _mockLogger.Object);
+        _entityService = new(_mockMapper.Object, _mockUnitOfWork.Object, _mockLogger.Object);
     }
 
     [Fact]

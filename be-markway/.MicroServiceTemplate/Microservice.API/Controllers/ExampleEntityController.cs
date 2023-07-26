@@ -37,7 +37,7 @@ public class ExampleEntityController : ControllerBase
     [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
     public async Task<IActionResult> GetEntityById(int id)
     {
-        Customer entity = await _entityService.GetAsync(id);
+        ExampleEntity entity = await _entityService.GetAsync(id);
 
         return Ok(_mapper.Map<ExampleEntityDto>(entity));
     }
@@ -45,7 +45,7 @@ public class ExampleEntityController : ControllerBase
     [HttpPost(Name = "CreateEntity")]
     public async Task<IActionResult> CreateEntity(ExampleEntityDto entityDto)
     {
-        Customer entity = await _entityService.AddAsync(entityDto);
+        ExampleEntity entity = await _entityService.AddAsync(entityDto);
 
         return Ok(_mapper.Map<ExampleEntityDto>(entity));
     }

@@ -3,7 +3,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace Napokon.Microservice.API.Models;
-public class Customer : Entity
+public class ExampleEntity : Entity
 {
 
     [Required]
