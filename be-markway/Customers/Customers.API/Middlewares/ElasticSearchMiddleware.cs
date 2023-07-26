@@ -28,7 +28,7 @@ namespace Napokon.Customers.API.Middlewares
         {
             if (!client.Indices.Exists(indexName).Exists)
             {
-                CreateIndexResponse CreateIndexResponse = client.Indices.Create(indexName, index => index.Map<ExampleEntityDto>(x => x.AutoMap()));
+                CreateIndexResponse CreateIndexResponse = client.Indices.Create(indexName, index => index.Map<CustomerDto>(x => x.AutoMap()));
             }
         }
     }

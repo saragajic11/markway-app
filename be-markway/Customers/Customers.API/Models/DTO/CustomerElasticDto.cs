@@ -2,11 +2,11 @@
 
 namespace Napokon.Customers.API.Models.DTO
 {
-    public record ExampleEntityElasticDto
+    public record CustomerElasticDto
     {
         public long? Id { get; init; }
 
-        public string? Property { get; init; }
+        public string? Name { get; init; }
 
         public DateTime DateCreated { get; init; }
 

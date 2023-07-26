@@ -15,10 +15,10 @@ namespace Napokon.Customers.API.Services.Grpc
 {
     public class GrpcEntityService : GrpcEntity.GrpcEntityBase
     {
-        private readonly IExampleEntityService _entityService;
+        private readonly ICustomerService _entityService;
         private readonly IMapper _mapper;
 
-        public GrpcEntityService(IExampleEntityService entityService, IMapper mapper)
+        public GrpcEntityService(ICustomerService entityService, IMapper mapper)
         {
             _entityService = entityService;
             _mapper = mapper;

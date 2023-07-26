@@ -23,7 +23,7 @@ namespace Napokon.Customers.API
             CustomersContext context = scope.ServiceProvider.GetRequiredService<CustomersContext>();
             await context.Database.EnsureCreatedAsync();
 
-            IExampleEntityService manager = scope.ServiceProvider.GetRequiredService<IExampleEntityService>();
+            ICustomerService manager = scope.ServiceProvider.GetRequiredService<ICustomerService>();
             // TODO Init some data 
         }
 

@@ -15,12 +15,12 @@ namespace Napokon.Customers.API.Controllers;
 
 [ApiController]
 [Route("api/entity/search")]
-public class ExampleEntitySearchController : ControllerBase
+public class CustomerSearchController : ControllerBase
 {
-    private readonly IExampleEntityService _entityService;
+    private readonly ICustomerService _entityService;
     private readonly IMapper _mapper;
 
-    public ExampleEntitySearchController(IExampleEntityService entityService, IMapper mapper)
+    public CustomerSearchController(ICustomerService entityService, IMapper mapper)
     {
         _entityService = entityService;
         _mapper = mapper;

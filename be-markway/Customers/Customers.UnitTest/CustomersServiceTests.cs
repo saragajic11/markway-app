@@ -14,11 +14,11 @@ using Napokon.Customers.API.Services.Core;
 
 public class EntityServiceTests
 {
-    private readonly EntityService _entityService;
+    private readonly CustomerService _entityService;
     private readonly Mock<IMapper> _mockMapper;
-    private readonly Mock<ILogger<EntityService>> _mockLogger;
+    private readonly Mock<ILogger<CustomerService>> _mockLogger;
     private readonly Mock<IUnitOfWork> _mockUnitOfWork;
-    private readonly Mock<IExampleEntityRepository> _mockEntityRepository;
+    private readonly Mock<ICustomerRepository> _mockEntityRepository;
 
     public EntityServiceTests()
     {

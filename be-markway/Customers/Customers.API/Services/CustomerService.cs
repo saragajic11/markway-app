@@ -8,17 +8,17 @@ using Napokon.Customers.API.Repository.Core;
 using Napokon.Customers.API.Services.Core;
 namespace Napokon.Customers.API.Services
 {
-    public class EntityService : BaseService<Customer>, IExampleEntityService
+    public class CustomerService : BaseService<Customer>, ICustomerService
     {
         private readonly IMapper _mapper;
 
-        public EntityService(IMapper mapper, IUnitOfWork unitOfWork, ILogger<EntityService> logger)
+        public CustomerService(IMapper mapper, IUnitOfWork unitOfWork, ILogger<CustomerService> logger)
             : base(logger, unitOfWork)
         {
             _mapper = mapper;
         }
 
-        public async Task<Customer?> AddAsync(ExampleEntityDto dto)
+        public async Task<Customer?> AddAsync(CustomerDto dto)
         {
             try
             {

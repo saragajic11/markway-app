@@ -4,9 +4,9 @@ using Napokon.Customers.API.Models;
 using Napokon.Customers.API.Models.DTO;
 namespace Napokon.Customers.API.Services.Core
 {
-    public interface IExampleEntityService
+    public interface ICustomerService
     {
-        Task<Customer?> AddAsync(ExampleEntityDto dto);
+        Task<Customer?> AddAsync(CustomerDto dto);
 
         Task<IList<Customer>> GetAllAsync(PageRequest pageRequest);
 

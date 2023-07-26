@@ -18,7 +18,7 @@ namespace Napokon.Customers.API.Middlewares
 
             services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
 
-            services.AddScoped<IExampleEntityService, EntityService>();
+            services.AddScoped<ICustomerService, CustomerService>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }

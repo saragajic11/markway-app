@@ -11,13 +11,13 @@ namespace Napokon.Customers.API.Profiles
     {
         public ExampleEntityProfile()
         {
-            CreateMap<Customer, ExampleEntityDto>();
+            CreateMap<Customer, CustomerDto>();
 
-            CreateMap<ExampleEntityDto, Customer>();
+            CreateMap<CustomerDto, Customer>();
 
-            CreateMap<Customer, ExampleEntityElasticDto>();
+            CreateMap<Customer, CustomerElasticDto>();
 
-            CreateMap<ExampleEntityElasticDto, ExampleEntityDto>();
+            CreateMap<CustomerElasticDto, CustomerDto>();
         }
     }
 }
