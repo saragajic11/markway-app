@@ -48,6 +48,8 @@ namespace Napokon.Shipments.API.Models
 
         public DbSet<Customer> Customers { get; set; }
 
+        public DbSet<Carrier> Carriers { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder.IsConfigured)

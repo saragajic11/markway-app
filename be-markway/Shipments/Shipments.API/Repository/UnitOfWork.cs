@@ -13,10 +13,13 @@ namespace Napokon.Shipments.API.Repository
 
         public ICustomerRepository Customers { get; private set; }
 
+        public ICarrierRepository Carriers { get; private set; }
+
         public UnitOfWork(ShipmentsContext context)
         {
             _context = context;
             Customers = new CustomerRepository(_context);
+            Carriers = new CarrierRepository(_context);
         }
 
         public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class

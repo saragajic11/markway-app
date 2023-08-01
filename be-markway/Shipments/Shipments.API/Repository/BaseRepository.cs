@@ -60,4 +60,3 @@ namespace Napokon.Shipments.API.Repository
         }
     }
 }
-
