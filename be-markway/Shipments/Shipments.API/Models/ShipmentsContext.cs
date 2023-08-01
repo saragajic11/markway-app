@@ -50,6 +50,8 @@ namespace Napokon.Shipments.API.Models
 
         public DbSet<Carrier> Carriers { get; set; }
 
+        public DbSet<BorderCrossing> BorderCrossings { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder.IsConfigured)
