@@ -19,6 +19,7 @@ namespace Napokon.Shipments.API.Middlewares
             services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
 
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<ICarrierService, CarrierService>();
             services.AddScoped<IElasticSearchService, ElasticSearchService>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();

@@ -10,6 +10,8 @@ namespace Napokon.Shipments.API.Repository.Core
         IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
 
         ICustomerRepository Customers { get; }
+
+        ICarrierRepository Carriers { get; }
     }
 }
 
