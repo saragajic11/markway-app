@@ -13,39 +13,39 @@ namespace Napokon.Shipments.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CarrierController : ControllerBase
+public class BorderCrossingController : ControllerBase
 {
-    private readonly ICarrierService _carrierService;
+    private readonly IBorderCrossingService _borderCrossingService;
     private readonly IMapper _mapper;
 
-    public CarrierController(ICarrierService carrierService, IMapper mapper)
+    public BorderCrossingController(IBorderCrossingService borderCrossingService, IMapper mapper)
     {
-        _carrierService = carrierService;
+        _borderCrossingService = borderCrossingService;
         _mapper = mapper;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetEntities([FromQuery] PageRequest pageRequest)
     {
-        IList<Carrier> entities = await _carrierService.GetAllAsync(pageRequest);
+        IList<BorderCrossing> entities = await _borderCrossingService.GetAllAsync(pageRequest);
 
-        return Ok(_mapper.Map<IEnumerable<Carrier>, List<CarrierDto>>(entities));
+        return Ok(_mapper.Map<IEnumerable<BorderCrossing>, List<BorderCrossingDto>>(entities));
     }
 
     [HttpGet("{id}")]
     [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
     public async Task<IActionResult> GetEntityById(int id)
     {
-        Carrier entity = await _carrierService.GetAsync(id);
+        BorderCrossing entity = await _borderCrossingService.GetAsync(id);
 
-        return Ok(_mapper.Map<CarrierDto>(entity));
+        return Ok(_mapper.Map<BorderCrossingDto>(entity));
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateEntity(CarrierDto entityDto)
+    public async Task<IActionResult> CreateEntity(BorderCrossingDto entityDto)
     {
-        Carrier entity = await _carrierService.AddAsync(entityDto);
+        BorderCrossing entity = await _borderCrossingService.AddAsync(entityDto);
 
-        return Ok(_mapper.Map<CarrierDto>(entity));
+        return Ok(_mapper.Map<BorderCrossingDto>(entity));
     }
 }

@@ -20,6 +20,7 @@ namespace Napokon.Shipments.API.Middlewares
 
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ICarrierService, CarrierService>();
+            services.AddScoped<IBorderCrossingService, BorderCrossingService>();
             services.AddScoped<IElasticSearchService, ElasticSearchService>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();

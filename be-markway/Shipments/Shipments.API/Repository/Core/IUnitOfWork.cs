@@ -12,6 +12,9 @@ namespace Napokon.Shipments.API.Repository.Core
         ICustomerRepository Customers { get; }
 
         ICarrierRepository Carriers { get; }
+        
+        IBorderCrossingRepository BorderCrossings { get; }
+
     }
 }
 
