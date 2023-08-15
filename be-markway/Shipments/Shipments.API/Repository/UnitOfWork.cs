@@ -15,11 +15,15 @@ namespace Napokon.Shipments.API.Repository
 
         public ICarrierRepository Carriers { get; private set; }
 
+        public IBorderCrossingRepository BorderCrossings { get; private set; }
+
+
         public UnitOfWork(ShipmentsContext context)
         {
             _context = context;
             Customers = new CustomerRepository(_context);
             Carriers = new CarrierRepository(_context);
+            BorderCrossings = new BorderCrossingRepository(_context);
         }
 
         public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class
