@@ -6,7 +6,7 @@ namespace Napokon.Shipments.API.Services.Core
 {
     public interface ICustomerService
     {
-        Task<Customer?> AddAsync(ExampleEntityDto dto);
+        Task<Customer?> AddAsync(CustomerDto dto);
 
         Task<IList<Customer>> GetAllAsync(PageRequest pageRequest);
 

@@ -1,0 +1,18 @@
+version: "3.4"
+
+services:
+  gateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    #    - ASPNETCORE_URLS=https://+:443;http://+:80
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+
+  shipments-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    #    - ASPNETCORE_URLS=https://+:443;http://+:80
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro

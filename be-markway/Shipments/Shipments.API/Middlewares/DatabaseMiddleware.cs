@@ -11,6 +11,8 @@ namespace Napokon.Shipments.API.Middlewares
     {
         public static void ConfigureDatabase(this WebApplicationBuilder builder, ISystemConfiguration systemConfiguration)
         {
+            Console.WriteLine($"{systemConfiguration.DatabaseConnection}");
+
             builder.Services
                 .AddDbContext<ShipmentsContext>(options => options.UseNpgsql(systemConfiguration.DatabaseConnection));
         }

@@ -18,7 +18,7 @@ namespace Napokon.Shipments.API.Services
             _mapper = mapper;
         }
 
-        public async Task<Customer?> AddAsync(ExampleEntityDto dto)
+        public async Task<Customer?> AddAsync(CustomerDto dto)
         {
             try
             {

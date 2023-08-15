@@ -1,0 +1,66 @@
+version: "3.4"
+
+services:
+  gateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: API-Gateway/Dockerfile
+    ports:
+      - "9090:80"
+    depends_on:
+      shipments-api:
+        condition: service_healthy
+    # links:
+    #   - users-api
+    environment:
+      - AUTHENTICATIONCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
+    # networks:
+    #   - net_authn
+    #   - net_users
+  shipments-api:
+    image: ${DOCKER_REGISTRY-}shipmentservice
+    build:
+      context: .
+      dockerfile: Shipments/Shipments.Api/Dockerfile
+    ports:
+      - "5287:5287"
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    environment:
+      # - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
+      - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_database; Integrated Security=true; Pooling=true;
+    # networks:
+    #   - net_users
+
+  postgres_db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=${MARKWAY_DB_USERNAME}
+      - POSTGRES_PASSWORD=${MARKWAY_DB_PASSWORD}
+    ports:
+      - "5632:5432"
+    volumes:
+      - db_postgres:/var/lib/postgresql/data
+    # networks:
+    #   - net_users
+    #   - net_authn
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "sh -c 'pg_isready -U ${MARKWAY_DB_USERNAME} -d markway_database'",
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  db_postgres:
+    driver: local
+  redis:
+    driver: local
+  elasticsearch-data:
+    driver: local

@@ -35,14 +35,8 @@ namespace Napokon.Shipments.API.Middlewares
         {
             builder.WebHost.ConfigureKestrel(options =>
             {
-                options.ListenAnyIP(5287, o =>
-                {
-                    o.Protocols = HttpProtocols.Http2;
-                });
-                options.ListenAnyIP(5387, o =>
-                {
-                    o.Protocols = HttpProtocols.Http1;
-                });
+                options.ListenAnyIP(5287, o => o.Protocols = HttpProtocols.Http2);
+                options.ListenAnyIP(5387, o => o.Protocols = HttpProtocols.Http1);
             });
         }
     }

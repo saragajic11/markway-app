@@ -35,7 +35,7 @@ public class ExampleEntitySearchController : ControllerBase
         ISearchResponse<ExampleEntityElasticDto> entities = await _elasticSearchService.SearchAllAsync(pageRequest, term);
         IReadOnlyCollection<ExampleEntityElasticDto> entitiesDocuments = entities.Documents;
 
-        return Ok(_mapper.Map<IReadOnlyCollection<ExampleEntityElasticDto>, List<ExampleEntityDto>>(entitiesDocuments));
+        return Ok(_mapper.Map<IReadOnlyCollection<ExampleEntityElasticDto>, List<CustomerDto>>(entitiesDocuments));
     }
 
     [HttpPut(Endpoints.SEARCH_REINDEX)]

@@ -2,11 +2,10 @@
 
 namespace Napokon.Shipments.API.Models.DTO
 {
-
-    public record ExampleEntityDto
+    public record CustomerDto
     {
         public long? Id { get; set; }
 
-        public string? Property { get; set; }
+        public string? Name { get; set; }
     }
 }

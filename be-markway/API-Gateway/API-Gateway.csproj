@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Napokon.API_Gateway</RootNamespace>
+    <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>1afba33b-a367-4761-9eb6-a6b05681afb0</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'API_Gateway' " />
+  <ItemGroup>
+    <None Remove="Ocelot" />
+    <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="OpenIddict" />
+    <None Remove="OpenIddict.EntityFrameworkCore" />
+    <None Remove="OpenIddict.EntityFrameworkCore.Models" />
+    <None Remove="OpenIddict.Validation.AspNetCore" />
+    <None Remove="Configurations\" />
+    <None Remove="Microsoft.IdentityModel.Tokens" />
+    <None Remove="Microsoft.AspNetCore.Authentication.OpenIdConnect" />
+    <None Remove="Middlewares\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Ocelot" Version="18.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.13" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Configurations\" />
+    <Folder Include="Middlewares\" />
+  </ItemGroup>
+</Project>
