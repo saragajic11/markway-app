@@ -17,6 +17,8 @@ namespace Napokon.Shipments.API.Repository
 
         public IBorderCrossingRepository BorderCrossings { get; private set; }
 
+        public ICustomsRepository Customs { get; private set; }
+
 
         public UnitOfWork(ShipmentsContext context)
         {
@@ -24,6 +26,7 @@ namespace Napokon.Shipments.API.Repository
             Customers = new CustomerRepository(_context);
             Carriers = new CarrierRepository(_context);
             BorderCrossings = new BorderCrossingRepository(_context);
+            Customs = new CustomsRepository(_context);
         }
 
         public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class
