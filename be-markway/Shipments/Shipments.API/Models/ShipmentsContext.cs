@@ -56,6 +56,9 @@ namespace Napokon.Shipments.API.Models
 
         public DbSet<LoadOnLocation> LoadOnLocations { get; set; }
 
+        public DbSet<Note> Notes { get; set; }
+
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
