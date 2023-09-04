@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
-using Napokon.Microservice.API.Models.DTO;
-using Napokon.Microservice.API.Repository.Core;
-using Napokon.Microservice.API.Services.Core;
+using Markway.Microservice.API.Models.DTO;
+using Markway.Microservice.API.Repository.Core;
+using Markway.Microservice.API.Services.Core;
 
-namespace Napokon.Microservice.API.Services
+namespace Markway.Microservice.API.Services
 {
     public class BaseCacheService<TEntity> : BaseService<TEntity>
         where TEntity : class 

@@ -2,10 +2,10 @@
 
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
-using Napokon.Commons.Configurations;
-using Napokon.Microservice.API.Constants;
+using Markway.Commons.Configurations;
+using Markway.Microservice.API.Constants;
 
-namespace Napokon.Microservice.API.Middlewares
+namespace Markway.Microservice.API.Middlewares
 {
     public static class ServerMiddleware
     {

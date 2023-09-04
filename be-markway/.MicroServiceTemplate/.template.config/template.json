@@ -1,9 +1,9 @@
 {
-  "author": "Srdjan Ilic",
-  "classifications": ["Napokon/RestApi"],
-  "name": "Napokon REST API Template",
-  "identity": "Napokon.RestApi",
-  "shortName": "napokon-restapi",
+  "author": "Marko Ruzic",
+  "classifications": ["Markway/RestApi"],
+  "name": "Markway REST API Template",
+  "identity": "Markway.RestApi",
+  "shortName": "markway-restapi",
   "tags": {
     "language": "C#"
   },

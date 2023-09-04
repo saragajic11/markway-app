@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
-using Napokon.Shipments.API.Models.DTO;
-using Napokon.Shipments.API.Repository.Core;
-using Napokon.Shipments.API.Services.Core;
+using Markway.Shipments.API.Models.DTO;
+using Markway.Shipments.API.Repository.Core;
+using Markway.Shipments.API.Services.Core;
 
-namespace Napokon.Shipments.API.Services
+namespace Markway.Shipments.API.Services
 {
     public class BaseCacheService<TEntity> : BaseService<TEntity>
         where TEntity : class 

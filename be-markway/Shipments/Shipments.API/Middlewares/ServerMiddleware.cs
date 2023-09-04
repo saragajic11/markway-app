@@ -2,10 +2,10 @@
 
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
-using Napokon.Commons.Configurations;
-using Napokon.Shipments.API.Constants;
+using Markway.Commons.Configurations;
+using Markway.Shipments.API.Constants;
 
-namespace Napokon.Shipments.API.Middlewares
+namespace Markway.Shipments.API.Middlewares
 {
     public static class ServerMiddleware
     {

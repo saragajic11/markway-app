@@ -1,4 +1,4 @@
-namespace Napokon.Commons.Authorization
+namespace Markway.Commons.Authorization
 
 {
     public enum UserStatus {

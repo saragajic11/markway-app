@@ -8,9 +8,9 @@ using Microsoft.Extensions.Logging;
 
 using Moq;
 
-using Napokon.Shipments.API.Repository.Core;
-using Napokon.Shipments.API.Services;
-using Napokon.Shipments.API.Services.Core;
+using Markway.Shipments.API.Repository.Core;
+using Markway.Shipments.API.Services;
+using Markway.Shipments.API.Services.Core;
 
 public class EntityServiceTests
 {

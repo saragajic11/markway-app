@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Authorization;
 
-namespace Napokon.Commons.Authorization
+namespace Markway.Commons.Authorization
 {
     public class PermissionHandler : AuthorizationHandler<PermissionRequirement>
     {

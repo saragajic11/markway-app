@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
 
-using Napokon.Commons.Configurations;
-using Napokon.Shipments.API.Constants;
-using Napokon.Shipments.API.Middlewares;
-using Napokon.Shipments.API.Services.Grpc;
+using Markway.Commons.Configurations;
+using Markway.Shipments.API.Constants;
+using Markway.Shipments.API.Middlewares;
+using Markway.Shipments.API.Services.Grpc;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

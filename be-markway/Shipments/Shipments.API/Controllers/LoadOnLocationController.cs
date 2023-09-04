@@ -5,11 +5,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-using Napokon.Shipments.API.Constants;
-using Napokon.Shipments.API.Models;
-using Napokon.Shipments.API.Models.DTO;
-using Napokon.Shipments.API.Services.Core;
-namespace Napokon.Shipments.API.Controllers;
+using Markway.Shipments.API.Constants;
+using Markway.Shipments.API.Models;
+using Markway.Shipments.API.Models.DTO;
+using Markway.Shipments.API.Services.Core;
+namespace Markway.Shipments.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

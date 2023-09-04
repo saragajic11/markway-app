@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Napokon.API_Gateway</RootNamespace>
+    <RootNamespace>Markway.API_Gateway</RootNamespace>
     <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
     <UserSecretsId>1afba33b-a367-4761-9eb6-a6b05681afb0</UserSecretsId>
   </PropertyGroup>

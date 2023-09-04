@@ -2,10 +2,10 @@
 
 using AutoMapper;
 
-using Napokon.Shipments.API.Models;
-using Napokon.Shipments.API.Models.DTO;
+using Markway.Shipments.API.Models;
+using Markway.Shipments.API.Models.DTO;
 
-namespace Napokon.Shipments.API.Profiles
+namespace Markway.Shipments.API.Profiles
 {
     public class CustomsProfile : Profile
     {

@@ -3,11 +3,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-using Napokon.Commons.Authorization;
-using Napokon.Commons.Configurations;
-using Napokon.Microservice.API.Constants;
+using Markway.Commons.Authorization;
+using Markway.Commons.Configurations;
+using Markway.Microservice.API.Constants;
 
-namespace Napokon.Microservice.API.Middlewares
+namespace Markway.Microservice.API.Middlewares
 {
     public static class AuthnAndAuthzMiddleware
     {

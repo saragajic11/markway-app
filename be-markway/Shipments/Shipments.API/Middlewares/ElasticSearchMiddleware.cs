@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
 
-using Napokon.Commons.Configurations;
-using Napokon.Shipments.API.Models.DTO;
+using Markway.Commons.Configurations;
+using Markway.Shipments.API.Models.DTO;
 
 using Nest;
 
-namespace Napokon.Shipments.API.Middlewares
+namespace Markway.Shipments.API.Middlewares
 {
     public static class ElasticSearchMiddleware
     {

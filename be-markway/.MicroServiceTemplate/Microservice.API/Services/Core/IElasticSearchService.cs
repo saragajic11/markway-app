@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
 
-using Napokon.Microservice.API.Models.DTO;
+using Markway.Microservice.API.Models.DTO;
 
 using Nest;
 
-namespace Napokon.Microservice.API.Services.Core
+namespace Markway.Microservice.API.Services.Core
 {
     public interface IElasticSearchService
     {

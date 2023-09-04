@@ -5,11 +5,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-using Napokon.Microservice.API.Constants;
-using Napokon.Microservice.API.Models;
-using Napokon.Microservice.API.Models.DTO;
-using Napokon.Microservice.API.Services.Core;
-namespace Napokon.Microservice.API.Controllers;
+using Markway.Microservice.API.Constants;
+using Markway.Microservice.API.Models;
+using Markway.Microservice.API.Models.DTO;
+using Markway.Microservice.API.Services.Core;
+namespace Markway.Microservice.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

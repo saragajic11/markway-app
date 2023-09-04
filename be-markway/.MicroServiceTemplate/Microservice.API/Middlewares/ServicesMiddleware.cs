@@ -2,13 +2,13 @@
 
 using Microsoft.AspNetCore.Authorization;
 
-using Napokon.Commons.Authorization;
-using Napokon.Microservice.API.Repository;
-using Napokon.Microservice.API.Repository.Core;
-using Napokon.Microservice.API.Services;
-using Napokon.Microservice.API.Services.Core;
+using Markway.Commons.Authorization;
+using Markway.Microservice.API.Repository;
+using Markway.Microservice.API.Repository.Core;
+using Markway.Microservice.API.Services;
+using Markway.Microservice.API.Services.Core;
 
-namespace Napokon.Microservice.API.Middlewares
+namespace Markway.Microservice.API.Middlewares
 {
     public static class ServicesMiddleware
     {

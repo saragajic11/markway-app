@@ -2,10 +2,10 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using Napokon.Commons.Configurations;
-using Napokon.Microservice.API.Models;
+using Markway.Commons.Configurations;
+using Markway.Microservice.API.Models;
 
-namespace Napokon.Microservice.API.Middlewares
+namespace Markway.Microservice.API.Middlewares
 {
     public static class DatabaseMiddleware
     {

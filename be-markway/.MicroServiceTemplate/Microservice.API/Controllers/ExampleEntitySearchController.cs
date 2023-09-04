@@ -5,13 +5,13 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-using Napokon.Microservice.API.Constants;
-using Napokon.Microservice.API.Models;
-using Napokon.Microservice.API.Models.DTO;
-using Napokon.Microservice.API.Services.Core;
+using Markway.Microservice.API.Constants;
+using Markway.Microservice.API.Models;
+using Markway.Microservice.API.Models.DTO;
+using Markway.Microservice.API.Services.Core;
 
 using Nest;
-namespace Napokon.Microservice.API.Controllers;
+namespace Markway.Microservice.API.Controllers;
 
 [ApiController]
 [Route("api/entity/search")]

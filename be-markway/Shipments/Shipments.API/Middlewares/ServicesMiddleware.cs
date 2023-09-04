@@ -2,13 +2,13 @@
 
 using Microsoft.AspNetCore.Authorization;
 
-using Napokon.Commons.Authorization;
-using Napokon.Shipments.API.Repository;
-using Napokon.Shipments.API.Repository.Core;
-using Napokon.Shipments.API.Services;
-using Napokon.Shipments.API.Services.Core;
+using Markway.Commons.Authorization;
+using Markway.Shipments.API.Repository;
+using Markway.Shipments.API.Repository.Core;
+using Markway.Shipments.API.Services;
+using Markway.Shipments.API.Services.Core;
 
-namespace Napokon.Shipments.API.Middlewares
+namespace Markway.Shipments.API.Middlewares
 {
     public static class ServicesMiddleware
     {

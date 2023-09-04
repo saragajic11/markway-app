@@ -2,10 +2,10 @@
 
 using AutoMapper;
 
-using Napokon.Microservice.API.Models;
-using Napokon.Microservice.API.Models.DTO;
+using Markway.Microservice.API.Models;
+using Markway.Microservice.API.Models.DTO;
 
-namespace Napokon.Microservice.API.Profiles
+namespace Markway.Microservice.API.Profiles
 {
     public class ExampleEntityProfile : Profile
     {

@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Napokon.Shipments.API.Models;
+namespace Markway.Shipments.API.Models;
 public class Customer : Entity
 {
     [Required]

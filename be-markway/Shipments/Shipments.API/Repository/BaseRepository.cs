@@ -2,11 +2,11 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using Napokon.Shipments.API.Models;
-using Napokon.Shipments.API.Models.DTO;
-using Napokon.Shipments.API.Repository.Core;
+using Markway.Shipments.API.Models;
+using Markway.Shipments.API.Models.DTO;
+using Markway.Shipments.API.Repository.Core;
 
-namespace Napokon.Shipments.API.Repository
+namespace Markway.Shipments.API.Repository
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {

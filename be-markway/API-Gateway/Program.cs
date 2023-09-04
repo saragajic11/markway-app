@@ -2,8 +2,8 @@
 
 using Microsoft.AspNetCore.HttpOverrides;
 
-using Napokon.API_Gateway.Middlewares;
-using Napokon.Auth.Configurations;
+using Markway.API_Gateway.Middlewares;
+using Markway.Auth.Configurations;
 
 using Ocelot.Middleware;
 
