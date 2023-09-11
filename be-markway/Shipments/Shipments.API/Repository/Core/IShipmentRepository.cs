@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
 
-namespace Napokon.Shipments.API.Constants
+using Napokon.Shipments.API.Models;
+
+namespace Napokon.Shipments.API.Repository.Core
 {
-    public enum CustomsType
+    public interface IShipmentRepository : IBaseRepository<Shipment>
     {
-        IMPORT = 0,
-        EXPORT = 1
     }
 }
 

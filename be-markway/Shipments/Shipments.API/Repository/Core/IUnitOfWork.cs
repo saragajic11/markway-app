@@ -21,6 +21,10 @@ namespace Napokon.Shipments.API.Repository.Core
 
         INoteRepository Notes { get; }
 
+        IShipmentRepository Shipments { get; }
+
+        IShipmentLoadOnLocationRepository ShipmentLoadOnLocations { get; }
+
     }
 }
 

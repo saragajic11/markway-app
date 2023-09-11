@@ -23,6 +23,10 @@ namespace Napokon.Shipments.API.Repository
 
         public INoteRepository Notes { get; private set; }
 
+        public IShipmentRepository Shipments { get; private set; }
+
+        public IShipmentLoadOnLocationRepository ShipmentLoadOnLocations { get; private set; }
+
 
         public UnitOfWork(ShipmentsContext context)
         {
@@ -33,6 +37,7 @@ namespace Napokon.Shipments.API.Repository
             Customs = new CustomsRepository(_context);
             LoadOnLocation = new LoadOnLocationRepository(_context);
             Notes = new NoteRepository(_context);
+            ShipmentLoadOnLocations = new ShipmentLoadOnLocationRepository(_context);
         }
 
         public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class

@@ -2,10 +2,12 @@
 
 namespace Napokon.Shipments.API.Constants
 {
-    public enum CustomsType
+    public enum Status
     {
-        IMPORT = 0,
-        EXPORT = 1
+        LOADED = 0,
+        UNLOADED = 1,
+        INVOICED = 2,
+        WAITING = 3
     }
 }
 
