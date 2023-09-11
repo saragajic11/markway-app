@@ -1,6 +1,6 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "Napokon.Shipments.API.Grpc";
+option csharp_namespace = "Markway.Shipments.API.Grpc";
 
 service GrpcEntity {
   rpc GetEntityById (EntityRequest) returns (EntityReply);

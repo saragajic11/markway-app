@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace Napokon.Microservice.API.Controllers
+namespace Markway.Microservice.API.Controllers
 {
     public class BaseController<TEntity> : ControllerBase where TEntity : class
     {

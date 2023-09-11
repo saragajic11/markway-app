@@ -6,12 +6,12 @@ using Grpc.Core;
 
 using Microsoft.AspNetCore.Authorization;
 
-using Napokon.Microservice.API.Constants;
-using Napokon.Microservice.API.Grpc;
-using Napokon.Microservice.API.Models;
-using Napokon.Microservice.API.Services.Core;
+using Markway.Microservice.API.Constants;
+using Markway.Microservice.API.Grpc;
+using Markway.Microservice.API.Models;
+using Markway.Microservice.API.Services.Core;
 
-namespace Napokon.Microservice.API.Services.Grpc
+namespace Markway.Microservice.API.Services.Grpc
 {
     public class GrpcEntityService : GrpcEntity.GrpcEntityBase
     {

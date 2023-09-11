@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Napokon.Microservice.API.Models;
+namespace Markway.Microservice.API.Models;
 public class ExampleEntity : Entity
 {
 

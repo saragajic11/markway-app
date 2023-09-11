@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
-using Napokon.Shipments.API.Models.DTO;
+using Markway.Shipments.API.Models.DTO;
 
-namespace Napokon.Shipments.API.Repository.Core
+namespace Markway.Shipments.API.Repository.Core
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {

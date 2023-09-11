@@ -2,7 +2,7 @@
 
 using System.Text.Json.Serialization;
 
-namespace Napokon.Microservice.API.Errors
+namespace Markway.Microservice.API.Errors
 {
     public class ErrorResponse
     {

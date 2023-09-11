@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Napokon.Microservice.API.Models.DTO
+namespace Markway.Microservice.API.Models.DTO
 {
     public enum Sort
     {

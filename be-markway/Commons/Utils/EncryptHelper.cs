@@ -3,7 +3,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Napokon.Commons.Utils
+namespace Markway.Commons.Utils
 {
     public class EncryptHelper
     {

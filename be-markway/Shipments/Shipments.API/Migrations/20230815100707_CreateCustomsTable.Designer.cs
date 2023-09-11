@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Napokon.Shipments.API.Models;
+using Markway.Shipments.API.Models;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -25,7 +25,7 @@ namespace Shipments.API.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.BorderCrossing", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.BorderCrossing", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace Shipments.API.Migrations
                     b.ToTable("BorderCrossings");
                 });
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.Carrier", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.Carrier", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,7 +81,7 @@ namespace Shipments.API.Migrations
                     b.ToTable("Carriers");
                 });
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.Customer", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.Customer", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +107,7 @@ namespace Shipments.API.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.Customs", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.Customs", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()

@@ -4,9 +4,9 @@ using System.Text.Json;
 
 using Microsoft.AspNetCore.Diagnostics;
 
-using Napokon.Microservice.API.Errors;
+using Markway.Microservice.API.Errors;
 
-namespace Napokon.Microservice.API.Middlewares
+namespace Markway.Microservice.API.Middlewares
 {
     public static class ExceptionMiddlewareExtensions
     {

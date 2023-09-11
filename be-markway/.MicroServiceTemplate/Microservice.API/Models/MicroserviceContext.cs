@@ -3,9 +3,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-using Napokon.Commons.Configurations;
+using Markway.Commons.Configurations;
 
-namespace Napokon.Microservice.API.Models
+namespace Markway.Microservice.API.Models
 {
     public class MicroserviceContext : DbContext
     {

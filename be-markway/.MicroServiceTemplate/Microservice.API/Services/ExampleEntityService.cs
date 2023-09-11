@@ -2,11 +2,11 @@
 
 using AutoMapper;
 
-using Napokon.Microservice.API.Models;
-using Napokon.Microservice.API.Models.DTO;
-using Napokon.Microservice.API.Repository.Core;
-using Napokon.Microservice.API.Services.Core;
-namespace Napokon.Microservice.API.Services
+using Markway.Microservice.API.Models;
+using Markway.Microservice.API.Models.DTO;
+using Markway.Microservice.API.Repository.Core;
+using Markway.Microservice.API.Services.Core;
+namespace Markway.Microservice.API.Services
 {
     public class EntityService : BaseService<ExampleEntity>, IExampleEntityService
     {

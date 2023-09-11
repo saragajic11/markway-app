@@ -2,11 +2,11 @@
 
 using Microsoft.EntityFrameworkCore;
 
-using Napokon.Microservice.API.Models;
-using Napokon.Microservice.API.Models.DTO;
-using Napokon.Microservice.API.Repository.Core;
+using Markway.Microservice.API.Models;
+using Markway.Microservice.API.Models.DTO;
+using Markway.Microservice.API.Repository.Core;
 
-namespace Napokon.Microservice.API.Repository
+namespace Markway.Microservice.API.Repository
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {

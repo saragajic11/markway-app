@@ -2,7 +2,7 @@
 
 using System.Net;
 
-namespace Napokon.Shipments.API.Errors
+namespace Markway.Shipments.API.Errors
 {
     public class HttpResponseException : Exception
     {

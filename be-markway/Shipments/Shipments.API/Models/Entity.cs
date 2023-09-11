@@ -3,7 +3,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Napokon.Shipments.API.Models
+namespace Markway.Shipments.API.Models
 {
     public class Entity
     {

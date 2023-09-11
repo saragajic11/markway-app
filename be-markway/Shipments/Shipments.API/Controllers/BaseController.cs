@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace Napokon.Shipments.API.Controllers
+namespace Markway.Shipments.API.Controllers
 {
     public class BaseController<TEntity> : ControllerBase where TEntity : class
     {

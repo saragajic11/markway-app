@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
 
-using Napokon.Microservice.API.Services.Core;
+using Markway.Microservice.API.Services.Core;
 
 using Redis.OM;
 using Redis.OM.Searching;
 
-namespace Napokon.Platform.API.Services.Core
+namespace Markway.Platform.API.Services.Core
 {
 
     public class CacheService<TCacheEntity> : ICacheService<TCacheEntity> where TCacheEntity : class

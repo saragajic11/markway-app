@@ -2,11 +2,11 @@
 
 using Microsoft.IdentityModel.Tokens;
 
-using Napokon.Auth.Configurations;
+using Markway.Auth.Configurations;
 
 using Ocelot.DependencyInjection;
 
-namespace Napokon.API_Gateway.Middlewares
+namespace Markway.API_Gateway.Middlewares
 {
     public static class AuthnMiddleware
     {

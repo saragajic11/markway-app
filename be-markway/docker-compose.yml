@@ -11,8 +11,8 @@ services:
     depends_on:
       shipments-api:
         condition: service_healthy
-    # links:
-    #   - users-api
+    links:
+      - shipments-api
     environment:
       - AUTHENTICATIONCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
     # networks:

@@ -2,7 +2,7 @@
 
 using System.Net;
 
-namespace Napokon.Microservice.API.Errors
+namespace Markway.Microservice.API.Errors
 {
     public class HttpResponseException : Exception
     {

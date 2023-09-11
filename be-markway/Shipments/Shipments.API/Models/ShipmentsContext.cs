@@ -3,9 +3,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-using Napokon.Commons.Configurations;
+using Markway.Commons.Configurations;
 
-namespace Napokon.Shipments.API.Models
+namespace Markway.Shipments.API.Models
 {
     public class ShipmentsContext : DbContext
     {

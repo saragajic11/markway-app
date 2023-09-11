@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
 
-using Napokon.Auth.Configurations;
+using Markway.Auth.Configurations;
 
-namespace Napokon.API_Gateway.Middlewares
+namespace Markway.API_Gateway.Middlewares
 {
     public static class ServerMiddleware
     {

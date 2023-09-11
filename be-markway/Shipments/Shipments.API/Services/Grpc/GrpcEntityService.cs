@@ -6,12 +6,12 @@ using Grpc.Core;
 
 using Microsoft.AspNetCore.Authorization;
 
-using Napokon.Shipments.API.Constants;
-using Napokon.Shipments.API.Grpc;
-using Napokon.Shipments.API.Models;
-using Napokon.Shipments.API.Services.Core;
+using Markway.Shipments.API.Constants;
+using Markway.Shipments.API.Grpc;
+using Markway.Shipments.API.Models;
+using Markway.Shipments.API.Services.Core;
 
-namespace Napokon.Shipments.API.Services.Grpc
+namespace Markway.Shipments.API.Services.Grpc
 {
     public class GrpcEntityService : GrpcEntity.GrpcEntityBase
     {
