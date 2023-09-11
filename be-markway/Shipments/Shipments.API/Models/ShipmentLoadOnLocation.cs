@@ -2,9 +2,9 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Napokon.Shipments.API.Constants;
+using Markway.Shipments.API.Constants;
 
-namespace Napokon.Shipments.API.Models;
+namespace Markway.Shipments.API.Models;
 
 public class ShipmentLoadOnLocation : Entity
 {

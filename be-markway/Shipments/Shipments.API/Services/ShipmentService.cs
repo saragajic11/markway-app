@@ -2,11 +2,11 @@
 
 using AutoMapper;
 
-using Napokon.Shipments.API.Models;
-using Napokon.Shipments.API.Models.DTO;
-using Napokon.Shipments.API.Repository.Core;
-using Napokon.Shipments.API.Services.Core;
-namespace Napokon.Shipments.API.Services
+using Markway.Shipments.API.Models;
+using Markway.Shipments.API.Models.DTO;
+using Markway.Shipments.API.Repository.Core;
+using Markway.Shipments.API.Services.Core;
+namespace Markway.Shipments.API.Services
 {
     public class ShipmentService : BaseService<Shipment>, IShipmentService
     {
