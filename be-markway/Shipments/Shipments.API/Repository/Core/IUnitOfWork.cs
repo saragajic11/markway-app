@@ -25,6 +25,8 @@ namespace Markway.Shipments.API.Repository.Core
 
         IShipmentLoadOnLocationRepository ShipmentLoadOnLocations { get; }
 
+        IShipmentCustomRepository ShipmentCustoms { get; }
+
     }
 }
 
