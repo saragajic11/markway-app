@@ -2,6 +2,7 @@
 
 using Markway.Shipments.API.Models;
 using Markway.Shipments.API.Repository.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Markway.Shipments.API.Repository
 {
@@ -9,5 +10,16 @@ namespace Markway.Shipments.API.Repository
     {
         public ShipmentRepository(ShipmentsContext context)
             : base(context) { }
+
+        public override async Task<Shipment?> GetAsync(long id)
+        {
+            return await ShipmentsContext.Shipments
+            .Include(x => x.Carrier)
+            .Include(x => x.Customer)
+            .Include(x => x.BorderCrossing)
+            .Include(x => x.Note)
+            .Where(shipment => shipment.Id == id && !shipment.Deleted)
+            .FirstOrDefaultAsync();
+        }
     }
 }

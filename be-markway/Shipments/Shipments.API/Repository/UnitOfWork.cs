@@ -40,6 +40,7 @@ namespace Markway.Shipments.API.Repository
             Notes = new NoteRepository(_context);
             ShipmentLoadOnLocations = new ShipmentLoadOnLocationRepository(_context);
             ShipmentCustoms = new ShipmentCustomRepository(_context);
+            Shipments = new ShipmentRepository(_context);
         }
 
         public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class

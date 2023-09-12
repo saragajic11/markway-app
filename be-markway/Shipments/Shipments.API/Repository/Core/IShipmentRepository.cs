@@ -6,6 +6,7 @@ namespace Markway.Shipments.API.Repository.Core
 {
     public interface IShipmentRepository : IBaseRepository<Shipment>
     {
+        public Task<Shipment?> GetAsync(long id);
     }
 }
 

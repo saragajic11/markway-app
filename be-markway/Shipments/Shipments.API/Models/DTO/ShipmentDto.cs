@@ -26,6 +26,22 @@ namespace Markway.Shipments.API.Models.DTO
 
         public long? Profit { get; set; }
 
+        public long? CarrierId { get; set; }
+
+        public CarrierDto? Carrier { get; set; }
+
+        public long? CustomerId { get; set; }
+
+        public CustomerDto? Customer { get; set; }
+
+        public long? BorderCrossingId { get; set; }
+
+        public BorderCrossingDto? BorderCrossing { get; set; }
+
+        public long? NoteId { get; set; }
+
+        public NoteDto? Note { get; set; }
+
         //TODO: add foreign key for customer_id, border_crossing_id, carrier_id, note_id, customs_id
 
     }
