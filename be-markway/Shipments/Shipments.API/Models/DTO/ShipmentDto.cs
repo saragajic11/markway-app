@@ -42,7 +42,5 @@ namespace Markway.Shipments.API.Models.DTO
 
         public NoteDto? Note { get; set; }
 
-        //TODO: add foreign key for customer_id, border_crossing_id, carrier_id, note_id, customs_id
-
     }
 }
