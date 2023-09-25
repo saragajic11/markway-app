@@ -49,4 +49,18 @@ public class ShipmentLoadOnLocationController : ControllerBase
 
         return Ok(_mapper.Map<ShipmentLoadOnLocation>(shipmentLoadOnLocationDto));
     }
+
+    [HttpGet("getByShipment")]
+    public async Task<IActionResult> GetAsyncByShipmentId([FromQuery] long shipmentId)
+    {
+        IList<ShipmentLoadOnLocation?> shipmentLoadOnLocations = await _shipmentLoadOnLocationService.GetAsyncByShipmentId(shipmentId);
+        return Ok(_mapper.Map<IList<ShipmentLoadOnLocation>, List<ShipmentLoadOnLocationDto>>(shipmentLoadOnLocations));
+    }
+
+    [HttpGet("getByShipmentAndType")]
+    public async Task<IActionResult> GetAsyncByShipmentIdAndLoadOnLocationType([FromQuery] long shipmentId, [FromQuery] long type)
+    {
+        IList<ShipmentLoadOnLocation?> shipmentLoadOnLocations = await _shipmentLoadOnLocationService.GetAsyncByShipmentIdAndLoadOnLocationType(shipmentId, type);
+        return Ok(_mapper.Map<IList<ShipmentLoadOnLocation>, List<ShipmentLoadOnLocationDto>>(shipmentLoadOnLocations));
+    }
 }

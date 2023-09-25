@@ -57,5 +57,33 @@ namespace Markway.Shipments.API.Services
                 return null;
             }
         }
+
+        public async Task<IList<ShipmentLoadOnLocation>?> GetAsyncByShipmentId(long id)
+        {
+            try
+            {
+                IList<ShipmentLoadOnLocation>? shipmentLoadOnLocation = await _unitOfWork.ShipmentLoadOnLocations.GetAsyncByShipmentId(id);
+                return shipmentLoadOnLocation;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
+                return null;
+            }
+        }
+
+        public async Task<IList<ShipmentLoadOnLocation>?> GetAsyncByShipmentIdAndLoadOnLocationType(long id, long type)
+        {
+            try
+            {
+                IList<ShipmentLoadOnLocation>? shipmentLoadOnLocation = await _unitOfWork.ShipmentLoadOnLocations.GetAsyncByShipmentIdAndLoadOnLocationType(id, type);
+                return shipmentLoadOnLocation;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
+                return null;
+            }
+        }
     }
 }

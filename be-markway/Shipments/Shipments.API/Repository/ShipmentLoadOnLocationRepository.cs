@@ -9,9 +9,10 @@ namespace Markway.Shipments.API.Repository
     public class ShipmentLoadOnLocationRepository : BaseRepository<ShipmentLoadOnLocation>, IShipmentLoadOnLocationRepository
     {
         public ShipmentLoadOnLocationRepository(ShipmentsContext context)
-            : base(context) { 
-                
-            }
+            : base(context)
+        {
+
+        }
 
         public override async Task<ShipmentLoadOnLocation?> GetAsync(long id)
         {
@@ -20,6 +21,24 @@ namespace Markway.Shipments.API.Repository
             .Include(x => x.LoadOnLocation)
             .Where(shipmentLoadOnLocation => shipmentLoadOnLocation.Id == id && !shipmentLoadOnLocation.Deleted)
             .FirstOrDefaultAsync();
+        }
+
+        public async Task<IList<ShipmentLoadOnLocation>?> GetAsyncByShipmentId(long shipmentId)
+        {
+            return await ShipmentsContext.ShipmentLoadOnLocations
+            .Include(x => x.Shipment)
+            .Include(x => x.LoadOnLocation)
+            .Where(shipmentLoadOnLocation => shipmentLoadOnLocation.ShipmentId == shipmentId && !shipmentLoadOnLocation.Deleted)
+            .ToListAsync();
+        }
+
+        public async Task<IList<ShipmentLoadOnLocation>?> GetAsyncByShipmentIdAndLoadOnLocationType(long shipmentId, long type)
+        {
+            return await ShipmentsContext.ShipmentLoadOnLocations
+            .Include(x => x.Shipment)
+            .Include(x => x.LoadOnLocation)
+            .Where(shipmentLoadOnLocation => shipmentLoadOnLocation.ShipmentId == shipmentId && (int)shipmentLoadOnLocation.type == type && !shipmentLoadOnLocation.Deleted)
+            .ToListAsync();
         }
     }
 }

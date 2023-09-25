@@ -7,6 +7,11 @@ namespace Markway.Shipments.API.Repository.Core
     public interface IShipmentLoadOnLocationRepository : IBaseRepository<ShipmentLoadOnLocation>
     {
         public Task<ShipmentLoadOnLocation?> GetAsync(long id);
+
+        public Task<IList<ShipmentLoadOnLocation>?> GetAsyncByShipmentId(long shipmentId);
+
+        public Task<IList<ShipmentLoadOnLocation>?> GetAsyncByShipmentIdAndLoadOnLocationType(long shipmentId, long type);
+
     }
 }
 
