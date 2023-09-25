@@ -1,0 +1,41 @@
+#home-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    .description-container {
+        width: 45%;
+        font-size: 20px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        button {
+            border: 2px solid #353e5d;
+            width: 150px;
+            border-radius: 8px;
+            padding: 10px;
+            min-width: 100px;
+            min-height: 50px;
+            margin-right: 10px;
+            background-color: white;
+            color: black;
+            margin-top: 30px;
+            text-transform: uppercase;
+
+            &:hover {
+                background-color: #f39b03;
+            }
+        }
+    }
+
+    .img-container {
+        width: 30%;
+
+        img {
+            width: 80%;
+        }
+    }
+}
