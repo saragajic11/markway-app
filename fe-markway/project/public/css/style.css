@@ -136,11 +136,14 @@ p {
 }
 #table-container td {
   border-bottom: none !important;
-  padding: 10px;
+  padding: 20px 10px;
 }
 #table-container .data-container {
   display: flex;
   flex-direction: column;
+}
+#table-container .data-container span {
+  font-size: 13px;
 }
 
 #shipments-container {
@@ -155,6 +158,9 @@ p {
   font-size: 26px;
 }
 
+#expandable-button-container {
+  font-size: 0px !important;
+}
 #expandable-button-container img {
   width: 10px;
   height: 10px;

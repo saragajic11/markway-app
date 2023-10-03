@@ -20,11 +20,17 @@ const TableRowComponent = ({ shipment }) => {
                     Dodatni podaci
                 </Typography>
                 <div className='data-container'>
-                    <span>Podatak 1</span>
-                    <span>Podatak 1</span>
-                    <span>Podatak 1</span>
-                    <span>Podatak 1</span>
-                    <span>Podatak 1</span>
+                    <span>Opis: {shipment.description}</span>
+                    <span>Status: {shipment.status}</span>
+                    <span>Roba: {shipment.merch} </span>
+                    <span>Količina robe: {shipment.merchAmount} </span>
+                    <span>Tip vozila: {shipment.vehicleType} </span>
+                    <span>Registarske tablice: {shipment.licencePlate} </span>
+                    <span>Odliv: {shipment.outcome} </span>
+                    <span>Profit: {shipment.profit} </span>
+                    <span>Prevoznik: {shipment.carrier.name} </span>
+                    <span>Granični prelaz: {shipment.borderCrossing.name} </span>
+                    <span>Napomena: {shipment.note.description}</span>
                 </div>
             </Box>
         </Collapse>

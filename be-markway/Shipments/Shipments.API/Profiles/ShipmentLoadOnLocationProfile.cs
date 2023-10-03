@@ -18,6 +18,10 @@ namespace Markway.Shipments.API.Profiles
             CreateMap<ShipmentLoadOnLocation, ShipmentLoadOnLocationElasticDto>();
 
             CreateMap<ShipmentLoadOnLocationElasticDto, ShipmentLoadOnLocationDto>();
+
+            CreateMap<ShipmentLoadOnLocation, ShipmentLoadOnLocationSpecificDto>();
+
+            CreateMap<ShipmentLoadOnLocationSpecificDto, ShipmentLoadOnLocation>();
         }
     }
 }

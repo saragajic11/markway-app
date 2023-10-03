@@ -36,8 +36,8 @@ const TableComponent = ({shipments}) => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {shipments.map((shipment, key, index) => (
-                    <TableSection shipment={shipment}/>
+                {shipments.map((shipment) => (
+                    <TableSection shipment={shipment} key={shipment.Id}/>
                 ))}
             </TableBody>
         </Table>

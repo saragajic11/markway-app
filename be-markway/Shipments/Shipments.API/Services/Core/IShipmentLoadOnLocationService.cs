@@ -16,5 +16,7 @@ namespace Markway.Shipments.API.Services.Core
 
         Task<IList<ShipmentLoadOnLocation>> GetAsyncByShipmentIdAndLoadOnLocationType(long shipmentId, long type);
 
+        Task<IList<ShipmentPopulatedDto>> GetAllShipmentsPopulated(PageRequest pageRequest);
+
     }
 }

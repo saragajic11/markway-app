@@ -35,7 +35,6 @@ namespace Markway.Shipments.API.Repository
         public async Task<IList<ShipmentLoadOnLocation>?> GetAsyncByShipmentIdAndLoadOnLocationType(long shipmentId, long type)
         {
             return await ShipmentsContext.ShipmentLoadOnLocations
-            .Include(x => x.Shipment)
             .Include(x => x.LoadOnLocation)
             .Where(shipmentLoadOnLocation => shipmentLoadOnLocation.ShipmentId == shipmentId && (int)shipmentLoadOnLocation.type == type && !shipmentLoadOnLocation.Deleted)
             .ToListAsync();

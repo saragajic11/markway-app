@@ -34,10 +34,13 @@ const TableSection = ({ shipment }) => {
                     <TableCell>
                         <ExpandableButton onClick={onClickOpen} />
                     </TableCell>
-                    <TableCell>{shipment.description}</TableCell>
+                    <TableCell>{shipment.customer.name}</TableCell>
                     <TableCell>{data.phone}</TableCell>
                     <TableCell>{data.numberrange}</TableCell>
                     <TableCell>{data.numberrange1}</TableCell>
+                    <TableCell>{data.numberrange1}</TableCell>
+                    <TableCell>{shipment.income}</TableCell>
+
                 </TableRow>
 
                 <TableRow className='collapsible'>
