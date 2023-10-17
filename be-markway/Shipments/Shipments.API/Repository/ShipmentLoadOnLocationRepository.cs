@@ -29,6 +29,8 @@ namespace Markway.Shipments.API.Repository
             .Include(x => x.Shipment)
             .Include(x => x.LoadOnLocation)
             .Where(shipmentLoadOnLocation => shipmentLoadOnLocation.ShipmentId == shipmentId && !shipmentLoadOnLocation.Deleted)
+            .OrderBy(shipmentLoadOnLocation => shipmentLoadOnLocation.type)
+            .ThenBy(shipmentLoadOnLocation => shipmentLoadOnLocation.date)
             .ToListAsync();
         }
 

@@ -9,4 +9,10 @@
     span {
         font-size: 26px;
     }
+
+    .load-on-data-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 8px;
+    }
 }

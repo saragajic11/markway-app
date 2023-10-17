@@ -8,20 +8,7 @@ import Paper from '@mui/material/Paper';
 import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 
-const TableComponent = ({shipments}) => {
-    // return <table id="table-container">
-    //     <thead>
-    //         <th>Nalogodavac</th>
-    //         <th>Status</th>
-    //         <th>Priliv</th>
-    //         <th>Odliv</th>
-    //         <th>Profit</th>
-    //         <td></td>
-    //     </thead>
-    //     {data.map((shipment, index)=> (
-    //         <TableSection shipment={shipment} index={index}/>
-    //     ))}
-    // </table>
+const TableComponent = ({ shipments }) => {
     return <TableContainer component={Paper} id="table-container">
         <Table aria-label="collapsible table">
             <TableHead>
@@ -37,7 +24,7 @@ const TableComponent = ({shipments}) => {
             </TableHead>
             <TableBody>
                 {shipments.map((shipment) => (
-                    <TableSection shipment={shipment} key={shipment.Id}/>
+                    <TableSection shipment={shipment} key={shipment.Id} />
                 ))}
             </TableBody>
         </Table>

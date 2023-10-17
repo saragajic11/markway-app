@@ -157,6 +157,11 @@ p {
 #shipments-container span {
   font-size: 26px;
 }
+#shipments-container .load-on-data-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
 
 #expandable-button-container {
   font-size: 0px !important;

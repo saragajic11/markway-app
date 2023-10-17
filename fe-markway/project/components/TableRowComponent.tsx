@@ -1,18 +1,15 @@
 import CollapsableContext from '@/context/CollapsableContext';
 import { Box, Collapse, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 import React, { useContext } from 'react';
+import LoadOnData from './LoadOnData';
+import LoadOffData from './LoadOffData';
+import ShipmentDto from '@/model/ShipmentDto';
 
-const TableRowComponent = ({ shipment }) => {
+
+const TableRowComponent = ({ shipment } : { shipment: ShipmentDto}) => {
 
     const { isCollapsed } = useContext(CollapsableContext);
 
-    // return <tr>
-    //     <td>{shipment.name}</td>
-    //     <td>{shipment.phone}</td>
-    //     <td>{shipment.numberrange}</td>
-    //     <td>{shipment.numberrange1}</td>
-
-    // </tr>
     return <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
         <Collapse in={!isCollapsed} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
@@ -31,6 +28,12 @@ const TableRowComponent = ({ shipment }) => {
                     <span>Prevoznik: {shipment.carrier.name} </span>
                     <span>Granični prelaz: {shipment.borderCrossing.name} </span>
                     <span>Napomena: {shipment.note.description}</span>
+                    <div>
+                        {shipment.shipmentLoadOnLocations.map((shipmentLoadOnLocation, index) => (
+                            shipmentLoadOnLocation.type === 0 ? <LoadOnData shipmentLoadOnLocation={shipmentLoadOnLocation} index={index} key={index} /> : <LoadOffData shipmentLoadOnLocation={shipmentLoadOnLocation} index={index} key={index} />
+                        ))
+                        }
+                    </div>
                 </div>
             </Box>
         </Collapse>
