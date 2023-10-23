@@ -3,6 +3,7 @@ using System;
 using Markway.Shipments.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Shipments.API.Migrations
 {
     [DbContext(typeof(ShipmentsContext))]
-    partial class ShipmentsContextModelSnapshot : ModelSnapshot
+    [Migration("20230911123843_AddedTableForShipmentCustoms")]
+    partial class AddedTableForShipmentCustoms
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,18 +201,6 @@ namespace Shipments.API.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long?>("BorderCrossingId")
-                        .IsRequired()
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("CarrierId")
-                        .IsRequired()
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("timestamp with time zone");
 
@@ -239,10 +230,6 @@ namespace Shipments.API.Migrations
                         .IsRequired()
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("NoteId")
-                        .IsRequired()
-                        .HasColumnType("bigint");
-
                     b.Property<long?>("Outcome")
                         .IsRequired()
                         .HasColumnType("bigint");
@@ -259,14 +246,6 @@ namespace Shipments.API.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BorderCrossingId");
-
-                    b.HasIndex("CarrierId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("NoteId");
 
                     b.ToTable("Shipments");
                 });
@@ -346,41 +325,6 @@ namespace Shipments.API.Migrations
                     b.HasIndex("ShipmentId");
 
                     b.ToTable("ShipmentLoadOnLocations");
-                });
-
-            modelBuilder.Entity("Markway.Shipments.API.Models.Shipment", b =>
-                {
-                    b.HasOne("Markway.Shipments.API.Models.BorderCrossing", "BorderCrossing")
-                        .WithMany()
-                        .HasForeignKey("BorderCrossingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Markway.Shipments.API.Models.Carrier", "Carrier")
-                        .WithMany()
-                        .HasForeignKey("CarrierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Markway.Shipments.API.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Markway.Shipments.API.Models.Note", "Note")
-                        .WithMany()
-                        .HasForeignKey("NoteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BorderCrossing");
-
-                    b.Navigation("Carrier");
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Note");
                 });
 
             modelBuilder.Entity("Markway.Shipments.API.Models.ShipmentCustoms", b =>

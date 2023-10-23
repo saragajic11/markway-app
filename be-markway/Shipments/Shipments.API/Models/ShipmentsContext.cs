@@ -56,7 +56,13 @@ namespace Markway.Shipments.API.Models
 
         public DbSet<LoadOnLocation> LoadOnLocations { get; set; }
 
+        public DbSet<Shipment> Shipments { get; set; }
+
+        public DbSet<ShipmentLoadOnLocation> ShipmentLoadOnLocations { get; set; }
+
         public DbSet<Note> Notes { get; set; }
+
+        public DbSet<ShipmentCustoms> ShipmentCustoms { get; set; }
 
 
 

@@ -1,0 +1,32 @@
+#table-container {
+    width: 80%;
+    height: 100%;
+    margin-top: 50px;
+    border-radius: 7px;
+
+    th {
+        height: 40px;
+        padding: 8px 10px 10px 10px;
+        background-color: #eff1f3;
+    }
+
+    tr {
+        min-height: 55px !important;
+        max-height: 55px !important;
+        border-bottom: 1px solid rgba(224, 224, 224, 1);
+    }
+
+    td {
+        border-bottom: none !important;
+        padding: 20px 10px;
+    }
+
+    .data-container {
+        display: flex;
+        flex-direction: column;
+
+        span {
+            font-size: 13px;
+        }
+    }
+}
