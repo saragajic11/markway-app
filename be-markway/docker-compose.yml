@@ -15,24 +15,44 @@ services:
       - shipments-api
     environment:
       - AUTHENTICATIONCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
-    # networks:
+    networks:
     #   - net_authn
-    #   - net_users
+      - net_users
   shipments-api:
     image: ${DOCKER_REGISTRY-}shipmentservice
     build:
       context: .
       dockerfile: Shipments/Shipments.Api/Dockerfile
-    ports:
-      - "5287:5287"
     depends_on:
       postgres_db:
         condition: service_healthy
+    ports:
+      - "5287:5287"
     environment:
       # - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
+      - BUILDKIT_PROGRESS=1
       - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_database; Integrated Security=true; Pooling=true;
-    # networks:
-    #   - net_users
+    networks:
+      - net_users
+
+  users-api:
+    image: ${DOCKER_REGISTRY-}users
+    build:
+      context: .
+      dockerfile: Users/Users.API/Dockerfile
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    ports:
+      - "6287:6287"
+    environment:
+      - BUILDKIT_PROGRESS=1
+      - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
+      - SYSTEMCONFIGURATION__JWT_TOKENVALIDATION_KEY=${JWT_ISSUER_SIGNING_KEY}
+      - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_users; Integrated Security=true; Pooling=true;
+    networks:
+      # - net_authn
+      - net_users
 
   postgres_db:
     image: postgres:14.1-alpine
@@ -44,8 +64,8 @@ services:
       - "5632:5432"
     volumes:
       - db_postgres:/var/lib/postgresql/data
-    # networks:
-    #   - net_users
+    networks:
+      - net_users
     #   - net_authn
     healthcheck:
       test:
@@ -64,3 +84,7 @@ volumes:
     driver: local
   elasticsearch-data:
     driver: local
+
+networks:
+  net_users:
+    driver: bridge

@@ -14,6 +14,21 @@
       "HttpHandlerOptions": {
         "UseTracing": true
       }
+    },
+    {
+      "DownstreamPathTemplate": "/api/users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "users-api",
+          "Port": "6387"
+        }
+      ],
+      "UpstreamPathTemplate": "/users",
+      "UpstreamHttpMethod": ["GET", "POST", "PUT"],
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      }
     }
   ],
   "GlobalConfiguration": {
