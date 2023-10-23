@@ -18,30 +18,29 @@ namespace Markway.Shipments.API.Middlewares
                 {
                     options.AddPolicy(Policies.Authorization.ACTION_ENTITY_NAME, policyBuilder =>
                     {
-                        PermissionRequirement requirement = new(new List<string>() { "Permissions.ExampleEntity.Action" });
+                        PermissionOrScopeRequirement requirement = new(new List<string>() { "Permissions.ExampleEntity.Action" }, null);
                         policyBuilder.AddRequirements(requirement);
                     });
                 })
                 .AddAuthentication(options =>
-                   {
-                       options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                       options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                   })
-               .AddJwtBearer(options =>
-                   {
-                       options.Authority = systemConfiguration.Jwt.Authority;
-                       options.RequireHttpsMetadata = false;
-                       options.SaveToken = true;
-                       options.TokenValidationParameters = new TokenValidationParameters
-                       {
-                           IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(systemConfiguration.Jwt.TokenValidation.Key)),
-                           ValidateIssuer = true,
-                           ValidateAudience = false,
-                           ValidateIssuerSigningKey = false,
-                           ClockSkew = TimeSpan.Zero
-                       };
-                   });
+                    {
+                        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    })
+                .AddJwtBearer(options =>
+                    {
+                        options.Authority = systemConfiguration.Jwt.Authority;
+                        options.RequireHttpsMetadata = false;
+                        options.SaveToken = true;
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(systemConfiguration.Jwt.TokenValidation.Key)),
+                            ValidateIssuer = true,
+                            ValidateAudience = false,
+                            ValidateIssuerSigningKey = false,
+                            ClockSkew = TimeSpan.Zero
+                        };
+                    });
         }
     }
 }
-

@@ -16,7 +16,8 @@ services:
     environment:
       - AUTHENTICATIONCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
     networks:
-    #   - net_authn
+      - net_authn
+      - net_shipments
       - net_users
   shipments-api:
     image: ${DOCKER_REGISTRY-}shipmentservice
@@ -33,7 +34,9 @@ services:
       - BUILDKIT_PROGRESS=1
       - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_database; Integrated Security=true; Pooling=true;
     networks:
+      - net_shipments
       - net_users
+      - net_authn
 
   users-api:
     image: ${DOCKER_REGISTRY-}users
@@ -51,7 +54,25 @@ services:
       - SYSTEMCONFIGURATION__JWT_TOKENVALIDATION_KEY=${JWT_ISSUER_SIGNING_KEY}
       - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_users; Integrated Security=true; Pooling=true;
     networks:
-      # - net_authn
+      - net_authn
+      - net_users
+
+  identity-api:
+    image: ${DOCKER_REGISTRY-}authopeniddict
+    build:
+      context: .
+      dockerfile: AuthOpenIddict/Dockerfile
+    ports:
+      - "5053:80"
+    depends_on:
+      - postgres_db
+    environment:
+      - BUILDKIT_PROGRESS=1
+      - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
+      - SYSTEMCONFIGURATION__JWT_TOKENVALIDATION_KEY=${JWT_ISSUER_SIGNING_KEY}
+      - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_users; Integrated Security=true; Pooling=true;
+    networks:
+      - net_authn
       - net_users
 
   postgres_db:
@@ -66,7 +87,7 @@ services:
       - db_postgres:/var/lib/postgresql/data
     networks:
       - net_users
-    #   - net_authn
+      - net_authn
     healthcheck:
       test:
         [
@@ -87,4 +108,8 @@ volumes:
 
 networks:
   net_users:
+    driver: bridge
+  net_shipments:
+    driver: bridge
+  net_authn:
     driver: bridge

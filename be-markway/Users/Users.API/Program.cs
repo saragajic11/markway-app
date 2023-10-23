@@ -46,7 +46,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGrpcService<GrpcEntityService>();
+app.MapGrpcService<GrpcUserService>();
 
 app.UseRouting();
 

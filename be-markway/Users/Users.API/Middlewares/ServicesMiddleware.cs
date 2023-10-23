@@ -7,6 +7,7 @@ using Markway.Users.API.Repository;
 using Markway.Users.API.Repository.Core;
 using Markway.Users.API.Services;
 using Markway.Users.API.Services.Core;
+using Markway.Commons.Configurations;
 
 namespace Markway.Users.API.Middlewares
 {
@@ -16,13 +17,16 @@ namespace Markway.Users.API.Middlewares
         {
             services.AddHostedService<DatabaseSeeder>();
 
-            services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
+            services.AddSingleton<IAuthorizationHandler, PermissionOrScopeHandler>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IElasticSearchService, ElasticSearchService>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
+
+        public static void AddGrpcClients(this WebApplicationBuilder builder, ISystemConfiguration systemConfiguration)
+        {
+        }
     }
 }
-

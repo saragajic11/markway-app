@@ -1,0 +1,139 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "UsersService";
+
+service GrpcUser {
+  rpc GetUserCredentials (UserRequest) returns (CredentialsResponse);
+  rpc GetUserByEmail (UserRequest) returns (UserReply);
+  rpc GetUserByUsername (UserRequest) returns (UserReply);
+  rpc GetUserById (UserRequest) returns (UserReply);
+  rpc GetUserAdAccountsByUserId (UserAdAccountRequest) returns (UserAdAccountReply);
+  rpc GetUserAdAccountsByUserIds (UserAdAccountRequestList) returns (UserAdAccountReplyList);
+  rpc GetCurrentUserAdAccounts (AdAccountsRequest) returns (AdAccountsReply);
+  rpc VerifyUserPhoneNumber (UserSmsActivationRequest) returns (CredentialsResponse);
+  rpc VerifyRecoveredUserPhoneNumber (UserSmsActivationRequest) returns (CredentialsResponse);
+  rpc GetAdditionalContactById (AdditionalContactRequest) returns (AdditionalContactReply);
+  rpc GetAdditionalContactsByAdId (AdditionalContactsRequest) returns (AdditionalContactsReply);
+  rpc GetAdditionalContactsByAdIdList (AdditionalContactsRequestList) returns (AdditionalContactsReplyList);
+  rpc GetFavouriteAdsByUserId (FavouriteAdsRequest) returns (FavouriteAdsReply);
+  rpc GetUserFavouriteAd (FavouriteAdsRequest) returns (FavouriteAdReply);
+}
+
+message UserAdAccountRequest {
+  int64 id = 1;
+  int64 referenceId = 2;
+}
+
+message UserAdAccountRequestList {
+  repeated UserAdAccountRequest adAccounts = 1;
+}
+
+message UserRequest {
+  string username = 1;
+  int64 id = 2;
+}
+
+message UserReply {
+  int64 id = 1;
+  string username = 2;
+  optional string email = 3;
+  string phoneNumber = 4;
+  repeated string roles = 5;
+  int64 countryId = 6;
+}
+
+message AdditionalContactRequest {
+  int64 contactId = 1;
+}
+
+message AdditionalContactReply {
+  int64 userId = 1;
+  string contact = 2;
+}
+
+message UserAdAccountReplyList {
+  repeated UserAdAccountReply accounts = 1;
+}
+
+message UserSmsActivationRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message CredentialsResponse {
+  string username = 1;
+  string password = 2;
+  string status = 3;
+  bool isPhoneNumberRegistration = 4;
+  repeated string roles = 5;
+}
+
+message UserAdAccountReply {
+  repeated UsersAdAccount accounts = 1;
+  int64 referenceId = 2;
+}
+
+message UsersAdAccount {
+  int64 id = 1;
+  string phoneNumber = 2;
+  string email = 3;
+}
+
+message AdditionalContactsRequest {
+  repeated int64 additionalContactIds = 1;
+  int64 userId = 2;
+  int64 referenceId = 3;
+}
+
+message AdditionalContactsRequestList {
+  repeated AdditionalContactsRequest contacts = 1;
+}
+
+message AdditionalContactsReplyList {
+  repeated AdditionalContactsReply additionalContacts = 1;
+}
+
+message AdditionalContactsReply {
+  repeated AdditionalContactReply additionalContacts = 1;
+  int64 referenceId = 3;
+}
+
+message FavouriteAdsRequest {
+  int64 UserId = 1;
+  int64 AdId = 2;
+  int64 Page = 3;
+  int64 PerPage = 4;
+}
+
+message FavouriteAdReply {
+  google.protobuf.Timestamp DateSaved = 1;
+  int64 AdId = 2;
+  bool IsFavourite = 4;
+}
+
+message FavouriteAdsReply {
+  repeated FavouriteAdReply Favourites = 1;
+}
+
+message AdAccountsRequest {
+  int64 userId = 1;
+}
+
+message AdAccountsReply {
+  repeated AdAccount accounts = 1;
+}
+
+message AdAccount {
+  int64 adAccountId = 1;
+  GrpcUserAccountType type = 2;
+  string phoneNumber = 3;
+  string email = 4;
+  string name = 5;
+}
+
+enum GrpcUserAccountType {
+    PRIVATE = 0;
+    BUSINESS = 1;
+}

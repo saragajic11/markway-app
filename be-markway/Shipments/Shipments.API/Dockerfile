@@ -24,6 +24,6 @@ WORKDIR /app
 
 COPY --from=publish /app/publish .
 
-HEALTHCHECK --interval=5s --timeout=10s --retries=5 CMD curl --fail http://shipments.api:5387/health || exit 1
+HEALTHCHECK --interval=5s --timeout=10s --retries=5 CMD curl --fail http://shipments-api:5387/health || exit 1
 
 ENTRYPOINT ["dotnet", "Shipments.dll"]

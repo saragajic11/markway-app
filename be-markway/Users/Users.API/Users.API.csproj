@@ -77,7 +77,7 @@
     <Folder Include="Services\Grpc\" />
   </ItemGroup>
   <ItemGroup>
-    <Protobuf Include="Protos\example_entity.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\user.proto" GrpcServices="Server" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Commons\Commons.csproj">

@@ -18,7 +18,7 @@ namespace Markway.Users.API.Middlewares
                 {
                     options.AddPolicy(Policies.Authorization.ACTION_ENTITY_NAME, policyBuilder =>
                     {
-                        PermissionRequirement requirement = new(new List<string>() { "Permissions.ExampleEntity.Action" });
+                        PermissionOrScopeRequirement requirement = new(new List<string>() { "Permissions.ExampleEntity.Action" }, null);
                         policyBuilder.AddRequirements(requirement);
                     });
                 })

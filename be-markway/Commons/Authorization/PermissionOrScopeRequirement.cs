@@ -4,14 +4,15 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Markway.Commons.Authorization
 {
-    public class PermissionRequirement : IAuthorizationRequirement
+    public class PermissionOrScopeRequirement : IAuthorizationRequirement
     {
         public IEnumerable<string> Permissions { get; set; } = Enumerable.Empty<string>();
+        public IEnumerable<string> Scopes { get; set; } = Enumerable.Empty<string>();
 
-        public PermissionRequirement(IEnumerable<string> _permissions)
+        public PermissionOrScopeRequirement(IEnumerable<string> _permissions, IEnumerable<string> _scopes)
         {
             Permissions = _permissions;
+            Scopes = _scopes;
         }
     }
 }
-

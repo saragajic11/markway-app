@@ -25,7 +25,7 @@ namespace Shipments.API.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.BorderCrossing", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.BorderCrossing", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace Shipments.API.Migrations
                     b.ToTable("BorderCrossings");
                 });
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.Carrier", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.Carrier", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,7 +81,7 @@ namespace Shipments.API.Migrations
                     b.ToTable("Carriers");
                 });
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.Customer", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.Customer", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +107,7 @@ namespace Shipments.API.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.Customs", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.Customs", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -137,7 +137,7 @@ namespace Shipments.API.Migrations
                     b.ToTable("Customs");
                 });
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.LoadOnLocation", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.LoadOnLocation", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -167,7 +167,7 @@ namespace Shipments.API.Migrations
                     b.ToTable("LoadOnLocations");
                 });
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.Note", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.Note", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -193,7 +193,7 @@ namespace Shipments.API.Migrations
                     b.ToTable("Notes");
                 });
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.Shipment", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.Shipment", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -250,7 +250,7 @@ namespace Shipments.API.Migrations
                     b.ToTable("Shipments");
                 });
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.ShipmentLoadOnLocation", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.ShipmentLoadOnLocation", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -290,15 +290,15 @@ namespace Shipments.API.Migrations
                     b.ToTable("ShipmentLoadOnLocations");
                 });
 
-            modelBuilder.Entity("Napokon.Shipments.API.Models.ShipmentLoadOnLocation", b =>
+            modelBuilder.Entity("Markway.Shipments.API.Models.ShipmentLoadOnLocation", b =>
                 {
-                    b.HasOne("Napokon.Shipments.API.Models.LoadOnLocation", "LoadOnLocation")
+                    b.HasOne("Markway.Shipments.API.Models.LoadOnLocation", "LoadOnLocation")
                         .WithMany()
                         .HasForeignKey("LoadOnLocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Napokon.Shipments.API.Models.Shipment", "Shipment")
+                    b.HasOne("Markway.Shipments.API.Models.Shipment", "Shipment")
                         .WithMany()
                         .HasForeignKey("ShipmentId")
                         .OnDelete(DeleteBehavior.Cascade)
