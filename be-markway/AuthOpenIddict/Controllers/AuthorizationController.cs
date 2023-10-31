@@ -85,18 +85,6 @@ namespace Markway.AuthOpenIddict.Controllers
             return SignIn(claimsPrincipal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
 
-        [HttpPost(Endpoints.ANONYMOUS_TOKEN), Produces("application/json")]
-        public async Task<IActionResult> ExchangeAnonymousToken()
-        {
-            ClaimsPrincipal claimsPrincipal;
-
-            ClaimsIdentity claimsIdentity = await ResolveAnonymousUser();
-            claimsPrincipal = new(claimsIdentity);
-            claimsPrincipal.SetScopes(new string[] { OpenIddictConstants.Scopes.OpenId, OpenIddictConstants.Scopes.OfflineAccess });
-
-            return SignIn(claimsPrincipal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
-        }
-
         [HttpPost(Endpoints.ADMIN_TOKEN), Produces("application/json")]
         public async Task<IActionResult> ExchangeAdminToken()
         {
@@ -142,28 +130,6 @@ namespace Markway.AuthOpenIddict.Controllers
             if (request.IsPasswordGrantType())
             {
                 CredentialsResponse credentials = await ResolveUserCredentials(request.Username);
-
-                if (credentials.IsPhoneNumberRegistration && UserStatus.STAGED.Equals(Enum.Parse(typeof(UserStatus), credentials.Status)))
-                {
-                    await VerifyUserPhoneNumberAsync(request.Username, request.Password);
-                    ClaimsIdentity identity = await ResolveUserIdentity(request.Password, credentials);
-
-                    claimsPrincipal = new(identity);
-                    claimsPrincipal.SetScopes(new string[] { OpenIddictConstants.Scopes.OpenId, OpenIddictConstants.Scopes.OfflineAccess });
-
-                    return SignIn(claimsPrincipal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
-                }
-
-                if (credentials.IsPhoneNumberRegistration && UserStatus.RECOVERY.Equals(Enum.Parse(typeof(UserStatus), credentials.Status)))
-                {
-                    await VerifyRecoveredUserPhoneNumberAsync(request.Username, request.Password);
-                    ClaimsIdentity identity = await ResolveUserIdentity(request.Password, credentials);
-
-                    claimsPrincipal = new(identity);
-                    claimsPrincipal.SetScopes(new string[] { OpenIddictConstants.Scopes.OpenId, OpenIddictConstants.Scopes.OfflineAccess });
-
-                    return SignIn(claimsPrincipal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
-                }
 
                 if (!UserStatus.ACTIVE.Equals(Enum.Parse(typeof(UserStatus), credentials.Status)))
                 {
@@ -227,24 +193,15 @@ namespace Markway.AuthOpenIddict.Controllers
             UserRequest userRequest = new UserRequest { Username = credentials.Username };
             UserReply user = await _grpcUserClient.GetUserByUsernameAsync(userRequest);
 
-            List<Claim> claims = new();
-            if (credentials.IsPhoneNumberRegistration)
+            List<Claim> claims = new()
             {
-                claims.Add(new Claim(OpenIddictConstants.Claims.Subject, credentials.Username));
-                claims.Add(new Claim(Claims.CLAIM_UID, $"{user.Id}").SetDestinations(OpenIddictConstants.Destinations.AccessToken));
-                claims.Add(new Claim(ClaimTypes.Name, credentials.Username));
-                claims.Add(new Claim(ClaimTypes.MobilePhone, credentials.Username));
-                claims.Add(new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethod.MOBILE_PHONE));
-            }
-            else
-            {
-                claims.Add(new Claim(OpenIddictConstants.Claims.Subject, credentials.Username));
-                claims.Add(new Claim(Claims.CLAIM_UID, $"{user.Id}").SetDestinations(OpenIddictConstants.Destinations.AccessToken));
-                claims.Add(new Claim(ClaimTypes.Name, credentials.Username));
-                claims.Add(new Claim(ClaimTypes.Name, credentials.Username));
-                claims.Add(new Claim(ClaimTypes.Email, credentials.Username));
-                claims.Add(new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethod.EMAIL));
-            }
+                new Claim(OpenIddictConstants.Claims.Subject, credentials.Username),
+                new Claim(Claims.CLAIM_UID, $"{user.Id}").SetDestinations(OpenIddictConstants.Destinations.AccessToken),
+                new Claim(ClaimTypes.Name, credentials.Username),
+                new Claim(ClaimTypes.Name, credentials.Username),
+                new Claim(ClaimTypes.Email, credentials.Username),
+                new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethod.EMAIL)
+            };
 
             foreach (string role in user.Roles)
             {
@@ -259,27 +216,6 @@ namespace Markway.AuthOpenIddict.Controllers
             return new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
-        private async Task<ClaimsIdentity> ResolveAnonymousUser()
-        {
-            DateTimeOffset expirationDate = DateTimeOffset.UtcNow.AddMonths(1);
-            string anonymousUsername = Guid.NewGuid().ToString();
-
-            List<Claim> claims = new()
-            {
-                new Claim(OpenIddictConstants.Claims.Subject, anonymousUsername),
-                new Claim(Claims.CLAIM_UID, anonymousUsername).SetDestinations(OpenIddictConstants.Destinations.AccessToken),
-                new Claim(ClaimTypes.Name, anonymousUsername),
-                new Claim(Claims.CLAIM_ROLES, Roles.ANONYMOUS).SetDestinations(OpenIddictConstants.Destinations.AccessToken),
-                new Claim(EXPIRATION_DATE, expirationDate.ToUnixTimeSeconds().ToString())
-            };
-
-            foreach (string permission in Roles.RolePermissions.GetValueOrDefault(Roles.ANONYMOUS))
-            {
-                claims.Add(new Claim(Claims.CLAIM_PERMISSIONS, permission).SetDestinations(OpenIddictConstants.Destinations.AccessToken));
-            }
-
-            return new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        }
         private async Task<CredentialsResponse> ResolveUserCredentials(string username)
         {
             try

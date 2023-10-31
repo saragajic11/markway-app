@@ -29,6 +29,21 @@
       "HttpHandlerOptions": {
         "UseTracing": true
       }
+    },
+    {
+      "DownstreamPathTemplate": "/connect/{action}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": "4387"
+        }
+      ],
+      "UpstreamPathTemplate": "/connect/{action}",
+      "UpstreamHttpMethod": ["POST", "GET"],
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      }
     }
   ],
   "GlobalConfiguration": {

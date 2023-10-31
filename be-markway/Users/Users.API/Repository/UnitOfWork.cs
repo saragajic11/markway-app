@@ -11,12 +11,12 @@ namespace Markway.Users.API.Repository
 
         private Dictionary<string, dynamic> _repositories = new();
 
-        public IExampleEntityRepository Entities { get; private set; }
+        public IUserRepository Users { get; private set; }
 
         public UnitOfWork(UsersContext context)
         {
             _context = context;
-            Entities = new ExampleEntityRepository(_context);
+            Users = new UserRepository(_context);
         }
 
         public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class

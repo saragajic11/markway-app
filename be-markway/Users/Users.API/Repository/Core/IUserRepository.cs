@@ -4,8 +4,9 @@ using Markway.Users.API.Models;
 
 namespace Markway.Users.API.Repository.Core
 {
-    public interface IExampleEntityRepository : IBaseRepository<User>
+    public interface IUserRepository : IBaseRepository<User>
     {
+        Task<User?> GetUserByUsernameAsync(string username);
     }
 }
 

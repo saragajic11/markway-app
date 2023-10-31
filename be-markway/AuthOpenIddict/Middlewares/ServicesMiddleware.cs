@@ -17,10 +17,7 @@ namespace Markway.AuthOpenIddict.Middlewares
         public static void AddGrpcClients(this WebApplicationBuilder builder, ISystemConfiguration systemConfiguration)
         {
             builder.Services
-                .AddGrpcClient<UsersService.GrpcUser.GrpcUserClient>(o =>
-                {
-                    o.Address = new Uri(systemConfiguration.GrpcConnections.Users);
-                })
+                .AddGrpcClient<UsersService.GrpcUser.GrpcUserClient>(o => o.Address = new Uri(systemConfiguration.GrpcConnections.Users))
                 .ConfigureChannel(o =>
                 {
                     o.UnsafeUseInsecureChannelCallCredentials = true;
@@ -31,4 +28,3 @@ namespace Markway.AuthOpenIddict.Middlewares
         }
     }
 }
-

@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
 
 using AutoMapper;
-
+using Markway.Commons.Authorization;
 using Markway.Users.API.Models;
 using Markway.Users.API.Models.DTO;
 using Markway.Users.API.Repository.Core;
@@ -23,13 +23,27 @@ namespace Markway.Users.API.Services
             try
             {
                 User user = _mapper.Map<User>(dto);
-                user.PhoneNumber = "065263422";
-                
+
+                user.Status = UserStatus.ACTIVE;
+
                 return await base.AddAsync(user);
             }
             catch (Exception e)
             {
                 _logger.LogError($"Error in UserService in Add {e.Message} in {e.StackTrace}");
+                return null;
+            }
+        }
+
+        public async Task<User?> GetByUsernameAsync(string username)
+        {
+            try
+            {
+                return await _unitOfWork.Users.GetUserByUsernameAsync(username);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in UserService in GetByUsernameAsync {e.Message} in {e.StackTrace}");
                 return null;
             }
         }

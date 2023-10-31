@@ -12,5 +12,6 @@ namespace Markway.Users.API.Services.Core
 
         Task<User?> GetAsync(long id);
 
+        Task<User?> GetByUsernameAsync(string username);
     }
 }

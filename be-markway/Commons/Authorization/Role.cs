@@ -5,7 +5,6 @@ namespace Markway.Commons.Authorization
     public enum Role
     {
         SUPER_ADMIN,
-        BUYER,
-        SELLER
+        EMPLOYEE
     }
 }

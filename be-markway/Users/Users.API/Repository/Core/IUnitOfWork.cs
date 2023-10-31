@@ -9,7 +9,7 @@ namespace Markway.Users.API.Repository.Core
         void Dispose();
         IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
 
-        IExampleEntityRepository Entities { get; }
+        IUserRepository Users { get; }
     }
 }
 

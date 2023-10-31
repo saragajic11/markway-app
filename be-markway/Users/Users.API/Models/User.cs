@@ -18,11 +18,6 @@ public class User : Entity
     [Required]
     public List<Role>? Roles { get; set; }
 
-    [DataType(DataType.PhoneNumber)]
-    [ProtectedPersonalData]
-    [PersonalData]
-    public string PhoneNumber { get; set; }
-
     public UserStatus Status { get; set; }
 
     [Required]

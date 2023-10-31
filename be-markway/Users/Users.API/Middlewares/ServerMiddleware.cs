@@ -9,7 +9,6 @@ namespace Markway.Users.API.Middlewares
 {
     public static class ServerMiddleware
     {
-
         public static ISystemConfiguration AddSystemConfiguration(this WebApplicationBuilder builder)
         {
             SystemConfiguration systemConfiguration = new();
@@ -35,16 +34,9 @@ namespace Markway.Users.API.Middlewares
         {
             builder.WebHost.ConfigureKestrel(options =>
             {
-                options.ListenAnyIP(6287, o =>
-                {
-                    o.Protocols = HttpProtocols.Http2;
-                });
-                options.ListenAnyIP(6387, o =>
-                {
-                    o.Protocols = HttpProtocols.Http1;
-                });
+                options.ListenAnyIP(6287, o => o.Protocols = HttpProtocols.Http2);
+                options.ListenAnyIP(6387, o => o.Protocols = HttpProtocols.Http1);
             });
         }
     }
 }
-
