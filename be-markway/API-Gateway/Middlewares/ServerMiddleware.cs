@@ -35,4 +35,3 @@ namespace Markway.API_Gateway.Middlewares
         }
     }
 }
-

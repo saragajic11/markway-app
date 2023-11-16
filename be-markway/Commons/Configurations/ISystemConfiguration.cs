@@ -8,9 +8,11 @@ namespace Markway.Commons.Configurations
         ELKConfiguration ELKConfiguration { get; }
 
         Jwt Jwt { get; }
-        
+
         string RedisConnectionString { get; }
 
         GrpcConnections GrpcConnections { get; set; }
+
+        public S3Settings S3Settings { get; set; }
     }
 }

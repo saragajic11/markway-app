@@ -122,6 +122,8 @@ namespace Markway.AuthOpenIddict.Controllers
         [HttpPost(Endpoints.TOKEN), Produces("application/json")]
         public async Task<IActionResult> Exchange()
         {
+            Console.WriteLine("OVDE SAM DOSAO 1");
+
             OpenIddictRequest request = HttpContext.GetOpenIddictServerRequest() ??
                                     throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
 
@@ -129,16 +131,20 @@ namespace Markway.AuthOpenIddict.Controllers
 
             if (request.IsPasswordGrantType())
             {
+                Console.WriteLine("OVDE SAM DOSAO 2");
                 CredentialsResponse credentials = await ResolveUserCredentials(request.Username);
 
                 if (!UserStatus.ACTIVE.Equals(Enum.Parse(typeof(UserStatus), credentials.Status)))
                 {
                     throw new BadHttpRequestException("The specified user credentials are invalid.");
                 }
+            Console.WriteLine("OVDE SAM DOSAO 3");
 
                 ClaimsIdentity claimsIdentity = await ResolveUserIdentity(request.Password, credentials);
                 claimsPrincipal = new(claimsIdentity);
                 claimsPrincipal.SetScopes(new string[] { OpenIddictConstants.Scopes.OpenId, OpenIddictConstants.Scopes.OfflineAccess });
+                
+            Console.WriteLine("OVDE SAM DOSAO 4");
 
                 return SignIn(claimsPrincipal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
             }
@@ -190,6 +196,8 @@ namespace Markway.AuthOpenIddict.Controllers
                 throw new BadHttpRequestException("The specified user credentials are invalid.");
             }
 
+            Console.WriteLine("OVDE SAM DOSAO 8");
+
             UserRequest userRequest = new UserRequest { Username = credentials.Username };
             UserReply user = await _grpcUserClient.GetUserByUsernameAsync(userRequest);
 
@@ -205,6 +213,8 @@ namespace Markway.AuthOpenIddict.Controllers
 
             foreach (string role in user.Roles)
             {
+            Console.WriteLine("OVDE SAM DOSAO 9");
+
                 foreach (string permission in Roles.RolePermissions.GetValueOrDefault(role))
                 {
                     claims.Add(new Claim(Claims.CLAIM_PERMISSIONS, permission).SetDestinations(OpenIddictConstants.Destinations.AccessToken));
@@ -220,40 +230,14 @@ namespace Markway.AuthOpenIddict.Controllers
         {
             try
             {
+            Console.WriteLine("OVDE SAM DOSAO 10");
+
                 UserRequest userRequest = new UserRequest { Username = username };
                 return await _grpcUserClient.GetUserCredentialsAsync(userRequest);
             }
             catch (Exception e)
             {
                 _logger.LogError($"Error in AuthenticationController in GetUserCredentialsAsync {e.Message} in {e.StackTrace}\n InnerException: {e.InnerException}");
-                throw new BadHttpRequestException("The specified user credentials are invalid.");
-            }
-        }
-
-        private async Task<CredentialsResponse> VerifyUserPhoneNumberAsync(string username, string password)
-        {
-            try
-            {
-                UserSmsActivationRequest smsActivationRequest = new UserSmsActivationRequest { Username = username, Password = password };
-                return await _grpcUserClient.VerifyUserPhoneNumberAsync(smsActivationRequest);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError($"Error in AuthenticationController in VerifyUserPhoneNumberAsync {e.Message} in {e.StackTrace}\n InnerException: {e.InnerException}");
-                throw new BadHttpRequestException("The specified user credentials are invalid.");
-            }
-        }
-
-        private async Task<CredentialsResponse> VerifyRecoveredUserPhoneNumberAsync(string username, string password)
-        {
-            try
-            {
-                UserSmsActivationRequest smsActivationRequest = new UserSmsActivationRequest { Username = username, Password = password };
-                return await _grpcUserClient.VerifyRecoveredUserPhoneNumberAsync(smsActivationRequest);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError($"Error in AuthenticationController in VerifyRecoveredUserPhoneNumberAsync {e.Message} in {e.StackTrace}\n");
                 throw new BadHttpRequestException("The specified user credentials are invalid.");
             }
         }

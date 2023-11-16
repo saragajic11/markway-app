@@ -2,7 +2,6 @@
 
 namespace Markway.Auth.Configurations
 {
-
     public class AuthenticationConfiguration : IAuhtenticationConfiguration
     {
         public const string ALLOW_ALL_ORIGIN = "ALLOW_ALL_ORIGIN";
@@ -28,4 +27,3 @@ namespace Markway.Auth.Configurations
         public string? Subject { get; set; }
     }
 }
-

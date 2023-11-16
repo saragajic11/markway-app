@@ -56,6 +56,27 @@ services:
     networks:
       - net_authn
       - net_users
+  
+  pdfs-api:
+    image: ${DOCKER_REGISTRY-}pdfsservice
+    build:
+      context: .
+      dockerfile: Pdfs/Pdfs.Api/Dockerfile
+    ports:
+      - "7287:7287"
+    depends_on:
+      - postgres_db
+    environment:
+      - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
+      - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_pdfs; Integrated Security=true; Pooling=true;
+      - SYSTEMCONFIGURATION__S3SETTINGS__ACCESSKEY=${S3_ACCESS_KEY}
+      - SYSTEMCONFIGURATION__S3SETTINGS__ACCESSSECRET=${S3_ACCESS_SECRET}
+      - SYSTEMCONFIGURATION__S3SETTINGS__SERVICEURL=${S3_SERVICE_URL}
+      - SYSTEMCONFIGURATION__S3SETTINGS__BUCKET=${S3_BUCKET}
+      - SYSTEMCONFIGURATION__S3SETTINGS__PUBLICURL=${S3_PUBLIC_URL}
+      - SYSTEMCONFIGURATION__S3SETTINGS__REGION=${S3_REGION}
+    networks:
+      - net_users
 
   identity-api:
     image: ${DOCKER_REGISTRY-}authopeniddict

@@ -31,6 +31,8 @@ namespace Markway.Users.API.Services.Grpc
             ServerCallContext context
         )
         {
+            Console.WriteLine("OVDE SAM DOSAO 7");
+
             User entity = await _userService.GetAsync(request.Id);
 
             return _mapper.Map<UserReply>(entity);
@@ -41,6 +43,8 @@ namespace Markway.Users.API.Services.Grpc
             ServerCallContext context
         )
         {
+            Console.WriteLine("OVDE SAM DOSAO 5");
+
             _ = new EmailAddressAttribute().IsValid(request.Username);
             User? user = await _userService.GetByUsernameAsync(request.Username);
 
@@ -52,6 +56,8 @@ namespace Markway.Users.API.Services.Grpc
             ServerCallContext context
         )
         {
+            Console.WriteLine("OVDE SAM DOSAO 6");
+
             User? user = await _userService.GetByUsernameAsync(request.Username);
             return _mapper.Map<UserReply>(user);
         }

@@ -37,7 +37,6 @@ namespace Markway.API_Gateway.Middlewares
                                     ValidateIssuerSigningKey = true,
                                 };
                             });
-                            
                     services.AddCors(options => {
                         options.AddPolicy(
                                     name: AuthenticationConfiguration.ALLOW_ALL_ORIGIN,
