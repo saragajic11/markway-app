@@ -15,24 +15,87 @@ services:
       - shipments-api
     environment:
       - AUTHENTICATIONCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
-    # networks:
-    #   - net_authn
-    #   - net_users
+    networks:
+      - net_authn
+      - net_shipments
+      - net_users
   shipments-api:
     image: ${DOCKER_REGISTRY-}shipmentservice
     build:
       context: .
       dockerfile: Shipments/Shipments.Api/Dockerfile
-    ports:
-      - "5287:5287"
     depends_on:
       postgres_db:
         condition: service_healthy
+    ports:
+      - "5287:5287"
     environment:
-      # - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
-      - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_database; Integrated Security=true; Pooling=true;
-    # networks:
-    #   - net_users
+      - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
+      - BUILDKIT_PROGRESS=1
+      - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_shipments; Integrated Security=true; Pooling=true;
+    networks:
+      - net_shipments
+      - net_users
+      - net_authn
+
+  users-api:
+    image: ${DOCKER_REGISTRY-}users
+    build:
+      context: .
+      dockerfile: Users/Users.API/Dockerfile
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    ports:
+      - "6287:6287"
+    environment:
+      - BUILDKIT_PROGRESS=1
+      - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
+      - SYSTEMCONFIGURATION__JWT_TOKENVALIDATION_KEY=${JWT_ISSUER_SIGNING_KEY}
+      - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_users; Integrated Security=true; Pooling=true;
+    networks:
+      - net_authn
+      - net_users
+  
+  pdfs-api:
+    image: ${DOCKER_REGISTRY-}pdfsservice
+    build:
+      context: .
+      dockerfile: Pdfs/Pdfs.Api/Dockerfile
+    ports:
+      - "7287:7287"
+    depends_on:
+      - postgres_db
+    environment:
+      - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
+      - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_pdfs; Integrated Security=true; Pooling=true;
+      - SYSTEMCONFIGURATION__S3SETTINGS__ACCESSKEY=${S3_ACCESS_KEY}
+      - SYSTEMCONFIGURATION__S3SETTINGS__ACCESSSECRET=${S3_ACCESS_SECRET}
+      - SYSTEMCONFIGURATION__S3SETTINGS__SERVICEURL=${S3_SERVICE_URL}
+      - SYSTEMCONFIGURATION__S3SETTINGS__BUCKET=${S3_BUCKET}
+      - SYSTEMCONFIGURATION__S3SETTINGS__PUBLICURL=${S3_PUBLIC_URL}
+      - SYSTEMCONFIGURATION__S3SETTINGS__REGION=${S3_REGION}
+    networks:
+      - net_users
+
+  identity-api:
+    image: ${DOCKER_REGISTRY-}authopeniddict
+    build:
+      context: .
+      dockerfile: AuthOpenIddict/Dockerfile
+    ports:
+      - "4287:4287"
+    depends_on:
+      - postgres_db
+    environment:
+      - BUILDKIT_PROGRESS=1
+      - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
+      - SYSTEMCONFIGURATION__JWT_TOKENVALIDATION_KEY=${JWT_ISSUER_SIGNING_KEY}
+      - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_auth; Integrated Security=true; Pooling=true;
+      - SYSTEMCONFIGURATION__GRPCCONNECTIONS__USERS=${GRPC_USERS_SERVICE}
+    networks:
+      - net_authn
+      - net_users
 
   postgres_db:
     image: postgres:14.1-alpine
@@ -44,9 +107,9 @@ services:
       - "5632:5432"
     volumes:
       - db_postgres:/var/lib/postgresql/data
-    # networks:
-    #   - net_users
-    #   - net_authn
+    networks:
+      - net_users
+      - net_authn
     healthcheck:
       test:
         [
@@ -64,3 +127,11 @@ volumes:
     driver: local
   elasticsearch-data:
     driver: local
+
+networks:
+  net_users:
+    driver: bridge
+  net_shipments:
+    driver: bridge
+  net_authn:
+    driver: bridge

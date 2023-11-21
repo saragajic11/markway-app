@@ -29,10 +29,7 @@ app.UseCors(AuthenticationConfiguration.ALLOW_ALL_ORIGIN);
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.UseEndpoints(endpoints => endpoints.MapControllers());
 
 app.UseOcelot().Wait();
 

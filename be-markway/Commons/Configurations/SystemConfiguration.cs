@@ -6,7 +6,7 @@ namespace Markway.Commons.Configurations
     {
         public string DatabaseConnection { get; set; }
         public ELKConfiguration ELKConfiguration { get; set; }
-
+        public S3Settings S3Settings { get; set; } = new S3Settings();
         public Jwt Jwt { get; set; } = new Jwt();
 
         public string RedisConnectionString { get; set; }
@@ -41,6 +41,16 @@ namespace Markway.Commons.Configurations
         public string? User { get; set; }
         public string? Ad { get; set; }
         public string? Image { get; set; }
+    }
+
+    public class S3Settings
+    {
+        public string? AccessKey { get; set; }
+        public string? AccessSecret { get; set; }
+        public string? ServiceURL { get; set; }
+        public string? Bucket { get; set; }
+        public string? PublicURL { get; set; }
+        public string? Region { get; set; }
     }
 }
 

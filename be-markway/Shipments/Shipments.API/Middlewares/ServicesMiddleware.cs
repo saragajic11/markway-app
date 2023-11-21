@@ -16,7 +16,7 @@ namespace Markway.Shipments.API.Middlewares
         {
             services.AddHostedService<DatabaseSeeder>();
 
-            services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
+            services.AddSingleton<IAuthorizationHandler, PermissionOrScopeHandler>();
 
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ICarrierService, CarrierService>();
