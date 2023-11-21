@@ -13,23 +13,28 @@ namespace Markway.Shipments.API.Services
         private readonly IMapper _mapper;
         private readonly IShipmentService _shipmentService;
         private readonly ILoadOnLocationService _loadOnLocationService;
+        private readonly ICarrierService _carrierService;
 
-        public ShipmentLoadOnLocationService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<ShipmentLoadOnLocationService> logger, IShipmentService shipmentService, ILoadOnLocationService loadOnLocationService)
+        private readonly IRouteService _routeService;
+
+        public ShipmentLoadOnLocationService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<ShipmentLoadOnLocationService> logger, IShipmentService shipmentService, ILoadOnLocationService loadOnLocationService, ICarrierService carrierService, IRouteService routeService)
             : base(logger, unitOfWork, elasticSearchService)
         {
             _mapper = mapper;
             _shipmentService = shipmentService;
             _loadOnLocationService = loadOnLocationService;
+            _carrierService = carrierService;
+            _routeService = routeService;
         }
 
         public async Task<ShipmentLoadOnLocation?> AddAsync(ShipmentLoadOnLocationDto dto)
         {
             try
             {
-                Shipment? shipment = await _shipmentService.GetAsync((long)dto.ShipmentId);
+                ShipmentsRoute? route = await _routeService.GetAsync((long)dto.RouteId);
                 LoadOnLocation? loadOnLocation = await _loadOnLocationService.GetAsync((long)dto.LoadOnLocationId);
                 ShipmentLoadOnLocation entity = _mapper.Map<ShipmentLoadOnLocation>(dto);
-                entity.Shipment = shipment;
+                entity.Route = route;
                 entity.LoadOnLocation = loadOnLocation;
                 await base.AddAsync(entity);
 

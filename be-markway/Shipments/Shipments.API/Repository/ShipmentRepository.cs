@@ -15,9 +15,7 @@ namespace Markway.Shipments.API.Repository
         public override async Task<Shipment?> GetAsync(long id)
         {
             return await ShipmentsContext.Shipments
-            .Include(x => x.Carrier)
             .Include(x => x.Customer)
-            .Include(x => x.BorderCrossing)
             .Include(x => x.Note)
             .Where(shipment => shipment.Id == id && !shipment.Deleted)
             .FirstOrDefaultAsync();
@@ -26,9 +24,7 @@ namespace Markway.Shipments.API.Repository
         public override async Task<IList<Shipment>> GetAllAsync(PageRequest pageRequest)
         {
             return await ShipmentsContext.Shipments
-            .Include(x => x.Carrier)
             .Include(x => x.Customer)
-            .Include(x => x.BorderCrossing)
             .Include(x => x.Note)
             .Where(shipment => !shipment.Deleted)
             .ToListAsync();

@@ -26,7 +26,7 @@ p {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 10vh;
+  height: 13vh;
   position: sticky;
   top: 0;
   z-index: 999;
@@ -154,8 +154,22 @@ p {
   height: 90vh;
   margin-bottom: 50px;
 }
-#shipments-container span {
+#shipments-container .heading-container {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#shipments-container .heading-container span {
   font-size: 26px;
+  color: #353e5d;
+}
+#shipments-container .heading-container button {
+  background-color: #f39b03;
+  color: #353e5d;
+  font-weight: bold;
+  height: 50px;
 }
 #shipments-container .load-on-data-container {
   display: flex;
@@ -169,6 +183,84 @@ p {
 #expandable-button-container img {
   width: 10px;
   height: 10px;
+}
+
+.MuiDrawer-root .MuiPaper-root {
+  width: 35%;
+}
+.MuiDrawer-root #shipments-drawer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding-top: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 30px;
+}
+.MuiDrawer-root #shipments-drawer-container span {
+  font-size: 26px;
+  color: #353e5d;
+}
+.MuiDrawer-root #shipments-drawer-container #shipments-form {
+  display: flex;
+  flex-direction: column;
+}
+.MuiDrawer-root #shipments-drawer-container #shipments-form .select-box {
+  margin-top: 20px;
+}
+.MuiDrawer-root #shipments-drawer-container #shipments-form .select-box .MuiInputBase-root {
+  height: 56px;
+}
+.MuiDrawer-root #shipments-drawer-container #shipments-form .MuiTextField-root {
+  margin-top: 20px;
+}
+.MuiDrawer-root #shipments-drawer-container #shipments-form button {
+  background-color: #f39b03;
+  color: #353e5d;
+  font-weight: bold;
+  height: 70px;
+  margin-top: 30px;
+}
+.MuiDrawer-root #shipments-drawer-container #shipments-form fieldset {
+  border-color: #353e5d;
+}
+.MuiDrawer-root #shipments-drawer-container #shipments-form div.Mui-focused fieldset {
+  border-color: #f39b03;
+}
+.MuiDrawer-root #shipments-drawer-container #shipments-form label.Mui-focused {
+  color: #353e5d;
+}
+.MuiDrawer-root #shipments-drawer-container #shipments-form hr {
+  border: 1px solid #353e5d;
+  width: 100%;
+  margin-top: 25px;
+}
+
+.carrier-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  max-width: 400px;
+}
+.carrier-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper .add-carrier-form {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+.carrier-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper .add-carrier-form button {
+  margin-top: 10px;
+}
+.carrier-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper .add-carrier-form fieldset {
+  border-color: #353e5d;
+}
+.carrier-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper .add-carrier-form div.Mui-focused fieldset {
+  border-color: #f39b03;
+}
+.carrier-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper .add-carrier-form label.Mui-focused {
+  color: #353e5d;
+}
+.carrier-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper .add-carrier-form p {
+  margin-left: 0px;
+  font-size: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

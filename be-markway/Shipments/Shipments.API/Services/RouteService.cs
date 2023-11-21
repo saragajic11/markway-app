@@ -8,32 +8,30 @@ using Markway.Shipments.API.Repository.Core;
 using Markway.Shipments.API.Services.Core;
 namespace Markway.Shipments.API.Services
 {
-    public class ShipmentService : BaseService<Shipment>, IShipmentService
+    public class RouteService : BaseService<ShipmentsRoute>, IRouteService
     {
         private readonly IMapper _mapper;
-        private readonly IBorderCrossingService _borderCrossingService;
-        private readonly INoteService _noteService;
-        private readonly ICustomerService _customerService;
+        private readonly ICarrierService _carrierService;
+        private readonly IShipmentService _shipmentService;
 
-        public ShipmentService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<ShipmentService> logger, IBorderCrossingService borderCrossingService, ICustomerService customerService, INoteService noteService)
+        public RouteService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<RouteService> logger, ICarrierService carrierService, IShipmentService shipmentService)
             : base(logger, unitOfWork, elasticSearchService)
         {
             _mapper = mapper;
-            _borderCrossingService = borderCrossingService;
-            _noteService = noteService;
-            _customerService = customerService;
+            _carrierService = carrierService;
+            _shipmentService = shipmentService;
         }
 
-        public async Task<Shipment?> AddAsync(ShipmentDto dto)
+        public async Task<ShipmentsRoute?> AddAsync(RouteDto dto)
         {
             try
             {
-                Customer customer = await _customerService.GetAsync((long)dto.CustomerId);
-                Note note = await _noteService.GetAsync((long)dto.NoteId);
+                Carrier carrier = await _carrierService.GetAsync((long)dto.CarrierId);
+                Shipment shipment = await _shipmentService.GetAsync((long)dto.ShipmentId);
 
-                Shipment entity = _mapper.Map<Shipment>(dto);
-                entity.Customer = customer;
-                entity.Note = note;
+                ShipmentsRoute entity = _mapper.Map<ShipmentsRoute>(dto);
+                entity.Carrier = carrier;
+                entity.Shipment = shipment;
 
                 await base.AddAsync(entity);
 
@@ -49,12 +47,12 @@ namespace Markway.Shipments.API.Services
             }
         }
 
-        public async Task<Shipment?> GetAsync(long id)
+        public async Task<ShipmentsRoute?> GetAsync(long id)
         {
             try
             {
-                Shipment? shipment = await _unitOfWork.Shipments.GetAsync(id);
-                return shipment;
+                ShipmentsRoute? route = await _unitOfWork.Routes.GetAsync(id);
+                return route;
             }
             catch (Exception e)
             {

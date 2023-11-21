@@ -27,6 +27,8 @@ namespace Markway.Shipments.API.Repository.Core
 
         IShipmentCustomRepository ShipmentCustoms { get; }
 
+        IRouteRepository Routes { get; }
+
     }
 }
 

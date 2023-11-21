@@ -29,6 +29,8 @@ namespace Markway.Shipments.API.Repository
 
         public IShipmentCustomRepository ShipmentCustoms { get; private set; }
 
+        public IRouteRepository Routes { get; private set; }
+
         public UnitOfWork(ShipmentsContext context)
         {
             _context = context;
@@ -41,6 +43,7 @@ namespace Markway.Shipments.API.Repository
             ShipmentLoadOnLocations = new ShipmentLoadOnLocationRepository(_context);
             ShipmentCustoms = new ShipmentCustomRepository(_context);
             Shipments = new ShipmentRepository(_context);
+            Routes = new RouteRepository(_context);
         }
 
         public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class

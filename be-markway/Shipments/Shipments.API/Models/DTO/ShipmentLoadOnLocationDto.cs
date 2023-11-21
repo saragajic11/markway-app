@@ -13,9 +13,9 @@ namespace Markway.Shipments.API.Models.DTO
 
         public CustomsType type { get; set; }
 
-        public long? ShipmentId { get; set; }
+        public long? RouteId { get; set; }
 
-        public ShipmentDto? Shipment { get; set; }
+        public RouteDto? Route { get; set; }
 
         public long? LoadOnLocationId { get; set; }
 

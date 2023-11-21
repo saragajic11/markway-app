@@ -16,7 +16,7 @@ namespace Markway.Shipments.API.Repository
         public override async Task<ShipmentCustoms?> GetAsync(long id)
         {
             return await ShipmentsContext.ShipmentCustoms
-            .Include(x => x.Shipment)
+            .Include(x => x.Route)
             .Include(x => x.Custom)
             .Where(shipmentCustom => shipmentCustom.Id == id && !shipmentCustom.Deleted)
             .FirstOrDefaultAsync();

@@ -27,6 +27,7 @@ namespace Markway.Shipments.API.Middlewares
             services.AddScoped<IShipmentService, ShipmentService>();
             services.AddScoped<IShipmentLoadOnLocationService, ShipmentLoadOnLocationService>();
             services.AddScoped<IShipmentCustomService, ShipmentCustomService>();
+            services.AddScoped<IRouteService, RouteService>();
 
             services.AddScoped<IElasticSearchService, ElasticSearchService>();
 

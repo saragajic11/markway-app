@@ -13,16 +13,16 @@ public class ShipmentCustoms : Entity
     public CustomsType type { get; set; }
 
     [Required]
-    public long? ShipmentId { get; set; }
-
-    [ForeignKey("ShipmentId")]
-    public Shipment? Shipment { get; set; }
-
-    [Required]
     public long? CustomId { get; set; }
 
     [ForeignKey("CustomId")]
     public Customs? Custom { get; set; }
+
+    [Required]
+    public long? RouteId { get; set; }
+
+    [ForeignKey("RouteId")]
+    public ShipmentsRoute? Route { get; set; }
 
 
 }

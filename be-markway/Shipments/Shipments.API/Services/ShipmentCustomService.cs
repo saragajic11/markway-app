@@ -11,14 +11,14 @@ namespace Markway.Shipments.API.Services
     public class ShipmentCustomService : BaseService<ShipmentCustoms>, IShipmentCustomService
     {
         private readonly IMapper _mapper;
-        private readonly IShipmentService _shipmentService;
+        private readonly IRouteService _routeService;
         private readonly ICustomsService _customsService;
 
-        public ShipmentCustomService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<ShipmentCustomService> logger, IShipmentService shipmentService, ICustomsService customsService)
+        public ShipmentCustomService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<ShipmentCustomService> logger, IShipmentService shipmentService, ICustomsService customsService, IRouteService routeService)
             : base(logger, unitOfWork, elasticSearchService)
         {
             _mapper = mapper;
-            _shipmentService = shipmentService;
+            _routeService = routeService;
             _customsService = customsService;
         }
 
@@ -26,10 +26,10 @@ namespace Markway.Shipments.API.Services
         {
             try
             {
-                Shipment? shipment = await _shipmentService.GetAsync((long)dto.ShipmentId);
+                ShipmentsRoute? route = await _routeService.GetAsync((long)dto.RouteId);
                 Customs? custom = await _customsService.GetAsync((long)dto.CustomId);
                 ShipmentCustoms entity = _mapper.Map<ShipmentCustoms>(dto);
-                entity.Shipment = shipment;
+                entity.Route = route;
                 entity.Custom = custom;
                 await base.AddAsync(entity);
 

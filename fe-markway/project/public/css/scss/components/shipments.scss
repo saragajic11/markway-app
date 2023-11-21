@@ -6,8 +6,23 @@
     height: 90vh;
     margin-bottom: 50px;
 
-    span {
-        font-size: 26px;
+    .heading-container {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        span {
+            font-size: 26px;
+            color: #353e5d;
+        }
+
+        button {
+            background-color: #f39b03;
+            color: #353e5d;
+            font-weight: bold;
+            height: 50px;
+        }
     }
 
     .load-on-data-container {

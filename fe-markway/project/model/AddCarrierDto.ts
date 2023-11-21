@@ -1,6 +1,6 @@
-class CarrierDto {
+class AddCarrierDto {
 
     constructor( public name: string, public email: string) {}
 }
 
-export default CarrierDto;
+export default AddCarrierDto;

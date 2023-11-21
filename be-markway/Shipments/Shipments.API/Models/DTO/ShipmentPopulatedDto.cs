@@ -27,10 +27,6 @@ namespace Markway.Shipments.API.Models.DTO
 
         public long? Profit { get; set; }
 
-        public long? CarrierId { get; set; }
-
-        public CarrierDto? Carrier { get; set; }
-
         public long? CustomerId { get; set; }
 
         public CustomerDto? Customer { get; set; }

@@ -15,16 +15,14 @@ public class ShipmentLoadOnLocation : Entity
     public CustomsType type { get; set; }
 
     [Required]
-    public long? ShipmentId { get; set; }
+    public long? RouteId { get; set; }
 
-    [ForeignKey("ShipmentId")]
-    public Shipment? Shipment { get; set; }
+    [ForeignKey("RouteId")]
+    public ShipmentsRoute? Route { get; set; }
 
     [Required]
     public long? LoadOnLocationId { get; set; }
 
     [ForeignKey("LoadOnLocationId")]
     public LoadOnLocation? LoadOnLocation { get; set; }
-
-
 }

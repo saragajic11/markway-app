@@ -64,6 +64,8 @@ namespace Markway.Shipments.API.Models
 
         public DbSet<ShipmentCustoms> ShipmentCustoms { get; set; }
 
+        public DbSet<ShipmentsRoute> ShipmentsRoutes { get; set; }
+
 
 
 
