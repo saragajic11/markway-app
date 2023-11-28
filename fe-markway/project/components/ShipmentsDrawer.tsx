@@ -3,8 +3,9 @@ import { Button, Drawer, List, ListItem, ListItemText, Paper } from "@mui/materi
 import { Fragment, useContext, useEffect, useState } from "react";
 import ShipmentsDrawerContainer from "./ShipmentsDrawerContainer";
 import { useForm } from "react-hook-form";
-import { getAllCarriers } from "@/services/ShipmentService";
+import { getAllCarriers, getAllLoadLocations } from "@/services/ShipmentService";
 import GetCarrierDto from "@/model/GetCarrierDto";
+import LoadOnLocationDto from "@/model/LoadOnLocationDto";
 
 const ShipmentsDrawer = ({ openAddCarrierDialog, newCarrier, closeAddCarrierDialog }) => {
 
@@ -12,11 +13,15 @@ const ShipmentsDrawer = ({ openAddCarrierDialog, newCarrier, closeAddCarrierDial
     const [listOfStatus, setListOfStatus] = useState([]);
     const [listOfCarriers, setListOfCarriers] = useState<GetCarrierDto[] | []>([]);
     const [newlyAddedCarrier, setNewlyAddedCarrier] = useState<GetCarrierDto>();
+    const [loadLocations, setLoadLocations] = useState<LoadOnLocationDto[] | []>([]);
 
     useEffect(() => {
         getAllCarriers().then((response) => {
             setListOfCarriers(response?.data);
         });
+        getAllLoadLocations().then((response) => {
+            setLoadLocations(response?.data);
+        })
     }, []);
 
     useEffect(() => {
@@ -98,7 +103,7 @@ const ShipmentsDrawer = ({ openAddCarrierDialog, newCarrier, closeAddCarrierDial
                 <Drawer anchor="right" open={isOpened} onClose={toggleDrawer()}>
                     <div id="shipments-drawer-container">
                         <span>Dodaj novu turu</span>
-                        <ShipmentsDrawerContainer formRules={formRules} errors={errors} form={form} onSubmit={handleSubmit(onSubmitAddShipmentForm)} values={getValues()} setValue={setValue} control={control} listOfStatus={listOfStatus} listOfCarriers={listOfCarriers} openAddCarrierDialog={openAddCarrierDialog} newCarrier={newlyAddedCarrier} trigger={trigger} />
+                        <ShipmentsDrawerContainer formRules={formRules} errors={errors} form={form} onSubmit={handleSubmit(onSubmitAddShipmentForm)} values={getValues()} setValue={setValue} control={control} listOfStatus={listOfStatus} listOfCarriers={listOfCarriers} openAddCarrierDialog={openAddCarrierDialog} newCarrier={newlyAddedCarrier} trigger={trigger} loadLocations={loadLocations} />
                     </div>
                 </Drawer >
             </Fragment>

@@ -35,7 +35,7 @@
                 margin-top: 20px;
             }
 
-            button {
+            .submit-btn {
                 background-color: #f39b03;
                 color: #353e5d;
                 font-weight: bold;
@@ -65,6 +65,11 @@
                 border: 1px solid #353e5d;
                 width: 100%;
                 margin-top: 25px;
+            }
+
+            .load-on-limitter {
+                width: calc(100% - 20px);
+                margin-left: 20px;
             }
         }
     }

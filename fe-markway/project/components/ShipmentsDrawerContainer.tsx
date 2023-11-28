@@ -7,6 +7,7 @@ import CarrierDialogContext from "@/context/CarrierDialogContext";
 import Currency from "@/constants/Currency";
 import VehicleType from "@/constants/VehicleType";
 import Status from "@/constants/Status";
+import LoadLocationContainer from "./LoadLocationContainer";
 
 const ShipmentsDrawerContainer = ({
     values,
@@ -21,6 +22,7 @@ const ShipmentsDrawerContainer = ({
     openAddCarrierDialog,
     newCarrier,
     trigger,
+    loadLocations
 }) => {
 
     useEffect(() => {
@@ -59,6 +61,10 @@ const ShipmentsDrawerContainer = ({
             <SelectControl name='currency' value={values['currency']} setValue={setValue} control={control} label={'Valuta'} options={Currency} nameKey={'name'} valueKey={'id'} />
             <SelectControl name='vehicleType' value={values['vehicleType']} setValue={setValue} control={control} label={'Tip vozila'} options={VehicleType} nameKey={'name'} valueKey={'id'} />
             <TextField label='Registarske tablice' />
+            <hr />
+            <span className="load-on-limitter">Utovar</span>
+            <LoadLocationContainer values={values} setValue={setValue} control={control} formRules={formRules} errors={errors} form={form} loadLocations={loadLocations} />
+            <hr/>
             <SelectControl name='status' value={values['status']} setValue={setValue} control={control} label={'Status'} options={Status} nameKey={'name'} valueKey={'id'} />
 
 
@@ -69,7 +75,7 @@ const ShipmentsDrawerContainer = ({
                 inputProps: { min: 0 }
             }} />
             <TextField label="Beleške" />
-            <Button type="submit">Potvrdi</Button>
+            <Button type="submit" className="submit-btn">Potvrdi</Button>
 
         </form>
     </FormProvider>

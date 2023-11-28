@@ -216,7 +216,7 @@ p {
 .MuiDrawer-root #shipments-drawer-container #shipments-form .MuiTextField-root {
   margin-top: 20px;
 }
-.MuiDrawer-root #shipments-drawer-container #shipments-form button {
+.MuiDrawer-root #shipments-drawer-container #shipments-form .submit-btn {
   background-color: #f39b03;
   color: #353e5d;
   font-weight: bold;
@@ -236,6 +236,10 @@ p {
   border: 1px solid #353e5d;
   width: 100%;
   margin-top: 25px;
+}
+.MuiDrawer-root #shipments-drawer-container #shipments-form .load-on-limitter {
+  width: calc(100% - 20px);
+  margin-left: 20px;
 }
 
 .carrier-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
@@ -261,6 +265,36 @@ p {
 .carrier-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper .add-carrier-form p {
   margin-left: 0px;
   font-size: 10px;
+}
+
+.loadLocationContainerVertical {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  margin-left: 20px;
+  width: calc(100% - 20px);
+}
+.loadLocationContainerVertical .loadLocationContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.loadLocationContainerVertical .loadLocationContainer .load-location-container-inputs {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+}
+.loadLocationContainerVertical .loadLocationContainer .load-location-container-inputs .select-box {
+  width: 43%;
+}
+.loadLocationContainerVertical .loadLocationContainer .loadOnLocationButton {
+  height: 30px !important;
+  width: 30px;
+  background-color: #f39b03;
+  color: #353e5d;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-left: 7px;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -17,3 +17,7 @@ export async function getAllCarriers() {
 export async function addCarrier(data: any) {
     return await request(`/carrier`, data, HttpMethod.POST);
 }
+
+export async function getAllLoadLocations() {
+    return await request(`/loadonlocation`, [], HttpMethod.GET);
+}
