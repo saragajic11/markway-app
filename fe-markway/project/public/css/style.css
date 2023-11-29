@@ -107,6 +107,7 @@ p {
   color: black;
   margin-top: 30px;
   text-transform: uppercase;
+  cursor: pointer;
 }
 #home-container .description-container button:hover {
   background-color: #f39b03;
