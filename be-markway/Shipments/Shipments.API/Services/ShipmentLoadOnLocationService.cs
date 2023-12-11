@@ -11,30 +11,23 @@ namespace Markway.Shipments.API.Services
     public class ShipmentLoadOnLocationService : BaseService<ShipmentLoadOnLocation>, IShipmentLoadOnLocationService
     {
         private readonly IMapper _mapper;
-        private readonly IShipmentService _shipmentService;
         private readonly ILoadOnLocationService _loadOnLocationService;
         private readonly ICarrierService _carrierService;
 
-        private readonly IRouteService _routeService;
-
-        public ShipmentLoadOnLocationService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<ShipmentLoadOnLocationService> logger, IShipmentService shipmentService, ILoadOnLocationService loadOnLocationService, ICarrierService carrierService, IRouteService routeService)
+        public ShipmentLoadOnLocationService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<ShipmentLoadOnLocationService> logger, ILoadOnLocationService loadOnLocationService, ICarrierService carrierService)
             : base(logger, unitOfWork, elasticSearchService)
         {
             _mapper = mapper;
-            _shipmentService = shipmentService;
             _loadOnLocationService = loadOnLocationService;
             _carrierService = carrierService;
-            _routeService = routeService;
         }
 
         public async Task<ShipmentLoadOnLocation?> AddAsync(ShipmentLoadOnLocationDto dto)
         {
             try
             {
-                ShipmentsRoute? route = await _routeService.GetAsync((long)dto.RouteId);
-                LoadOnLocation? loadOnLocation = await _loadOnLocationService.GetAsync((long)dto.LoadOnLocationId);
+                LoadOnLocation? loadOnLocation = await _loadOnLocationService.GetAsync((long)dto.LoadOnLocation.Id);
                 ShipmentLoadOnLocation entity = _mapper.Map<ShipmentLoadOnLocation>(dto);
-                entity.Route = route;
                 entity.LoadOnLocation = loadOnLocation;
                 await base.AddAsync(entity);
 

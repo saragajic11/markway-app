@@ -3,6 +3,7 @@ using System;
 using Markway.Shipments.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Shipments.API.Migrations
 {
     [DbContext(typeof(ShipmentsContext))]
-    partial class ShipmentsContextModelSnapshot : ModelSnapshot
+    [Migration("20231211131919_RemovedRequiredForeignKey")]
+    partial class RemovedRequiredForeignKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -355,6 +358,7 @@ namespace Shipments.API.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long?>("ShipmentId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<int>("Status")
@@ -442,7 +446,9 @@ namespace Shipments.API.Migrations
 
                     b.HasOne("Markway.Shipments.API.Models.Shipment", "Shipment")
                         .WithMany("ShipmentRoutes")
-                        .HasForeignKey("ShipmentId");
+                        .HasForeignKey("ShipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("BorderCrossing");
 

@@ -33,4 +33,7 @@ public class Shipment : Entity
 
     [ForeignKey("NoteId")]
     public Note? Note { get; set; }
+
+    [InverseProperty("Shipment")]
+    public ICollection<ShipmentsRoute>? ShipmentRoutes { get; set; }
 }

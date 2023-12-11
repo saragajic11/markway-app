@@ -217,6 +217,10 @@ p {
 .MuiDrawer-root #shipments-drawer-container #shipments-form .MuiTextField-root {
   margin-top: 20px;
 }
+.MuiDrawer-root #shipments-drawer-container #shipments-form .MuiTextField-root input {
+  height: 56px;
+  padding: 0px 5px 0px 5px;
+}
 .MuiDrawer-root #shipments-drawer-container #shipments-form .submit-btn {
   background-color: #f39b03;
   color: #353e5d;
@@ -283,7 +287,7 @@ p {
 .loadLocationContainerVertical .loadLocationContainer .load-location-container-inputs {
   display: flex;
   width: 80%;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .loadLocationContainerVertical .loadLocationContainer .load-location-container-inputs .select-box {
   width: 43%;

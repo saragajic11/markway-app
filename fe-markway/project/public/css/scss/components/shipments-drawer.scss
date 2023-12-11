@@ -33,6 +33,11 @@
 
             .MuiTextField-root {
                 margin-top: 20px;
+
+                input {
+                    height: 56px;
+                    padding: 0px 5px 0px 5px;
+                }
             }
 
             .submit-btn {

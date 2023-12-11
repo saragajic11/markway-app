@@ -18,7 +18,6 @@ public class ShipmentCustoms : Entity
     [ForeignKey("CustomId")]
     public Customs? Custom { get; set; }
 
-    [Required]
     public long? RouteId { get; set; }
 
     [ForeignKey("RouteId")]

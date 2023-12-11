@@ -8,6 +8,7 @@ import Currency from "@/constants/Currency";
 import VehicleType from "@/constants/VehicleType";
 import Status from "@/constants/Status";
 import LoadLocationContainer from "./LoadLocationContainer";
+import TextFieldControl from "./controls/inputs/TextFieldControl";
 
 const ShipmentsDrawerContainer = ({
   values,
@@ -23,6 +24,9 @@ const ShipmentsDrawerContainer = ({
   newCarrier,
   trigger,
   loadLocations,
+  customs,
+  borderCrossings,
+  customers,
 }) => {
   useEffect(() => {
     setValue("carrier", newCarrier?.id);
@@ -38,24 +42,28 @@ const ShipmentsDrawerContainer = ({
   return (
     <FormProvider {...form}>
       <form id="shipments-form" className="shipments-form" onSubmit={onSubmit}>
-        <TextField label="Opis" />
-        <TextField label="Klijent" />
+        <TextFieldControl label="Opis" name="description" />
+        <SelectControl name="customer" value={values["customer"]} setValue={setValue} control={control} label="Klijent" options={customers}
+          nameKey={"name"}
+          valueKey={"id"}/>
         {/* <TextField label="Status" /> */}
         {/* <SelectControl value={values['listOfStatus']} setValue={setValue} name='status' control={control} label={'Status'} options={listOfStatus} nameKey='status' valueKey={'id'} /> */}
-        <TextField label="Roba" />
-        <TextField
+        <TextFieldControl label="Roba" name="merch" />
+        <TextFieldControl
           label="Količina robe"
           type="number"
           InputProps={{
             inputProps: { min: 0 },
           }}
+          name="merchAmount"
         />
-        <TextField
+        <TextFieldControl
           label="Priliv"
           type="number"
           InputProps={{
             inputProps: { min: 0 },
           }}
+          name="income"
         />
 
         <hr />
@@ -72,12 +80,13 @@ const ShipmentsDrawerContainer = ({
           valueKey={"id"}
           addCarrier={addCarrier}
         />
-        <TextField
+        <TextFieldControl
           label="Odliv"
           type="number"
           InputProps={{
             inputProps: { min: 0 },
           }}
+          name="outcome"
         />
         <SelectControl
           name="currency"
@@ -99,7 +108,7 @@ const ShipmentsDrawerContainer = ({
           nameKey={"name"}
           valueKey={"id"}
         />
-        <TextField label="Registarske tablice" />
+        <TextFieldControl label="Registarske tablice" name="licencePlate" />
         <hr />
         <span className="load-on-limitter">Utovar</span>
         <LoadLocationContainer
@@ -126,6 +135,36 @@ const ShipmentsDrawerContainer = ({
         />
         <hr />
         <SelectControl
+          name="importDuty"
+          value={values["importDuty"]}
+          setValue={setValue}
+          control={control}
+          label={"Uvozna carina"}
+          options={customs}
+          nameKey={"name"}
+          valueKey={"id"}
+        />
+        <SelectControl
+          name="exportDuty"
+          value={values["exportDuty"]}
+          setValue={setValue}
+          control={control}
+          label={"Izvozna carina"}
+          options={customs}
+          nameKey={"name"}
+          valueKey={"id"}
+        />
+        <SelectControl
+          name="borderCrossings"
+          value={values["borderCrossings"]}
+          setValue={setValue}
+          control={control}
+          label={"Granični prelaz"}
+          options={borderCrossings}
+          nameKey={"name"}
+          valueKey={"id"}
+        />
+        <SelectControl
           name="status"
           value={values["status"]}
           setValue={setValue}
@@ -138,14 +177,15 @@ const ShipmentsDrawerContainer = ({
 
         <hr />
 
-        <TextField
+        <TextFieldControl
           label="Profit"
           type="number"
           InputProps={{
             inputProps: { min: 0 },
           }}
+          name="profit"
         />
-        <TextField label="Beleške" />
+        <TextFieldControl label="Beleške" name="note" />
         <Button type="submit" className="submit-btn">
           Potvrdi
         </Button>

@@ -26,5 +26,7 @@ namespace Markway.Shipments.API.Models.DTO
 
         public NoteDto? Note { get; set; }
 
+        public IList<RouteDto>? ShipmentRoutes { get; set; }
+
     }
 }

@@ -7,6 +7,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import DateTimeControl from "./controls/inputs/DateTimeControl";
+import dayjs from 'dayjs'
 
 const LoadLocationContainer = ({
   values,
@@ -21,6 +23,11 @@ const LoadLocationContainer = ({
   const [divs, setDivs] = useState([]);
   const [counter, setCounter] = useState(1);
 
+
+  const getCurrentDate = () => {
+    return dayjs().format('YYYY-MM-DD');;
+}
+
   const addNewDiv = () => {
     const newDiv = { id: counter };
     setDivs([...divs, newDiv]);
@@ -32,6 +39,9 @@ const LoadLocationContainer = ({
     listOfDivs.splice(index, 1);
     setDivs(listOfDivs);
   };
+
+  //TODO: u dom-u, mozda umesto indexa treba koristiti div.id za name i value, ali proveri
+  //TODO: disable-uj datum stariji od danasnjeg
 
   return (
     <div className="loadLocationContainerVertical">
@@ -54,15 +64,22 @@ const LoadLocationContainer = ({
             options={loadLocations}
             className="load-on-location-input"
           />
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
+          <DateTimeControl
+              dateTime={true}
               label={
                 loadLocationType === 0
                   ? "Datum i vreme utovara"
                   : "Datum i vreme istovara"
               }
+               name= {loadLocationType === 0 ? "loadOnLocationDate" : "loadOffLocationDate" }
+               data={control}
+               fullWidth
+               margin="normal"
+               value={loadLocationType === 0 ? values["loadOnLocationDate"] ? values["loadOnLocationDate"] : NaN : values["loadOffLocationDate"] ? values["loadOffLocationDate"] : NaN}
+               setValue={setValue}
+               variant="filled"
+               minDate={getCurrentDate()}
             />
-          </LocalizationProvider>
         </div>
         <IconButton className="loadOnLocationButton" onClick={addNewDiv}>
           <AddIcon fontSize="small" />
@@ -75,13 +92,13 @@ const LoadLocationContainer = ({
               <SelectControl
                 name={
                   loadLocationType === 0
-                    ? "loadOnLocation-" + index
-                    : "loadOffLocation-" + index
+                    ? "loadOnLocation" + index
+                    : "loadOffLocation" + index
                 }
                 value={
                   loadLocationType === 0
-                    ? values["loadOnLocation-" + index]
-                    : values["loadOffLocation-" + index]
+                    ? values["loadOnLocation" + index]
+                    : values["loadOffLocation" + index]
                 }
                 setValue={setValue}
                 control={control}
@@ -94,15 +111,24 @@ const LoadLocationContainer = ({
                 valueKey={"id"}
                 options={loadLocations}
               />
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
+              <DateTimeControl
+                  dateTime={true}
                   label={
                     loadLocationType === 0
                       ? "Datum i vreme utovara"
                       : "Datum i vreme istovara"
                   }
+                  name={loadLocationType === 0 ? "loadOnLocationDate" + index : "loadOffLocationDate" + index }
+                  value={loadLocationType === 0
+                    ? values["loadOnLocationDate" + index]
+                    : values["loadOffLocationDate" + index]}
+                  data={control}
+                  fullWidth
+                  margin="normal"
+                  setValue={setValue}
+                  variant="filled"
+                  minDate={getCurrentDate()}
                 />
-              </LocalizationProvider>
             </div>
             <div>
               <IconButton className="loadOnLocationButton" onClick={addNewDiv}>

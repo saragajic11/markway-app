@@ -12,26 +12,48 @@ namespace Markway.Shipments.API.Services
     {
         private readonly IMapper _mapper;
         private readonly ICarrierService _carrierService;
-        private readonly IShipmentService _shipmentService;
+        private readonly IShipmentCustomService _shipmentCustomService;
+        private readonly IShipmentLoadOnLocationService _shipmentLoadOnLocationService;
+        private readonly IBorderCrossingService _borderCrossingService;
 
-        public RouteService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<RouteService> logger, ICarrierService carrierService, IShipmentService shipmentService)
+        public RouteService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<RouteService> logger, ICarrierService carrierService, IShipmentCustomService shipmentCustomService, IShipmentLoadOnLocationService shipmentLoadOnLocationService, IBorderCrossingService borderCrossingService)
             : base(logger, unitOfWork, elasticSearchService)
         {
             _mapper = mapper;
             _carrierService = carrierService;
-            _shipmentService = shipmentService;
+            _shipmentCustomService = shipmentCustomService;
+            _shipmentLoadOnLocationService = shipmentLoadOnLocationService;
+            _borderCrossingService = borderCrossingService;
         }
 
         public async Task<ShipmentsRoute?> AddAsync(RouteDto dto)
         {
             try
             {
-                Carrier carrier = await _carrierService.GetAsync((long)dto.CarrierId);
-                Shipment shipment = await _shipmentService.GetAsync((long)dto.ShipmentId);
+                Carrier carrier = await _carrierService.GetAsync((long)dto.CarrierDto.Id);
+                BorderCrossing borderCrossing = await _borderCrossingService.GetAsync((long)dto.BorderCrossing.Id);
+                List<ShipmentCustoms> listOfShipmentCustoms = new();
+                List<ShipmentLoadOnLocation> listOfShipmentLoadOnLocation = new();
+
+                foreach (ShipmentCustomDto shipmentCustomDto in dto.ShipmentCustoms)
+                {
+                    ShipmentCustoms shipmentCustoms = await _shipmentCustomService.AddAsync(shipmentCustomDto);
+                    if (shipmentCustoms != null)
+                        listOfShipmentCustoms.Add(shipmentCustoms);
+                }
+
+                foreach (ShipmentLoadOnLocationDto shipmentLoadOnLocationDto in dto.ShipmentLoadOnLocations)
+                {
+                    ShipmentLoadOnLocation shipmentLoadOnLocation = await _shipmentLoadOnLocationService.AddAsync(shipmentLoadOnLocationDto);
+                    if (shipmentLoadOnLocation != null)
+                        listOfShipmentLoadOnLocation.Add(shipmentLoadOnLocation);
+                }
 
                 ShipmentsRoute entity = _mapper.Map<ShipmentsRoute>(dto);
                 entity.Carrier = carrier;
-                entity.Shipment = shipment;
+                entity.BorderCrossing = borderCrossing;
+                entity.ShipmentCustoms = listOfShipmentCustoms;
+                entity.ShipmentLoadOnLocations = listOfShipmentLoadOnLocation;
 
                 await base.AddAsync(entity);
 

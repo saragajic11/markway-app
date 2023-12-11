@@ -11,29 +11,44 @@ namespace Markway.Shipments.API.Services
     public class ShipmentService : BaseService<Shipment>, IShipmentService
     {
         private readonly IMapper _mapper;
-        private readonly IBorderCrossingService _borderCrossingService;
         private readonly INoteService _noteService;
         private readonly ICustomerService _customerService;
 
-        public ShipmentService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<ShipmentService> logger, IBorderCrossingService borderCrossingService, ICustomerService customerService, INoteService noteService)
+        private readonly IRouteService _routeService;
+
+        public ShipmentService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<ShipmentService> logger, ICustomerService customerService, INoteService noteService, IRouteService routeService)
             : base(logger, unitOfWork, elasticSearchService)
         {
             _mapper = mapper;
-            _borderCrossingService = borderCrossingService;
             _noteService = noteService;
             _customerService = customerService;
+            _routeService = routeService;
         }
 
         public async Task<Shipment?> AddAsync(ShipmentDto dto)
         {
             try
             {
-                Customer customer = await _customerService.GetAsync((long)dto.CustomerId);
-                Note note = await _noteService.GetAsync((long)dto.NoteId);
+                Customer customer = await _customerService.GetAsync((long)dto.Customer.Id);
+                Note note = await _noteService.GetAsync((long)dto.Note.Id);
 
                 Shipment entity = _mapper.Map<Shipment>(dto);
+                List<ShipmentsRoute> listOfShipmentRoutes = new();
                 entity.Customer = customer;
                 entity.Note = note;
+
+                if (dto.ShipmentRoutes != null)
+                {
+                    foreach (RouteDto route in dto.ShipmentRoutes)
+                    {
+                        ShipmentsRoute shipmentsRoute = await _routeService.AddAsync(route);
+                        if (shipmentsRoute != null)
+                            listOfShipmentRoutes.Add(shipmentsRoute);
+                    }
+                }
+
+                entity.ShipmentRoutes = listOfShipmentRoutes;
+
 
                 await base.AddAsync(entity);
 

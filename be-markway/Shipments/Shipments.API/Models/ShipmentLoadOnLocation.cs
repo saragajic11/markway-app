@@ -14,7 +14,6 @@ public class ShipmentLoadOnLocation : Entity
     [Required]
     public CustomsType type { get; set; }
 
-    [Required]
     public long? RouteId { get; set; }
 
     [ForeignKey("RouteId")]

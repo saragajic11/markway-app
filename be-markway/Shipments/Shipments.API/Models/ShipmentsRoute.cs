@@ -27,12 +27,18 @@ public class ShipmentsRoute : Entity
 
     [Required]
     public Status? Status { get; set; }
-
-    [Required]
+    
     public long? ShipmentId { get; set; }
 
     [ForeignKey("ShipmentId")]
     public Shipment? Shipment { get; set; }
 
+    [InverseProperty("Route")]
+    public ICollection<ShipmentLoadOnLocation>? ShipmentLoadOnLocations { get; set; }
 
+    [InverseProperty("Route")]
+    public ICollection<ShipmentCustoms>? ShipmentCustoms { get; set; }
+
+    [ForeignKey("BorderCrossingId")]
+    public BorderCrossing? BorderCrossing { get; set; }
 }

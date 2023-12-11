@@ -3,6 +3,7 @@ using System;
 using Markway.Shipments.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Shipments.API.Migrations
 {
     [DbContext(typeof(ShipmentsContext))]
-    partial class ShipmentsContextModelSnapshot : ModelSnapshot
+    [Migration("20231129140622_Added inverse field lists for referential integrity")]
+    partial class Addedinversefieldlistsforreferentialintegrity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,6 +269,7 @@ namespace Shipments.API.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<long?>("RouteId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<int>("type")
@@ -302,6 +306,7 @@ namespace Shipments.API.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long?>("RouteId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("date")
@@ -326,9 +331,6 @@ namespace Shipments.API.Migrations
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<long?>("BorderCrossingId")
-                        .HasColumnType("bigint");
 
                     b.Property<long?>("CarrierId")
                         .IsRequired()
@@ -355,6 +357,7 @@ namespace Shipments.API.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long?>("ShipmentId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<int>("Status")
@@ -365,8 +368,6 @@ namespace Shipments.API.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BorderCrossingId");
 
                     b.HasIndex("CarrierId");
 
@@ -404,7 +405,9 @@ namespace Shipments.API.Migrations
 
                     b.HasOne("Markway.Shipments.API.Models.ShipmentsRoute", "Route")
                         .WithMany("ShipmentCustoms")
-                        .HasForeignKey("RouteId");
+                        .HasForeignKey("RouteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Custom");
 
@@ -421,7 +424,9 @@ namespace Shipments.API.Migrations
 
                     b.HasOne("Markway.Shipments.API.Models.ShipmentsRoute", "Route")
                         .WithMany("ShipmentLoadOnLocations")
-                        .HasForeignKey("RouteId");
+                        .HasForeignKey("RouteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("LoadOnLocation");
 
@@ -430,10 +435,6 @@ namespace Shipments.API.Migrations
 
             modelBuilder.Entity("Markway.Shipments.API.Models.ShipmentsRoute", b =>
                 {
-                    b.HasOne("Markway.Shipments.API.Models.BorderCrossing", "BorderCrossing")
-                        .WithMany()
-                        .HasForeignKey("BorderCrossingId");
-
                     b.HasOne("Markway.Shipments.API.Models.Carrier", "Carrier")
                         .WithMany()
                         .HasForeignKey("CarrierId")
@@ -442,9 +443,9 @@ namespace Shipments.API.Migrations
 
                     b.HasOne("Markway.Shipments.API.Models.Shipment", "Shipment")
                         .WithMany("ShipmentRoutes")
-                        .HasForeignKey("ShipmentId");
-
-                    b.Navigation("BorderCrossing");
+                        .HasForeignKey("ShipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Carrier");
 

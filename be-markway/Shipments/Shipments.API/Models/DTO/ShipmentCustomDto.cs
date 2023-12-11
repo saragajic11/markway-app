@@ -13,8 +13,6 @@ namespace Markway.Shipments.API.Models.DTO
 
         public long? RouteId { get; set; }
 
-        public ShipmentsRoute? Route { get; set; }
-
         public long? CustomId { get; set; }
 
         public CustomsDto? Custom { get; set; }

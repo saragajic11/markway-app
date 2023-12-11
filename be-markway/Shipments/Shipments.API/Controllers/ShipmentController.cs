@@ -45,6 +45,7 @@ public class ShipmentController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateEntity(ShipmentDto shipmentDto)
     {
+        Console.WriteLine("Caosiii ", shipmentDto.Customer);
         Shipment? shipment = await _shipmentService.AddAsync(shipmentDto);
 
         return Ok(_mapper.Map<ShipmentDto>(shipmentDto));

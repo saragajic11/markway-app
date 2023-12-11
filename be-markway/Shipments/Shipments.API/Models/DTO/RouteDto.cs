@@ -24,7 +24,10 @@ namespace Markway.Shipments.API.Models.DTO
 
         public long? ShipmentId { get; set; }
 
-        public ShipmentDto? Shipment { get; set; }
+        public IList<ShipmentLoadOnLocationDto>? ShipmentLoadOnLocations { get; set; }
 
+        public IList<ShipmentCustomDto>? ShipmentCustoms { get; set; }
+
+        public BorderCrossingDto? BorderCrossing { get; set; }
     }
 }

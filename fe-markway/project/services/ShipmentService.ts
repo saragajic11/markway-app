@@ -1,4 +1,3 @@
-import AddCarrierDto from "@/model/AddCarrierDto";
 import { request } from "../base/HTTP";
 import HttpMethod from "../constants/HttpMethod";
 
@@ -20,4 +19,20 @@ export async function addCarrier(data: any) {
 
 export async function getAllLoadLocations() {
     return await request(`/loadonlocation`, [], HttpMethod.GET);
+}
+
+export async function getAllCustoms() {
+    return await request(`/customs`, [], HttpMethod.GET);
+}
+
+export async function getAllBorderCrossings() {
+    return await request(`/bordercrossing`, [], HttpMethod.GET);
+}
+
+export async function getAllCustomers() {
+    return await request(`/customer`, [], HttpMethod.GET);
+}
+
+export async function addShipment(shipment: any) {
+    return await request(`/shipment`, shipment, HttpMethod.POST);
 }
