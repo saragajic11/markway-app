@@ -30,7 +30,7 @@ namespace Markway.Shipments.API.Services
         {
             try
             {
-                Carrier carrier = await _carrierService.GetAsync((long)dto.CarrierDto.Id);
+                Carrier carrier = await _carrierService.GetAsync((long)dto.Carrier.Id);
                 BorderCrossing borderCrossing = await _borderCrossingService.GetAsync((long)dto.BorderCrossing.Id);
                 List<ShipmentCustoms> listOfShipmentCustoms = new();
                 List<ShipmentLoadOnLocation> listOfShipmentLoadOnLocation = new();

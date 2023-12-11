@@ -1,6 +1,8 @@
+import CustomsDto from "./CustomsDto";
+
 class ShipmentCustomsDto {
 
-    constructor(public id: number, public name: string, public address: string, type: number) {};
+    constructor(public custom: CustomsDto, type: number) {};
 }
 
 export default ShipmentCustomsDto;

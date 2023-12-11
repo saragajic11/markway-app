@@ -10,7 +10,7 @@ namespace Markway.Shipments.API.Models.DTO
 
         public long? CarrierId { get; set; }
 
-        public CarrierDto? CarrierDto { get; set; }
+        public CarrierDto? Carrier { get; set; }
 
         public long Outcome { get; set; }
 

@@ -178,7 +178,9 @@ const ShipmentsDrawer = ({
         );
         shipmentRoutes.push(route);
 
-        const shipmentNote = new NoteDto(data.note);
+        //TODO: srediti logiku za notes
+        // const shipmentNote = new NoteDto(data.note);
+        const shipmentNote = {id: 1, description: 'Napomena 1'}
 
         const shipment = new AddShipmentDto(
           data.description,
@@ -192,7 +194,7 @@ const ShipmentsDrawer = ({
         );
 
         addShipment(shipment).then((response) => {
-          console.log("CAOOOOOO", response);
+          //TODO: Implementirati refresh stranice kad se uspesno doda shipment
         })
       };
 

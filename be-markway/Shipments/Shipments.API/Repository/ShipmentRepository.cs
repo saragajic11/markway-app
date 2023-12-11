@@ -26,6 +26,16 @@ namespace Markway.Shipments.API.Repository
             return await ShipmentsContext.Shipments
             .Include(x => x.Customer)
             .Include(x => x.Note)
+            .Include(x => x.ShipmentRoutes)
+                .ThenInclude(route => route.Carrier)
+            .Include(x => x.ShipmentRoutes)
+                .ThenInclude(route => route.ShipmentCustoms)
+                    .ThenInclude(shipmentCustom => shipmentCustom.Custom)
+            .Include(x => x.ShipmentRoutes)
+                .ThenInclude(route => route.ShipmentLoadOnLocations)
+                    .ThenInclude(shipmentLoadOnLocation => shipmentLoadOnLocation.LoadOnLocation)
+            .Include(x => x.ShipmentRoutes)
+                .ThenInclude(route => route.BorderCrossing)
             .Where(shipment => !shipment.Deleted)
             .ToListAsync();
         }

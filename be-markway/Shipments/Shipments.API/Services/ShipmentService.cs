@@ -77,5 +77,19 @@ namespace Markway.Shipments.API.Services
                 return null;
             }
         }
+
+        public async Task<IList<Shipment>> GetAllAsync(PageRequest pageRequest)
+        {
+            try
+            {
+                IList<Shipment> listOfShipments = await _unitOfWork.Shipments.GetAllAsync(pageRequest);
+                return listOfShipments;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
+                return null;
+            }
+        }
     }
 }

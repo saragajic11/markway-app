@@ -29,7 +29,7 @@ const ShipmentsDrawerContainer = ({
   customers,
 }) => {
   useEffect(() => {
-    setValue("carrier", newCarrier?.id);
+    setValue("carrier", newCarrier);
     trigger("carrier");
   }, [newCarrier]);
 
