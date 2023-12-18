@@ -46,7 +46,7 @@ namespace Markway.Pdfs.API.Models
             return await base.SaveChangesAsync(cancellationToken);
         }
 
-        public DbSet<ExampleEntity> Entities { get; set; }
+        public DbSet<Pdf> Entities { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

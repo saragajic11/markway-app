@@ -18,11 +18,10 @@ namespace Markway.Pdfs.API.Middlewares
 
             services.AddSingleton<IAuthorizationHandler, PermissionOrScopeHandler>();
 
-            services.AddScoped<IExampleEntityService, PdfService>();
+            services.AddScoped<IPdfService, PdfService>();
             services.AddScoped<IElasticSearchService, ElasticSearchService>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
     }
 }
-

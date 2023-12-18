@@ -10,20 +10,29 @@ namespace Markway.Pdfs.API.Controllers
     [ApiController]
     public class PdfsController : ControllerBase
     {
-        private readonly IExampleEntityService _entityService;
+        private readonly IPdfService _pdfService;
         private readonly IMapper _mapper;
 
-        public PdfsController(IExampleEntityService entityService, IMapper mapper)
-    {
-        _entityService = entityService;
-        _mapper = mapper;
-    }
+        public PdfsController(IPdfService pdfService, IMapper mapper)
+        {
+            _pdfService = pdfService;
+            _mapper = mapper;
+        }
 
         [HttpPost]
         [Authorize(Policy = Policies.Authorization.FILE_CREATE)]
         public async Task<IActionResult> UploadPdf([FromForm] IFormFile file)
         {
-            await _entityService.UploadPdf(file);
+            await _pdfService.UploadPdf(file);
+
+            return Ok();
+        }
+
+        [HttpPost(Endpoints.GENERATE_PDF)]
+        // [Authorize(Policy = Policies.Authorization.FILE_CREATE)]
+        public async Task<IActionResult> GeneratePdf()
+        {
+            await _pdfService.GenerateAndUploadPdf();
 
             return Ok();
         }

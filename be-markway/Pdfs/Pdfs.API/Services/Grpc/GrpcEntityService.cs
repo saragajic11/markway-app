@@ -15,10 +15,10 @@ namespace Markway.Pdfs.API.Services.Grpc
 {
     public class GrpcEntityService : GrpcEntity.GrpcEntityBase
     {
-        private readonly IExampleEntityService _entityService;
+        private readonly IPdfService _entityService;
         private readonly IMapper _mapper;
 
-        public GrpcEntityService(IExampleEntityService entityService, IMapper mapper)
+        public GrpcEntityService(IPdfService entityService, IMapper mapper)
         {
             _entityService = entityService;
             _mapper = mapper;
@@ -30,7 +30,7 @@ namespace Markway.Pdfs.API.Services.Grpc
             ServerCallContext context
         )
         {
-            ExampleEntity entity = await _entityService.GetAsync(request.Id);
+            Pdf entity = await _entityService.GetAsync(request.Id);
 
             return _mapper.Map<EntityReply>(entity);
         }

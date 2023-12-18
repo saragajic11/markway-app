@@ -18,7 +18,7 @@ builder.AddGrpcClients(systemConfiguration);
 
 builder.ConfigureDatabase(systemConfiguration);
 
-builder.ConfigureKestrel();
+// builder.ConfigureKestrel();
 
 builder.ConfigureOpenIdConnect();
 

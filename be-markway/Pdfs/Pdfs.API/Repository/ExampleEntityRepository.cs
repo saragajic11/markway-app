@@ -5,7 +5,7 @@ using Markway.Pdfs.API.Repository.Core;
 
 namespace Markway.Pdfs.API.Repository
 {
-    public class ExampleEntityRepository : BaseRepository<ExampleEntity>, IExampleEntityRepository
+    public class ExampleEntityRepository : BaseRepository<Pdf>, IExampleEntityRepository
     {
         public ExampleEntityRepository(PdfsContext context)
             : base(context) { }

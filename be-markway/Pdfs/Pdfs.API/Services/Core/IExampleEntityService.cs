@@ -4,14 +4,15 @@ using Markway.Pdfs.API.Models;
 using Markway.Pdfs.API.Models.DTO;
 namespace Markway.Pdfs.API.Services.Core
 {
-    public interface IExampleEntityService
+    public interface IPdfService
     {
-        Task<ExampleEntity?> AddAsync(ExampleEntityDto dto);
+        Task<Pdf?> AddAsync(ExampleEntityDto dto);
 
-        Task<IList<ExampleEntity>> GetAllAsync(PageRequest pageRequest);
+        Task<IList<Pdf>> GetAllAsync(PageRequest pageRequest);
 
-        Task<ExampleEntity?> GetAsync(long id);
+        Task<Pdf?> GetAsync(long id);
 
         Task UploadPdf(IFormFile file);
+        Task GenerateAndUploadPdf();
     }
 }

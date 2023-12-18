@@ -84,7 +84,7 @@ services:
       context: .
       dockerfile: AuthOpenIddict/Dockerfile
     ports:
-      - "4287:4287"
+      - "5053:80"
     depends_on:
       - postgres_db
     environment:

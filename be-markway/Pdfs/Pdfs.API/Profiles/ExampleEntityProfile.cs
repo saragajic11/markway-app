@@ -11,11 +11,11 @@ namespace Markway.Pdfs.API.Profiles
     {
         public ExampleEntityProfile()
         {
-            CreateMap<ExampleEntity, ExampleEntityDto>();
+            CreateMap<Pdf, ExampleEntityDto>();
 
-            CreateMap<ExampleEntityDto, ExampleEntity>();
+            CreateMap<ExampleEntityDto, Pdf>();
 
-            CreateMap<ExampleEntity, ExampleEntityElasticDto>();
+            CreateMap<Pdf, ExampleEntityElasticDto>();
 
             CreateMap<ExampleEntityElasticDto, ExampleEntityDto>();
         }

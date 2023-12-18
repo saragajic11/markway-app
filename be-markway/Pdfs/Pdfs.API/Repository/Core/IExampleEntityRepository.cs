@@ -4,7 +4,7 @@ using Markway.Pdfs.API.Models;
 
 namespace Markway.Pdfs.API.Repository.Core
 {
-    public interface IExampleEntityRepository : IBaseRepository<ExampleEntity>
+    public interface IExampleEntityRepository : IBaseRepository<Pdf>
     {
     }
 }

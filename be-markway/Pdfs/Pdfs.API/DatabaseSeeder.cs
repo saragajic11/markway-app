@@ -23,7 +23,7 @@ namespace Markway.Pdfs.API
             PdfsContext context = scope.ServiceProvider.GetRequiredService<PdfsContext>();
             await context.Database.EnsureCreatedAsync();
 
-            IExampleEntityService manager = scope.ServiceProvider.GetRequiredService<IExampleEntityService>();
+            IPdfService manager = scope.ServiceProvider.GetRequiredService<IPdfService>();
             // TODO Init some data 
         }
 
