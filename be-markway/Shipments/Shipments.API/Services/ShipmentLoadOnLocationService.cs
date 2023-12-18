@@ -83,29 +83,5 @@ namespace Markway.Shipments.API.Services
                 return null;
             }
         }
-
-        public async Task<IList<ShipmentPopulatedDto?>> GetAllShipmentsPopulated(PageRequest pageRequest)
-        {
-            try
-            {
-                IList<Shipment>? shipments = await _unitOfWork.Shipments.GetAllAsync(pageRequest);
-                List<ShipmentPopulatedDto> shipmentsPopulated = _mapper.Map<List<ShipmentPopulatedDto>>(shipments);
-                foreach (ShipmentPopulatedDto? shipment in shipmentsPopulated)
-                {
-
-                    IList<ShipmentLoadOnLocation> shipmentLoadOnLocations = await GetAsyncByShipmentId(shipment.Id);
-                    List<ShipmentLoadOnLocationSpecificDto> shipmentLoadOnLocationSpecificDtos = _mapper.Map<List<ShipmentLoadOnLocationSpecificDto>>(shipmentLoadOnLocations);
-                    shipment.ShipmentLoadOnLocations = shipmentLoadOnLocationSpecificDtos;
-
-                };
-
-                return shipmentsPopulated;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
-                return null;
-            }
-        }
     }
 }

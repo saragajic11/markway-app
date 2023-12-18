@@ -83,6 +83,16 @@ namespace Markway.Shipments.API.Services
             try
             {
                 IList<Shipment> listOfShipments = await _unitOfWork.Shipments.GetAllAsync(pageRequest);
+                foreach (var shipment in listOfShipments)
+                {
+                    foreach (var route in shipment.ShipmentRoutes)
+                    {
+                        route.ShipmentLoadOnLocations = route.ShipmentLoadOnLocations
+                        .OrderBy(shipmentLoadOnLocation => shipmentLoadOnLocation.type)
+                        .ThenBy(shipmentLoadOnLocation => shipmentLoadOnLocation.date)
+                        .ToList();
+                    }
+                }
                 return listOfShipments;
             }
             catch (Exception e)

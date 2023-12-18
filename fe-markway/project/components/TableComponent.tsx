@@ -7,8 +7,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
+import ShipmentDto from "@/model/ShipmentDto";
 
-const TableComponent = ({ shipments }) => {
+const TableComponent = ({ shipments } : {shipments: ShipmentDto[]}) => {
     return <TableContainer component={Paper} id="table-container">
         <Table aria-label="collapsible table">
             <TableHead>
@@ -24,7 +25,7 @@ const TableComponent = ({ shipments }) => {
             </TableHead>
             <TableBody>
                 {shipments.map((shipment) => (
-                    <TableSection shipment={shipment} key={shipment.Id} />
+                    <TableSection shipment={shipment} key={shipment.id} />
                 ))}
             </TableBody>
         </Table>

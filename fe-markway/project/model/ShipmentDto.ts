@@ -1,11 +1,12 @@
 import BorderCrossingDto from "./BorderCrossingDto";
-import CarrierDto from "./CarrierDto";
+import CarrierDto from "./RouteDto";
 import CustomerDto from "./CustomerDto";
 import NoteDto from "./NoteDto";
 import ShipmentLoadOnLocationDto from "./ShipmentLoadOnLocationDto";
+import RouteDto from "./RouteDto";
 
 class ShipmentDto {
-    constructor(public description: string, public status: string, public merch: string, public merchAmount: number, public vehicleType: string, public licencePlate: string, public income: number, public outcome: number, public profit: number, public carrierId: number, public carrier: CarrierDto, public customerID: number, public customer: CustomerDto, public borderCrossingId: number, public borderCrossing: BorderCrossingDto, public noteId: number, public note: NoteDto, public shipmentLoadOnLocations: ShipmentLoadOnLocationDto[]) { }
+    constructor(public id: number, public description: string, public merch: string, public merchAmount: number, public income: number, public profit: number, public carrierId: number, public carrier: CarrierDto, public customerID: number, public customer: CustomerDto, public noteId: number, public note: NoteDto, public shipmentRoutes: RouteDto[]) { }
 }
 
 export default ShipmentDto;
