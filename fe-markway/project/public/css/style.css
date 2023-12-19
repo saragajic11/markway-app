@@ -27,8 +27,6 @@ p {
   justify-content: space-between;
   align-items: center;
   height: 13vh;
-  position: sticky;
-  top: 0;
   z-index: 999;
 }
 #header-container .logo-container {
@@ -125,10 +123,12 @@ p {
   margin-top: 50px;
   border-radius: 7px;
 }
+#table-container .MuiTableHead-root {
+  background-color: #eff1f3;
+}
 #table-container th {
   height: 40px;
   padding: 8px 10px 10px 10px;
-  background-color: #eff1f3;
 }
 #table-container tr {
   min-height: 55px !important;
@@ -138,6 +138,11 @@ p {
 #table-container td {
   border-bottom: none !important;
   padding: 20px 10px;
+}
+#table-container img {
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
 }
 #table-container .data-container {
   display: flex;
@@ -176,6 +181,11 @@ p {
   display: flex;
   flex-direction: column;
   margin-top: 8px;
+  margin-bottom: 8px;
+}
+#shipments-container .route-container {
+  display: flex;
+  flex-direction: column;
 }
 
 #expandable-button-container {

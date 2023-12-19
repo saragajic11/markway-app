@@ -1,33 +1,39 @@
 #shipments-container {
-    margin-top: 50px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90vh;
+  margin-bottom: 50px;
+
+  .heading-container {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      font-size: 26px;
+      color: #353e5d;
+    }
+
+    button {
+      background-color: #f39b03;
+      color: #353e5d;
+      font-weight: bold;
+      height: 50px;
+    }
+  }
+
+  .load-on-data-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 90vh;
-    margin-bottom: 50px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
 
-    .heading-container {
-        width: 80%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        span {
-            font-size: 26px;
-            color: #353e5d;
-        }
-
-        button {
-            background-color: #f39b03;
-            color: #353e5d;
-            font-weight: bold;
-            height: 50px;
-        }
-    }
-
-    .load-on-data-container {
-        display: flex;
-        flex-direction: column;
-        margin-top: 8px;
-    }
+  .route-container {
+    display: flex;
+    flex-direction: column;
+  }
 }
