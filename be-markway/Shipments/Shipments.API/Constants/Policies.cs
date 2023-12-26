@@ -4,7 +4,6 @@ namespace Markway.Shipments.API.Constants
 {
     public class Policies
     {
-
         public static class CORS
         {
             public const string ALLOW_ALL_ORIGIN = "ALLOW_ALL_ORIGIN";
@@ -12,8 +11,7 @@ namespace Markway.Shipments.API.Constants
 
         public static class Authorization
         {
-            public const string ACTION_ENTITY_NAME = "POLICY_ACTION_ENTITY_NAME";
+            public const string SHIPMENT_CREATE = "POLICY_SHIPMENT_CREATE";
         }
     }
 }
-

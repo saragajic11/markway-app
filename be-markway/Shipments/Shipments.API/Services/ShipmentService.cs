@@ -6,6 +6,7 @@ using Markway.Shipments.API.Models;
 using Markway.Shipments.API.Models.DTO;
 using Markway.Shipments.API.Repository.Core;
 using Markway.Shipments.API.Services.Core;
+using UsersService;
 namespace Markway.Shipments.API.Services
 {
     public class ShipmentService : BaseService<Shipment>, IShipmentService
@@ -13,22 +14,31 @@ namespace Markway.Shipments.API.Services
         private readonly IMapper _mapper;
         private readonly INoteService _noteService;
         private readonly ICustomerService _customerService;
-
         private readonly IRouteService _routeService;
+        private readonly ICurrentUserService _currentUserService;
 
-        public ShipmentService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<ShipmentService> logger, ICustomerService customerService, INoteService noteService, IRouteService routeService)
+        public ShipmentService(IMapper mapper, IElasticSearchService elasticSearchService,
+        IUnitOfWork unitOfWork,
+        ILogger<ShipmentService> logger,
+        ICustomerService customerService,
+        INoteService noteService,
+        IRouteService routeService,
+        ICurrentUserService currentUserService)
             : base(logger, unitOfWork, elasticSearchService)
         {
             _mapper = mapper;
             _noteService = noteService;
             _customerService = customerService;
             _routeService = routeService;
+            _currentUserService = currentUserService;
         }
 
         public async Task<Shipment?> AddAsync(ShipmentDto dto)
         {
             try
             {
+                UserReply user = await _currentUserService.GetCurrentUserAsync();
+
                 Customer customer = await _customerService.GetAsync((long)dto.Customer.Id);
                 Note note = await _noteService.GetAsync((long)dto.Note.Id);
 
@@ -36,6 +46,7 @@ namespace Markway.Shipments.API.Services
                 List<ShipmentsRoute> listOfShipmentRoutes = new();
                 entity.Customer = customer;
                 entity.Note = note;
+                entity.UserId = user.Id;
 
                 if (dto.ShipmentRoutes != null)
                 {
@@ -48,7 +59,6 @@ namespace Markway.Shipments.API.Services
                 }
 
                 entity.ShipmentRoutes = listOfShipmentRoutes;
-
 
                 await base.AddAsync(entity);
 

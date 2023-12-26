@@ -43,6 +43,7 @@ public class ShipmentController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Policy = Policies.Authorization.SHIPMENT_CREATE)]
     public async Task<IActionResult> CreateEntity(ShipmentDto shipmentDto)
     {
         Console.WriteLine("Caosiii ", shipmentDto.Customer);

@@ -24,7 +24,7 @@ namespace Markway.Shipments.API.Services.Grpc
             _mapper = mapper;
         }
 
-        [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
+        // [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
         public override async Task<EntityReply> GetEntityById(
             EntityRequest request,
             ServerCallContext context

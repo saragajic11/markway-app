@@ -29,7 +29,7 @@ public class NoteSearchController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
+    // [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
     public async Task<IActionResult> SearchEntities([FromQuery] PageRequest pageRequest, [FromQuery] string? term = "")
     {
         ISearchResponse<NoteElasticDto> entities = await _elasticSearchService.SearchAllAsync(pageRequest, term);
@@ -39,7 +39,7 @@ public class NoteSearchController : ControllerBase
     }
 
     [HttpPut(Endpoints.SEARCH_REINDEX)]
-    [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
+    // [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
     public async Task<IActionResult> ElasticSearchReindex()
     {
         PageRequest pageRequest = new PageRequest();
