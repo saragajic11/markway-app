@@ -36,4 +36,6 @@ public class Shipment : Entity
 
     [InverseProperty("Shipment")]
     public ICollection<ShipmentsRoute>? ShipmentRoutes { get; set; }
+
+    public long? UserId { get; set; }
 }

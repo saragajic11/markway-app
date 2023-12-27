@@ -7,4 +7,9 @@ public class Permissions
     {
         public const string CREATE = "file:create";
     }
+
+    public static class Shipment
+    {
+        public const string CREATE = "shipment:create";
+    }
 }

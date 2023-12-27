@@ -16,9 +16,9 @@ namespace Markway.Shipments.API.Middlewares
             services
                 .AddAuthorization(options =>
                 {
-                    options.AddPolicy(Policies.Authorization.ACTION_ENTITY_NAME, policyBuilder =>
+                    options.AddPolicy(Policies.Authorization.SHIPMENT_CREATE, policyBuilder =>
                     {
-                        PermissionOrScopeRequirement requirement = new(new List<string>() { "Permissions.ExampleEntity.Action" }, null);
+                        PermissionOrScopeRequirement requirement = new(new List<string>() { Permissions.Shipment.CREATE }, null);
                         policyBuilder.AddRequirements(requirement);
                     });
                 })

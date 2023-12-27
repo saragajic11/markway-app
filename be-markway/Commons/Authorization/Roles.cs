@@ -8,8 +8,8 @@ namespace Markway.Commons.Authorization
         public static readonly string EMPLOYEE = "EMPLOYEE";
         public static readonly Dictionary<string, List<string>> RolePermissions = new()
         {
-            {Roles.SUPER_ADMIN, new List<string> { Permissions.S3Files.CREATE}},
-            {Roles.EMPLOYEE, new List<string> { Permissions.S3Files.CREATE}}
+            {Roles.SUPER_ADMIN, new List<string> { Permissions.S3Files.CREATE, Permissions.Shipment.CREATE}},
+            {Roles.EMPLOYEE, new List<string> { Permissions.S3Files.CREATE, Permissions.Shipment.CREATE}}
         };
     }
 }

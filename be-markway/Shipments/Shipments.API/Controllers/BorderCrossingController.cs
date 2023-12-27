@@ -33,7 +33,7 @@ public class BorderCrossingController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
+    // [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
     public async Task<IActionResult> GetEntityById(int id)
     {
         BorderCrossing entity = await _borderCrossingService.GetAsync(id);

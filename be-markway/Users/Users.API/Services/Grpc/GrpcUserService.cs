@@ -61,5 +61,15 @@ namespace Markway.Users.API.Services.Grpc
             User? user = await _userService.GetByUsernameAsync(request.Username);
             return _mapper.Map<UserReply>(user);
         }
+
+        public override async Task<UserReply> GetUserById(
+            UserRequest request,
+            ServerCallContext context
+        )
+        {
+            User? user = await _userService.GetAsync(request.Id);
+
+            return _mapper.Map<UserReply>(user);
+        }
     }
 }
