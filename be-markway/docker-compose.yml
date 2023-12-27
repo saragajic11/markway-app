@@ -1,4 +1,4 @@
-version: "3.4"
+version: '3.4'
 
 services:
   gateway:
@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: API-Gateway/Dockerfile
     ports:
-      - "9090:80"
+      - '9090:80'
     depends_on:
       shipments-api:
         condition: service_healthy
@@ -28,7 +28,7 @@ services:
       postgres_db:
         condition: service_healthy
     ports:
-      - "5287:5287"
+      - '5287:5287'
     environment:
       - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
       - BUILDKIT_PROGRESS=1
@@ -47,7 +47,7 @@ services:
       postgres_db:
         condition: service_healthy
     ports:
-      - "6287:6287"
+      - '6287:6287'
     environment:
       - BUILDKIT_PROGRESS=1
       - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
@@ -56,14 +56,14 @@ services:
     networks:
       - net_authn
       - net_users
-  
+
   pdfs-api:
     image: ${DOCKER_REGISTRY-}pdfsservice
     build:
       context: .
       dockerfile: Pdfs/Pdfs.Api/Dockerfile
     ports:
-      - "7287:7287"
+      - '7287:7287'
     depends_on:
       - postgres_db
     environment:
@@ -84,7 +84,7 @@ services:
       context: .
       dockerfile: AuthOpenIddict/Dockerfile
     ports:
-      - "5053:80"
+      - '5053:80'
     depends_on:
       - postgres_db
     environment:
@@ -104,7 +104,7 @@ services:
       - POSTGRES_USER=${MARKWAY_DB_USERNAME}
       - POSTGRES_PASSWORD=${MARKWAY_DB_PASSWORD}
     ports:
-      - "5632:5432"
+      - '5632:5432'
     volumes:
       - db_postgres:/var/lib/postgresql/data
     networks:
@@ -113,8 +113,8 @@ services:
     healthcheck:
       test:
         [
-          "CMD-SHELL",
-          "sh -c 'pg_isready -U ${MARKWAY_DB_USERNAME} -d markway_database'",
+          'CMD-SHELL',
+          "sh -c 'pg_isready -U ${MARKWAY_DB_USERNAME} -d markway_shipments'",
         ]
       interval: 10s
       timeout: 3s

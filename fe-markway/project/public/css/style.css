@@ -311,5 +311,48 @@ p {
   margin-top: 30px;
   margin-left: 7px;
 }
+.drag-drop-dialog .MuiDialog-container .MuiPaper-root {
+  padding: 10px 30px;
+  width: 35vw;
+  height: 35vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+.drag-drop-dialog .MuiDialog-container .MuiPaper-root div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.drag-drop-dialog .MuiDialog-container .MuiPaper-root div.active {
+  border: 2px dotted #6883e3;
+}
+.drag-drop-dialog .MuiDialog-container .MuiPaper-root h2 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.drag-drop-dialog .MuiDialog-container .MuiPaper-root span {
+  color: #6883e3;
+  cursor: pointer;
+}
+.drag-drop-dialog .MuiDialog-container .MuiPaper-root span:hover {
+  text-decoration: underline;
+}
+.drag-drop-dialog .MuiDialog-container .MuiPaper-root input {
+  display: none;
+}
+.drag-drop-dialog .MuiDialog-container .MuiPaper-root .files-container {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+.drag-drop-dialog .MuiDialog-container .MuiPaper-root .files-container .remove-btn {
+  color: red;
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=style.css.map */

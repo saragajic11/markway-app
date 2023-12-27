@@ -1,0 +1,53 @@
+.drag-drop-dialog {
+  .MuiDialog-container {
+    .MuiPaper-root {
+      padding: 10px 30px;
+      width: 35vw;
+      height: 35vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+
+      div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        &.active {
+          border: 2px dotted #6883e3;
+        }
+      }
+
+      h2 {
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+
+      span {
+        color: #6883e3;
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      input {
+        display: none;
+      }
+
+      .files-container {
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+
+        .remove-btn {
+          color: red;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

@@ -9,7 +9,15 @@ import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import ShipmentDto from '@/model/ShipmentDto';
 
-const TableComponent = ({ shipments }: { shipments: ShipmentDto[] }) => {
+const TableComponent = ({
+  shipments,
+  openDragDropDialog,
+  closeDragDropDialog,
+}: {
+  shipments: ShipmentDto[];
+  openDragDropDialog: any;
+  closeDragDropDialog: any;
+}) => {
   return (
     <TableContainer component={Paper} id='table-container'>
       <Table aria-label='collapsible table'>
@@ -29,7 +37,12 @@ const TableComponent = ({ shipments }: { shipments: ShipmentDto[] }) => {
         </TableHead>
         <TableBody>
           {shipments.map((shipment) => (
-            <TableSection shipment={shipment} key={shipment.id} />
+            <TableSection
+              shipment={shipment}
+              key={shipment.id}
+              openDragDropDialog={openDragDropDialog}
+              closeDragDropDialog={closeDragDropDialog}
+            />
           ))}
         </TableBody>
       </Table>

@@ -16,6 +16,96 @@
       }
     },
     {
+      "DownstreamPathTemplate": "/api/shipment",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "shipments-api",
+          "Port": "5387"
+        }
+      ],
+      "UpstreamPathTemplate": "/shipment",
+      "UpstreamHttpMethod": ["PUT", "POST", "GET"],
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/carrier",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "shipments-api",
+          "Port": "5387"
+        }
+      ],
+      "UpstreamPathTemplate": "/carrier",
+      "UpstreamHttpMethod": ["PUT", "POST", "GET"],
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/loadonlocation",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "shipments-api",
+          "Port": "5387"
+        }
+      ],
+      "UpstreamPathTemplate": "/loadonlocation",
+      "UpstreamHttpMethod": ["PUT", "POST", "GET"],
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/customs",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "shipments-api",
+          "Port": "5387"
+        }
+      ],
+      "UpstreamPathTemplate": "/customs",
+      "UpstreamHttpMethod": ["PUT", "POST", "GET"],
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/bordercrossing",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "shipments-api",
+          "Port": "5387"
+        }
+      ],
+      "UpstreamPathTemplate": "/bordercrossing",
+      "UpstreamHttpMethod": ["PUT", "POST", "GET"],
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/note",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "shipments-api",
+          "Port": "5387"
+        }
+      ],
+      "UpstreamPathTemplate": "/note",
+      "UpstreamHttpMethod": ["PUT", "POST", "GET"],
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      }
+    },
+    {
       "DownstreamPathTemplate": "/api/users",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

@@ -1,6 +1,7 @@
 {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-    "[csharp]": {
-        "editor.defaultFormatter": "ms-dotnettools.csharp"
-    }
+  "editor.formatOnSave": true,
+  "eslint.run": "onSave",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 4000,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

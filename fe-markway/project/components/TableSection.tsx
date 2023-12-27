@@ -7,7 +7,15 @@ import { TableCell, TableRow } from '@mui/material';
 import { format } from 'date-fns';
 import ShipmentDto from '@/model/ShipmentDto';
 
-const TableSection = ({ shipment }: { shipment: ShipmentDto }) => {
+const TableSection = ({
+  shipment,
+  openDragDropDialog,
+  closeDragDropDialog,
+}: {
+  shipment: ShipmentDto;
+  openDragDropDialog: any;
+  closeDragDropDialog: any;
+}) => {
   const [isCollapsed, setCollapsed] = useState(true);
   const value = { isCollapsed: isCollapsed, setCollapsed: setCollapsed };
 
@@ -18,6 +26,10 @@ const TableSection = ({ shipment }: { shipment: ShipmentDto }) => {
   const formatDate = (date: Date) => {
     const parsedDate = new Date(date);
     return format(parsedDate, 'dd.MM.yyyy. hh:mm');
+  };
+
+  const onClickAddFile = () => {
+    openDragDropDialog(shipment.id);
   };
 
   return (
@@ -62,7 +74,7 @@ const TableSection = ({ shipment }: { shipment: ShipmentDto }) => {
                 )}
           </TableCell>
           <TableCell>{shipment.income}</TableCell>
-          <TableCell>
+          <TableCell onClick={onClickAddFile}>
             <img src={'/images/add-document.png'} alt='Add document' />
           </TableCell>
           <TableCell>

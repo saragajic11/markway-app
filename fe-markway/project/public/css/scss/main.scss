@@ -1,11 +1,11 @@
-@import "global";
-@import "utils";
-@import "./components/header";
-@import "./components/home";
-@import "./components/table";
-@import "./components/shipments";
-@import "./components/expandable-button";
-@import "./components/shipments-drawer";
-@import "./components/carrier-dialog";
-@import "./components/load-location";
-
+@import 'global';
+@import 'utils';
+@import './components/header';
+@import './components/home';
+@import './components/table';
+@import './components/shipments';
+@import './components/expandable-button';
+@import './components/shipments-drawer';
+@import './components/carrier-dialog';
+@import './components/load-location';
+@import './components/drag-drop-dialog';
