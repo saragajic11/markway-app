@@ -35,6 +35,7 @@ p {
   display: flex;
   align-items: center;
   margin-left: 20px;
+  cursor: pointer;
 }
 #header-container .logo-container .logo {
   width: 120px;
@@ -353,6 +354,82 @@ p {
 .drag-drop-dialog .MuiDialog-container .MuiPaper-root .files-container .remove-btn {
   color: red;
   cursor: pointer;
+}
+
+#register-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+#register-container h2 {
+  font-size: 25px;
+  color: #353e5d;
+}
+#register-container .register-form {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+#register-container .register-form fieldset {
+  border-color: #353e5d;
+}
+#register-container .register-form div.Mui-focused fieldset {
+  border-color: #f39b03;
+}
+#register-container .register-form label.Mui-focused {
+  color: #353e5d;
+}
+#register-container .register-form button {
+  color: #353e5d;
+  cursor: pointer;
+  margin-top: 15px;
+}
+#register-container .register-form button:hover {
+  background-color: #f39b03;
+}
+
+#login-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+#login-container h2 {
+  font-size: 25px;
+  color: #353e5d;
+}
+#login-container .login-form {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+#login-container .login-form fieldset {
+  border-color: #353e5d;
+}
+#login-container .login-form div.Mui-focused fieldset {
+  border-color: #f39b03;
+}
+#login-container .login-form label.Mui-focused {
+  color: #353e5d;
+}
+#login-container .login-form button {
+  color: #353e5d;
+  cursor: pointer;
+  margin-top: 15px;
+}
+#login-container .login-form button:hover {
+  background-color: #f39b03;
 }
 
 /*# sourceMappingURL=style.css.map */

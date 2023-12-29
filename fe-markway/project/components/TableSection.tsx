@@ -33,63 +33,64 @@ const TableSection = ({
   };
 
   return (
-    <CollapsableContext.Provider value={value}>
-      <React.Fragment>
-        <TableRow className='visible'>
-          <TableCell>
-            <ExpandableButton onClick={onClickOpen} />
-          </TableCell>
-          <TableCell>{shipment.customer.name}</TableCell>
-          <TableCell>
-            {shipment.shipmentRoutes.length === 0
-              ? ''
-              : shipment.shipmentRoutes[0].shipmentLoadOnLocations[0]
-                  .loadOnLocation.name}
-          </TableCell>
-          <TableCell>
-            {shipment.shipmentRoutes.length === 0
-              ? ''
-              : formatDate(
-                  shipment.shipmentRoutes[0].shipmentLoadOnLocations[0].date
-                )}
-          </TableCell>
-          <TableCell>
-            {shipment.shipmentRoutes.length === 0
-              ? ''
-              : shipment.shipmentRoutes[shipment.shipmentRoutes.length - 1]
-                  .shipmentLoadOnLocations[
-                  shipment.shipmentRoutes[shipment.shipmentRoutes.length - 1]
-                    .shipmentLoadOnLocations.length - 1
-                ].loadOnLocation.name}
-          </TableCell>
-          <TableCell>
-            {shipment.shipmentRoutes.length === 0
-              ? ''
-              : formatDate(
-                  shipment.shipmentRoutes[shipment.shipmentRoutes.length - 1]
-                    .shipmentLoadOnLocations[
-                    shipment.shipmentRoutes[shipment.shipmentRoutes.length - 1]
-                      .shipmentLoadOnLocations.length - 1
-                  ].date
-                )}
-          </TableCell>
-          <TableCell>{shipment.income}</TableCell>
-          <TableCell onClick={onClickAddFile}>
-            <img src={'/images/add-document.png'} alt='Add document' />
-          </TableCell>
-          <TableCell>
-            <img src={'/images/edit-icon.svg'} alt='Edit' />
-          </TableCell>
-          <TableCell>
-            <img src={'/images/delete-icon.png'} alt='Delete' />
-          </TableCell>
-        </TableRow>
+    // <CollapsableContext.Provider value={value}>
+    //   <React.Fragment>
+    //     <TableRow className='visible'>
+    //       <TableCell>
+    //         <ExpandableButton onClick={onClickOpen} />
+    //       </TableCell>
+    //       <TableCell>{shipment.customer.name}</TableCell>
+    //       <TableCell>
+    //         {shipment.shipmentRoutes.length === 0
+    //           ? ''
+    //           : shipment.shipmentRoutes[0].shipmentLoadOnLocations[0]
+    //               .loadOnLocation.name}
+    //       </TableCell>
+    //       <TableCell>
+    //         {shipment.shipmentRoutes.length === 0
+    //           ? ''
+    //           : formatDate(
+    //               shipment.shipmentRoutes[0].shipmentLoadOnLocations[0].date
+    //             )}
+    //       </TableCell>
+    //       <TableCell>
+    //         {shipment.shipmentRoutes.length === 0
+    //           ? ''
+    //           : shipment.shipmentRoutes[shipment.shipmentRoutes.length - 1]
+    //               .shipmentLoadOnLocations[
+    //               shipment.shipmentRoutes[shipment.shipmentRoutes.length - 1]
+    //                 .shipmentLoadOnLocations.length - 1
+    //             ].loadOnLocation.name}
+    //       </TableCell>
+    //       <TableCell>
+    //         {shipment.shipmentRoutes.length === 0
+    //           ? ''
+    //           : formatDate(
+    //               shipment.shipmentRoutes[shipment.shipmentRoutes.length - 1]
+    //                 .shipmentLoadOnLocations[
+    //                 shipment.shipmentRoutes[shipment.shipmentRoutes.length - 1]
+    //                   .shipmentLoadOnLocations.length - 1
+    //               ].date
+    //             )}
+    //       </TableCell>
+    //       <TableCell>{shipment.income}</TableCell>
+    //       <TableCell onClick={onClickAddFile}>
+    //         <img src={'/images/add-document.png'} alt='Add document' />
+    //       </TableCell>
+    //       <TableCell>
+    //         <img src={'/images/edit-icon.svg'} alt='Edit' />
+    //       </TableCell>
+    //       <TableCell>
+    //         <img src={'/images/delete-icon.png'} alt='Delete' />
+    //       </TableCell>
+    //     </TableRow>
 
-        <TableRow className='collapsible'>
-          {!isCollapsed && <TableRowComponent shipment={shipment} />}
-        </TableRow>
-      </React.Fragment>
-    </CollapsableContext.Provider>
+    //     <TableRow className='collapsible'>
+    //       {!isCollapsed && <TableRowComponent shipment={shipment} />}
+    //     </TableRow>
+    //   </React.Fragment>
+    // </CollapsableContext.Provider>
+    <span>Cao</span>
   );
 };
 

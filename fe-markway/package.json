@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@emotion/react": "^11.11.1",
-    "@mui/lab": "^5.0.0-alpha.155"
+    "@mui/lab": "^5.0.0-alpha.155",
+    "react-toastify": "^9.1.3"
   }
 }
