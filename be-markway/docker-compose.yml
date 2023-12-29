@@ -33,6 +33,7 @@ services:
       - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
       - BUILDKIT_PROGRESS=1
       - SYSTEMCONFIGURATION__DATABASECONNECTION=User ID="${MARKWAY_DB_USERNAME}"; Password="${MARKWAY_DB_PASSWORD}"; Host=postgres_db; Database=markway_shipments; Integrated Security=true; Pooling=true;
+      - SYSTEMCONFIGURATION__GRPCCONNECTIONS__USER=${GRPC_USERS_SERVICE}
     networks:
       - net_shipments
       - net_users
