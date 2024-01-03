@@ -37,7 +37,14 @@ export async function getAllCustomers() {
 }
 
 export async function addShipment(shipment: any) {
-  return await request(`/shipment`, shipment, HttpMethod.POST);
+  const accessToken = window.localStorage.getItem('access_token');
+  
+  console.log(accessToken);
+  const headers = {
+    'Authorization': `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  return await request(`/shipment`, shipment, HttpMethod.POST, { headers });
 }
 
 export async function attachFile(file: any) {
