@@ -77,7 +77,8 @@ const TableComponent = ({
     },
   ];
 
-  const rows = shipments?.map((shipment) => ({
+  const rows = 
+  !shipments ? [] : shipments?.map((shipment) => ({
     expand: <ExpandableButton onClick={onClickOpen} />,
     customer: shipment.customer.name,
     loadOnLocation:
