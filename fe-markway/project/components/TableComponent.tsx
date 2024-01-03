@@ -162,50 +162,51 @@ const TableComponent = ({
     },
   ];
 
-  const rows = shipments?.map((shipment) => ({
-    id: shipment.id,
-    expand: <ExpandableButton onClick={onClickOpen} />,
-    customer: shipment.customer.name,
-    loadOnLocation:
-      shipment.shipmentRoutes?.length === 0
-        ? ''
-        : shipment.shipmentRoutes[0].shipmentLoadOnLocations[0].loadOnLocation
-            .name,
-    loadOnDate:
-      shipment.shipmentRoutes?.length === 0
-        ? ''
-        : formatDate(
-            shipment.shipmentRoutes[0].shipmentLoadOnLocations[0].date
-          ),
-    loadOffLocation:
-      shipment.shipmentRoutes?.length === 0
-        ? ''
-        : shipment.shipmentRoutes[shipment?.shipmentRoutes?.length - 1]
-            .shipmentLoadOnLocations[
-            shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
-              .shipmentLoadOnLocations?.length - 1
-          ].loadOnLocation.name,
-    loadOffDate:
-      shipment.shipmentRoutes?.length === 0
-        ? ''
-        : formatDate(
-            shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
-              .shipmentLoadOnLocations[
-              shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
-                .shipmentLoadOnLocations?.length - 1
-            ].date
-          ),
-    income: shipment.income,
-    addPdfIcon: (
-      <img
-        src={'/images/add-document.png'}
-        alt='Add document'
-        onClick={() => onClickAddFile(shipment.id)}
-      />
-    ),
-    editIcon: <img src={'/images/edit-icon.svg'} alt='Edit' />,
-    deleteIcon: <img src={'/images/delete-icon.png'} alt='Delete' />,
-  }));
+  const rows = !shipments
+    ? []
+    : shipments?.map((shipment) => ({
+        expand: <ExpandableButton onClick={onClickOpen} />,
+        customer: shipment.customer.name,
+        loadOnLocation:
+          shipment.shipmentRoutes?.length === 0
+            ? ''
+            : shipment.shipmentRoutes[0].shipmentLoadOnLocations[0]
+                .loadOnLocation.name,
+        loadOnDate:
+          shipment.shipmentRoutes?.length === 0
+            ? ''
+            : formatDate(
+                shipment.shipmentRoutes[0].shipmentLoadOnLocations[0].date
+              ),
+        loadOffLocation:
+          shipment.shipmentRoutes?.length === 0
+            ? ''
+            : shipment.shipmentRoutes[shipment?.shipmentRoutes?.length - 1]
+                .shipmentLoadOnLocations[
+                shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
+                  .shipmentLoadOnLocations?.length - 1
+              ].loadOnLocation.name,
+        loadOffDate:
+          shipment.shipmentRoutes?.length === 0
+            ? ''
+            : formatDate(
+                shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
+                  .shipmentLoadOnLocations[
+                  shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
+                    .shipmentLoadOnLocations?.length - 1
+                ].date
+              ),
+        income: shipment.income,
+        addPdfIcon: (
+          <img
+            src={'/images/add-document.png'}
+            alt='Add document'
+            onClick={() => onClickAddFile(shipment.id)}
+          />
+        ),
+        editIcon: <img src={'/images/edit-icon.svg'} alt='Edit' />,
+        deleteIcon: <img src={'/images/delete-icon.png'} alt='Delete' />,
+      }));
 
   const CustomToolbar = () => (
     <GridToolbarContainer>

@@ -6,13 +6,14 @@ namespace Markway.Pdfs.API.Services.Core
 {
     public interface IPdfService
     {
-        Task<Pdf?> AddAsync(ExampleEntityDto dto);
+        Task<Pdf?> AddAsync(PdfDto dto);
 
         Task<IList<Pdf>> GetAllAsync(PageRequest pageRequest);
 
         Task<Pdf?> GetAsync(long id);
 
-        Task UploadPdf(IFormFile file);
+        Task<Pdf?> UploadPdf(IFormFile file, PdfDto pdfDto);
+
         Task GenerateAndUploadPdf();
     }
 }

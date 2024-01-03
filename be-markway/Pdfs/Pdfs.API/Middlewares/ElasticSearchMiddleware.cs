@@ -28,7 +28,7 @@ namespace Markway.Pdfs.API.Middlewares
         {
             if (!client.Indices.Exists(indexName).Exists)
             {
-                CreateIndexResponse CreateIndexResponse = client.Indices.Create(indexName, index => index.Map<ExampleEntityDto>(x => x.AutoMap()));
+                CreateIndexResponse CreateIndexResponse = client.Indices.Create(indexName, index => index.Map<PdfDto>(x => x.AutoMap()));
             }
         }
     }
