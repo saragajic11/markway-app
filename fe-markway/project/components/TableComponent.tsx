@@ -10,6 +10,9 @@ import {
 import { useState } from 'react';
 import { format } from 'date-fns';
 import Image from 'next/image';
+import { Box, Typography } from '@mui/material';
+import RouteContainer from './RouteContainer';
+import ActionContainer from './ActionContainer';
 
 const TableComponent = ({
   shipments,
@@ -23,8 +26,8 @@ const TableComponent = ({
   const [isCollapsed, setCollapsed] = useState(true);
   const value = { isCollapsed: isCollapsed, setCollapsed: setCollapsed };
 
-  const onClickOpen = () => {
-    setCollapsed(!isCollapsed);
+  const onClickOpen = (id: number) => {
+    // setCollapsed(!isCollapsed);
   };
 
   const formatDate = (date: Date) => {
@@ -32,21 +35,33 @@ const TableComponent = ({
     return format(parsedDate, 'dd.MM.yyyy. hh:mm');
   };
 
+  const onClickPreview = (id: number) => {};
+
   const onClickAddFile = (id: number) => {
     openDragDropDialog(id);
   };
 
+  const onClickEdit = (id: number) => {};
+
+  const onClickDelete = (id: number) => {};
+
   const columns: GridColDef[] = [
     {
-      field: 'Proširi',
-      headerName: '',
+      field: 'Akcije',
+      headerName: 'Akcije',
       type: 'string',
-      renderCell: () => <ExpandableButton onClick={onClickOpen} />,
-      minWidth: 80,
-      width: 80,
-      maxWidth: 80,
+      renderCell: (params) => (
+        <ActionContainer
+          onClickPreview={() => onClickPreview(params.row.id)}
+          onClickAddFile={() => onClickAddFile(params.row.id)}
+          onClickEdit={() => onClickEdit(params.row.id)}
+          onClickDelete={() => onClickDelete(params.row.id)}
+        />
+      ),
+      minWidth: 200,
+      width: 200,
+      maxWidth: 200,
       sortable: false,
-      hideable: false,
     },
     {
       field: 'customer',
@@ -102,71 +117,20 @@ const TableComponent = ({
       width: 150,
       maxWidth: 150,
     },
-    {
-      field: 'Dodaj PDF',
-      headerName: '',
-      type: 'string',
-      renderCell: (params) => (
-        <Image
-          src={'/images/add-document.png'}
-          alt='Add document'
-          onClick={() => onClickAddFile(params.row.id)}
-          width={25}
-          height={25}
-        />
-      ),
-      minWidth: 80,
-      width: 80,
-      maxWidth: 80,
-      resizable: true,
-      sortable: false,
-      hideable: false,
-    },
-    {
-      field: 'Izmeni',
-      headerName: '',
-      type: 'string',
-      renderCell: () => (
-        <Image
-          src={'/images/edit-icon.svg'}
-          alt='Edit'
-          width={25}
-          height={25}
-        />
-      ),
-      resizable: true,
-      minWidth: 80,
-      width: 80,
-      maxWidth: 80,
-      sortable: false,
-      hideable: false,
-    },
-    {
-      field: 'Obriši',
-      headerName: '',
-      type: 'string',
-      renderCell: () => (
-        <Image
-          src={'/images/delete-icon.png'}
-          alt='Delete'
-          width={25}
-          height={25}
-        />
-      ),
-      resizable: true,
-      minWidth: 80,
-      width: 80,
-      maxWidth: 80,
-      sortable: false,
-      hideable: false,
-    },
   ];
 
   const rows = !shipments
     ? []
     : shipments?.map((shipment) => ({
         id: shipment.id,
-        expand: <ExpandableButton onClick={onClickOpen} />,
+        action: (
+          <ActionContainer
+            onClickPreview={() => onClickPreview(shipment.id)}
+            onClickAddFile={() => onClickAddFile(shipment.id)}
+            onClickEdit={() => onClickEdit(shipment.id)}
+            onClickDelete={() => onClickDelete(shipment.id)}
+          />
+        ),
         customer: shipment.customer.name,
         loadOnLocation:
           shipment.shipmentRoutes?.length === 0
@@ -198,15 +162,6 @@ const TableComponent = ({
                 ].date
               ),
         income: shipment.income,
-        addPdfIcon: (
-          <img
-            src={'/images/add-document.png'}
-            alt='Add document'
-            onClick={() => onClickAddFile(shipment.id)}
-          />
-        ),
-        editIcon: <img src={'/images/edit-icon.svg'} alt='Edit' />,
-        deleteIcon: <img src={'/images/delete-icon.png'} alt='Delete' />,
       }));
 
   return (

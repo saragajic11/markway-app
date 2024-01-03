@@ -62,7 +62,6 @@ export default function Shipments() {
   };
 
   const openDragDropDialog = (id: number) => {
-    console.log('Mijao');
     setShipmentId(id);
     setOpenedDragDropPdfDialog(true);
   };

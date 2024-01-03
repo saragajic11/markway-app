@@ -153,6 +153,22 @@ p {
   font-size: 13px;
 }
 
+.MuiDataGrid-root {
+  margin-top: 50px;
+  width: 80%;
+  height: 100%;
+}
+.MuiDataGrid-root .MuiDataGrid-row .action-container {
+  display: flex;
+  width: 100%;
+}
+.MuiDataGrid-root .MuiDataGrid-row .action-container img {
+  height: 23px;
+  width: 23px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
 #shipments-container {
   margin-top: 50px;
   display: flex;
@@ -190,6 +206,11 @@ p {
 }
 
 #expandable-button-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0px !important;
 }
 #expandable-button-container img {
