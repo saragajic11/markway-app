@@ -39,3 +39,16 @@
     }
   }
 }
+
+.MuiDataGrid-root {
+  margin-top: 50px;
+  width: 80%;
+  height: 100%;
+  .MuiDataGrid-row {
+    img {
+      height: 25px;
+      width: 25px;
+      cursor: pointer;
+    }
+  }
+}

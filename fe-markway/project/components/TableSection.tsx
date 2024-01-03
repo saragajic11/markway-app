@@ -90,7 +90,7 @@ const TableSection = ({
     //     </TableRow>
     //   </React.Fragment>
     // </CollapsableContext.Provider>
-    <span>Cao</span>
+    <div>{shipment.customer.name}</div>
   );
 };
 

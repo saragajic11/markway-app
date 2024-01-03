@@ -1,17 +1,15 @@
-import { data } from '../data/dumbdata';
-import TableSection from './TableSection';
-import Table from '@mui/material/Table';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import TableCell from '@mui/material/TableCell';
-import TableBody from '@mui/material/TableBody';
 import ShipmentDto from '@/model/ShipmentDto';
 import ExpandableButton from './ExpandableButton';
-import { DataGrid } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridColDef,
+  GridToolbar,
+  GridToolbarColumnsButton,
+  GridToolbarContainer,
+} from '@mui/x-data-grid';
 import { useState } from 'react';
 import { format } from 'date-fns';
+import Image from 'next/image';
 
 const TableComponent = ({
   shipments,
@@ -38,46 +36,134 @@ const TableComponent = ({
     openDragDropDialog(id);
   };
 
-  const columns = [
+  const columns: GridColDef[] = [
     {
-      field: 'expand',
+      field: 'Proširi',
       headerName: '',
       type: 'string',
       renderCell: () => <ExpandableButton onClick={onClickOpen} />,
+      minWidth: 80,
+      width: 80,
+      maxWidth: 80,
+      sortable: false,
+      hideable: false,
     },
-    { field: 'customer', headerName: 'Nalogodavac', type: 'string' },
-    { field: 'loadOnLocation', headerName: 'Mesto utovara', type: 'string' },
-    { field: 'loadOnDate', headerName: 'Datum utovara', type: 'string' },
-    { field: 'loadOffLocation', headerName: 'Mesto istovara', type: 'string' },
-    { field: 'loadOffDate', headerName: 'Datum istovara', type: 'string' },
-    { field: 'income', headerName: 'Prihod', type: 'number' },
     {
-      field: 'addPdfIcon',
+      field: 'customer',
+      headerName: 'Nalogodavac',
+      type: 'string',
+      resizable: true,
+      minWidth: 200,
+      width: 200,
+      maxWidth: 200,
+    },
+    {
+      field: 'loadOnLocation',
+      headerName: 'Mesto utovara',
+      type: 'string',
+      resizable: true,
+      minWidth: 200,
+      width: 200,
+      maxWidth: 200,
+    },
+    {
+      field: 'loadOnDate',
+      headerName: 'Datum utovara',
+      type: 'string',
+      resizable: true,
+      minWidth: 200,
+      width: 200,
+      maxWidth: 200,
+    },
+    {
+      field: 'loadOffLocation',
+      headerName: 'Mesto istovara',
+      type: 'string',
+      resizable: true,
+      minWidth: 200,
+      width: 200,
+      maxWidth: 200,
+    },
+    {
+      field: 'loadOffDate',
+      headerName: 'Datum istovara',
+      type: 'string',
+      resizable: true,
+      minWidth: 200,
+      width: 200,
+      maxWidth: 200,
+    },
+    {
+      field: 'income',
+      headerName: 'Prihod',
+      type: 'string',
+      resizable: true,
+      minWidth: 150,
+      width: 150,
+      maxWidth: 150,
+    },
+    {
+      field: 'Dodaj PDF',
       headerName: '',
       type: 'string',
       renderCell: (params) => (
-        <img
+        <Image
           src={'/images/add-document.png'}
           alt='Add document'
           onClick={() => onClickAddFile(params.row.id)}
+          width={25}
+          height={25}
         />
       ),
+      minWidth: 80,
+      width: 80,
+      maxWidth: 80,
+      resizable: true,
+      sortable: false,
+      hideable: false,
     },
     {
-      field: 'editIcon',
+      field: 'Izmeni',
       headerName: '',
       type: 'string',
-      renderCell: () => <img src={'/images/edit-icon.svg'} alt='Edit' />,
+      renderCell: () => (
+        <Image
+          src={'/images/edit-icon.svg'}
+          alt='Edit'
+          width={25}
+          height={25}
+        />
+      ),
+      resizable: true,
+      minWidth: 80,
+      width: 80,
+      maxWidth: 80,
+      sortable: false,
+      hideable: false,
     },
     {
-      field: 'deleteIcon',
+      field: 'Obriši',
       headerName: '',
       type: 'string',
-      renderCell: () => <img src={'/images/delete-icon.png'} alt='Delete' />,
+      renderCell: () => (
+        <Image
+          src={'/images/delete-icon.png'}
+          alt='Delete'
+          width={25}
+          height={25}
+        />
+      ),
+      resizable: true,
+      minWidth: 80,
+      width: 80,
+      maxWidth: 80,
+      sortable: false,
+      hideable: false,
     },
   ];
 
   const rows = shipments?.map((shipment) => ({
+    id: shipment.id,
     expand: <ExpandableButton onClick={onClickOpen} />,
     customer: shipment.customer.name,
     loadOnLocation:
@@ -120,6 +206,21 @@ const TableComponent = ({
     editIcon: <img src={'/images/edit-icon.svg'} alt='Edit' />,
     deleteIcon: <img src={'/images/delete-icon.png'} alt='Delete' />,
   }));
+
+  const CustomToolbar = () => (
+    <GridToolbarContainer>
+      <GridToolbarColumnsButton
+        columns={[
+          'customer',
+          'loadOnLocation',
+          'loadOnDate',
+          'loadOffLocation',
+          'loadOffDate',
+        ]}
+      />
+    </GridToolbarContainer>
+  );
+
   return (
     // <TableContainer component={Paper} id='table-container'>
     //   <Table aria-label='collapsible table'>
@@ -153,18 +254,10 @@ const TableComponent = ({
       rows={rows}
       columns={columns}
       autoPageSize
-      checkboxSelection
-      components={{
-        Row: ({ row, ...props }) => (
-          <div>
-            <TableSection
-              shipment={row}
-              key={row.id}
-              openDragDropDialog={openDragDropDialog}
-              closeDragDropDialog={closeDragDropDialog}
-            />
-          </div>
-        ),
+      checkboxSelection={false}
+      style={{ height: '100%', width: '80%' }}
+      slots={{
+        toolbar: GridToolbar,
       }}
     />
   );
