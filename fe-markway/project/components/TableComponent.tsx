@@ -165,6 +165,7 @@ const TableComponent = ({
   const rows = !shipments
     ? []
     : shipments?.map((shipment) => ({
+        id: shipment.id,
         expand: <ExpandableButton onClick={onClickOpen} />,
         customer: shipment.customer.name,
         loadOnLocation:
@@ -208,49 +209,7 @@ const TableComponent = ({
         deleteIcon: <img src={'/images/delete-icon.png'} alt='Delete' />,
       }));
 
-  const CustomToolbar = () => (
-    <GridToolbarContainer>
-      <GridToolbarColumnsButton
-        columns={[
-          'customer',
-          'loadOnLocation',
-          'loadOnDate',
-          'loadOffLocation',
-          'loadOffDate',
-        ]}
-      />
-    </GridToolbarContainer>
-  );
-
   return (
-    // <TableContainer component={Paper} id='table-container'>
-    //   <Table aria-label='collapsible table'>
-    //     <TableHead>
-    //       <TableRow>
-    //         <TableCell />
-    //         <TableCell>Nalogodavac</TableCell>
-    //         <TableCell>Mesto utovara</TableCell>
-    //         <TableCell>Datum utovara</TableCell>
-    //         <TableCell>Mesto istovara</TableCell>
-    //         <TableCell>Datum istovara</TableCell>
-    //         <TableCell>Prihod</TableCell>
-    //         <TableCell />
-    //         <TableCell />
-    //         <TableCell />
-    //       </TableRow>
-    //     </TableHead>
-    //     <TableBody>
-    //       {shipments?.map((shipment) => (
-    //         <TableSection
-    //           shipment={shipment}
-    //           key={shipment.id}
-    //           openDragDropDialog={openDragDropDialog}
-    //           closeDragDropDialog={closeDragDropDialog}
-    //         />
-    //       ))}
-    //     </TableBody>
-    //   </Table>
-    // </TableContainer>
     <DataGrid
       rows={rows}
       columns={columns}
