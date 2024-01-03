@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Markway.Pdfs.API.Constants;
+using Markway.Pdfs.API.Models;
+using Markway.Pdfs.API.Models.DTO;
 using Markway.Pdfs.API.Services.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +23,11 @@ namespace Markway.Pdfs.API.Controllers
 
         [HttpPost]
         [Authorize(Policy = Policies.Authorization.FILE_CREATE)]
-        public async Task<IActionResult> UploadPdf([FromForm] IFormFile file)
+        public async Task<IActionResult> UploadPdf([FromForm] IFormFile file, [FromForm] PdfDto pdfDto)
         {
-            await _pdfService.UploadPdf(file);
+            Pdf? pdf = await _pdfService.UploadPdf(file, pdfDto);
 
-            return Ok();
+            return Ok(_mapper.Map<PdfDto>(pdf));
         }
 
         [HttpPost(Endpoints.GENERATE_PDF)]

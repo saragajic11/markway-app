@@ -7,18 +7,17 @@ using Markway.Pdfs.API.Models.DTO;
 
 namespace Markway.Pdfs.API.Profiles
 {
-    public class ExampleEntityProfile : Profile
+    public class PdfProfile : Profile
     {
-        public ExampleEntityProfile()
+        public PdfProfile()
         {
-            CreateMap<Pdf, ExampleEntityDto>();
+            CreateMap<Pdf, PdfDto>();
 
-            CreateMap<ExampleEntityDto, Pdf>();
+            CreateMap<PdfDto, Pdf>();
 
             CreateMap<Pdf, ExampleEntityElasticDto>();
 
-            CreateMap<ExampleEntityElasticDto, ExampleEntityDto>();
+            CreateMap<ExampleEntityElasticDto, PdfDto>();
         }
     }
 }
-

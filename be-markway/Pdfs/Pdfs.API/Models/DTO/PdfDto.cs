@@ -3,10 +3,12 @@
 namespace Markway.Pdfs.API.Models.DTO
 {
 
-    public record ExampleEntityDto
+    public record PdfDto
     {
         public long? Id { get; set; }
-
-        public string? Property { get; set; }
+        public string? Name { get; set; }
+        public string? Extension { get; set; }
+        public string? Path { get; set; }
+        public long ReferenceId { get; set; }
     }
 }

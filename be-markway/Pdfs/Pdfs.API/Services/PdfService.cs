@@ -20,6 +20,7 @@ namespace Markway.Pdfs.API.Services
     {
         private readonly IMapper _mapper;
         private readonly SystemConfiguration _systemConfiguration;
+        private readonly string _extension = ".pdf";
 
         public PdfService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<PdfService> logger, SystemConfiguration systemConfiguration)
             : base(logger, unitOfWork, elasticSearchService)
@@ -28,7 +29,7 @@ namespace Markway.Pdfs.API.Services
             _systemConfiguration = systemConfiguration;
         }
 
-        public async Task<Pdf?> AddAsync(ExampleEntityDto dto)
+        public async Task<Pdf?> AddAsync(PdfDto dto)
         {
             try
             {
@@ -129,17 +130,19 @@ namespace Markway.Pdfs.API.Services
             throw new HttpResponseException(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCode.SERVICE_ABBREVIATION_0001));
         }
 
-        public async Task UploadPdf(IFormFile file)
+        public async Task<Pdf?> UploadPdf(IFormFile file, PdfDto pdfDto)
         {
             if (file == null || file.Length == 0)
             {
-                return;
+                return null;
             }
 
             try
             {
                 using var client = new AmazonS3Client(_systemConfiguration.S3Settings.AccessKey, _systemConfiguration.S3Settings.AccessSecret, RegionEndpoint.GetBySystemName(_systemConfiguration.S3Settings.Region));
-                var key = Guid.NewGuid() + Path.GetExtension(file.FileName); // Unique key for the S3 object
+                string key = Guid.NewGuid() + Path.GetExtension(file.FileName); // Unique key for the S3 object
+                DateTime now = DateTime.Now;
+                string path = string.Format("/markway/{0}/{1}/{2}", now.Year, now.Month, now.Day);
 
                 await using var fileStream = file.OpenReadStream();
                 var putRequest = new PutObjectRequest
@@ -157,18 +160,22 @@ namespace Markway.Pdfs.API.Services
                     Pdf pdf = new()
                     {
                         Name = key,
+                        Path = path + "/" + key,
+                        Extension = _extension,
+                        ReferenceId = pdfDto.ReferenceId,
                     };
-                    
-                    return;
+
+                    return await base.AddAsync(pdf);
                 }
                 else
                 {
-                    return;
+                    return null;
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return;
+                _logger.LogError($"Error in PdfService in UploadPdf {e.Message} in {e.StackTrace}");
+                return null;
             }
         }
     }
