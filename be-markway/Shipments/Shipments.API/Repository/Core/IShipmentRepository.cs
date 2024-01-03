@@ -9,7 +9,7 @@ namespace Markway.Shipments.API.Repository.Core
     {
         public Task<Shipment?> GetAsync(long id);
 
-        public Task<IList<Shipment>> GetAllAsync(PageRequest pageRequest);
+        public Task<IList<Shipment>> GetAllAsync(ShipmentFilter filter);
     }
 }
 

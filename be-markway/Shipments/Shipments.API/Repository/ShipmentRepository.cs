@@ -15,29 +15,36 @@ namespace Markway.Shipments.API.Repository
         public override async Task<Shipment?> GetAsync(long id)
         {
             return await ShipmentsContext.Shipments
-            .Include(x => x.Customer)
-            .Include(x => x.Note)
-            .Where(shipment => shipment.Id == id && !shipment.Deleted)
-            .FirstOrDefaultAsync();
+                // .Include(x => x.Customer)
+                // .Include(x => x.Note)
+                .Where(shipment => shipment.Id == id && !shipment.Deleted)
+                .FirstOrDefaultAsync();
         }
 
-        public override async Task<IList<Shipment>> GetAllAsync(PageRequest pageRequest)
+        public async Task<IList<Shipment>> GetAllAsync(ShipmentFilter filter)
         {
-            return await ShipmentsContext.Shipments
-            .Include(x => x.Customer)
-            .Include(x => x.Note)
-            .Include(x => x.ShipmentRoutes)
-                .ThenInclude(route => route.Carrier)
-            .Include(x => x.ShipmentRoutes)
-                .ThenInclude(route => route.ShipmentCustoms)
-                    .ThenInclude(shipmentCustom => shipmentCustom.Custom)
-            .Include(x => x.ShipmentRoutes)
-                .ThenInclude(route => route.ShipmentLoadOnLocations)
-                    .ThenInclude(shipmentLoadOnLocation => shipmentLoadOnLocation.LoadOnLocation)
-            .Include(x => x.ShipmentRoutes)
-                .ThenInclude(route => route.BorderCrossing)
-            .Where(shipment => !shipment.Deleted)
-            .ToListAsync();
+            IQueryable<Shipment> query = ShipmentsContext.Shipments.AsQueryable();
+
+            if (filter.UserId.HasValue && filter.UserId != 0)
+            {
+                query = query.Where(shipment => filter.UserId.Equals(shipment.UserId));
+            }
+
+            return await query
+                .Include(x => x.Customer)
+                .Include(x => x.Note)
+                .Include(x => x.ShipmentRoutes)
+                    .ThenInclude(route => route.Carrier)
+                .Include(x => x.ShipmentRoutes)
+                    .ThenInclude(route => route.ShipmentCustoms)
+                        .ThenInclude(shipmentCustom => shipmentCustom.Custom)
+                .Include(x => x.ShipmentRoutes)
+                    .ThenInclude(route => route.ShipmentLoadOnLocations)
+                        .ThenInclude(shipmentLoadOnLocation => shipmentLoadOnLocation.LoadOnLocation)
+                .Include(x => x.ShipmentRoutes)
+                    .ThenInclude(route => route.BorderCrossing)
+                .Where(shipment => !shipment.Deleted)
+                .ToListAsync();
         }
     }
 }

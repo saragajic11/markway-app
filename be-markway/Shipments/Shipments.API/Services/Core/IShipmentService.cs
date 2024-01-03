@@ -8,8 +8,10 @@ namespace Markway.Shipments.API.Services.Core
     {
         Task<Shipment?> AddAsync(ShipmentDto dto);
 
-        Task<IList<Shipment>> GetAllAsync(PageRequest pageRequest);
+        Task<IList<Shipment>> GetAllAsync(ShipmentFilter filter);
 
         Task<Shipment?> GetAsync(long id);
+
+        Task<bool> DeleteAsync(long id);
     }
 }

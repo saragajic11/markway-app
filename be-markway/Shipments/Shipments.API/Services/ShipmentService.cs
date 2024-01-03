@@ -78,8 +78,7 @@ namespace Markway.Shipments.API.Services
         {
             try
             {
-                Shipment? shipment = await _unitOfWork.Shipments.GetAsync(id);
-                return shipment;
+                return await _unitOfWork.Shipments.GetAsync(id);
             }
             catch (Exception e)
             {
@@ -88,11 +87,34 @@ namespace Markway.Shipments.API.Services
             }
         }
 
-        public async Task<IList<Shipment>> GetAllAsync(PageRequest pageRequest)
+        public async Task<bool> DeleteAsync(long id)
         {
             try
             {
-                IList<Shipment> listOfShipments = await _unitOfWork.Shipments.GetAllAsync(pageRequest);
+                Shipment? shipment = await GetAsync(id);
+
+                shipment.Deleted = true;
+
+                await base.UpdateAsync(shipment);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
+                return false;
+            }
+        }
+
+        public async Task<IList<Shipment>> GetAllAsync(ShipmentFilter filter)
+        {
+            try
+            {
+                UserReply user = await _currentUserService.GetCurrentUserAsync();
+
+                filter.UserId = user.Id;
+
+                IList<Shipment> listOfShipments = await _unitOfWork.Shipments.GetAllAsync(filter);
                 foreach (var shipment in listOfShipments)
                 {
                     foreach (var route in shipment.ShipmentRoutes)

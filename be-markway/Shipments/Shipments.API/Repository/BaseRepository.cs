@@ -28,6 +28,13 @@ namespace Markway.Shipments.API.Repository
         {
             await _context.Set<TEntity>().AddRangeAsync(entities);
         }
+        
+        public virtual TEntity Update(TEntity entity)
+        {
+            _context.Set<TEntity>().Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+            return _context.Update(entity).Entity;
+        }
 
         public virtual async Task<TEntity?> GetAsync(long id) => await _context.Set<TEntity>().FindAsync(id);
 

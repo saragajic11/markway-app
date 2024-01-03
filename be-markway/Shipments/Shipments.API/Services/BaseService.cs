@@ -55,6 +55,21 @@ namespace Markway.Shipments.API.Services
             }
         }
 
+        public virtual async Task<TEntity?> UpdateAsync(TEntity entity)
+        {
+            try
+            {
+                entity = _unitOfWork.GetRepository<TEntity>().Update(entity);
+                await _unitOfWork.Complete();
+
+                return entity;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in BaseService in Update Method {e.Message} in {e.StackTrace}");
+                return null;
+            }
+        }
 
         public virtual async Task<TEntity?> GetAsync(long id)
         {

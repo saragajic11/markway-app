@@ -11,6 +11,8 @@ namespace Markway.Shipments.API.Repository.Core
 
         Task<TEntity?> GetAsync(long id);
 
+        TEntity Update(TEntity entity);
+
         Task<IList<TEntity>> GetAllAsync(PageRequest pageRequest);
 
         Task SaveChangesAsync();

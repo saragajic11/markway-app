@@ -25,10 +25,10 @@ public class ShipmentController : ControllerBase
     }
 
     [HttpGet]
-    // [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
-    public async Task<IActionResult> GetEntities([FromQuery] PageRequest pageRequest)
+    [Authorize(Policy = Policies.Authorization.SHIPMENT_CREATE)]
+    public async Task<IActionResult> GetEntities([FromQuery] ShipmentFilter filter)
     {
-        IList<Shipment> entities = await _shipmentService.GetAllAsync(pageRequest);
+        IList<Shipment> entities = await _shipmentService.GetAllAsync(filter);
 
         return Ok(_mapper.Map<IEnumerable<Shipment>, List<ShipmentDto>>(entities));
     }
@@ -42,13 +42,19 @@ public class ShipmentController : ControllerBase
         return Ok(_mapper.Map<ShipmentDto>(entity));
     }
 
+    [HttpDelete("{id}")]
+    // [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
+    public async Task<IActionResult> DeleteShipment(int id)
+    {
+        return Ok(_shipmentService.DeleteAsync(id));
+    }
+
     [HttpPost]
     [Authorize(Policy = Policies.Authorization.SHIPMENT_CREATE)]
     public async Task<IActionResult> CreateEntity(ShipmentDto shipmentDto)
     {
-        Console.WriteLine("Caosiii ", shipmentDto.Customer);
         Shipment? shipment = await _shipmentService.AddAsync(shipmentDto);
 
-        return Ok(_mapper.Map<ShipmentDto>(shipmentDto));
+        return Ok(_mapper.Map<ShipmentDto>(shipment));
     }
 }

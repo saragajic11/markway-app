@@ -3,7 +3,15 @@ import { request } from '../base/HTTP';
 import HttpMethod from '../constants/HttpMethod';
 
 export async function getAllShipments() {
-  return await request(`/shipment`, [], HttpMethod.GET);
+
+  const accessToken = window.localStorage.getItem('access_token');
+  
+  const headers = {
+    'Authorization': `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+
+  return await request(`/shipment`, [], HttpMethod.GET, { headers: headers});
 }
 
 export async function getShipmentLoadOnLocationByShipmentIdAndType(data) {
@@ -39,12 +47,22 @@ export async function getAllCustomers() {
 export async function addShipment(shipment: any) {
   const accessToken = window.localStorage.getItem('access_token');
   
-  console.log(accessToken);
   const headers = {
     'Authorization': `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   return await request(`/shipment`, shipment, HttpMethod.POST, { headers });
+}
+
+export async function deleteShipment(shipmentId: any) {
+  const accessToken = window.localStorage.getItem('access_token');
+  
+  const headers = {
+    'Authorization': `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+
+  return await request(`/shipment/${shipmentId}`, [], HttpMethod.DELETE, { headers });
 }
 
 export async function attachFile(file: any) {

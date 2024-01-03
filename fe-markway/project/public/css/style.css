@@ -158,10 +158,15 @@ p {
   width: 80%;
   height: 100%;
 }
-.MuiDataGrid-root .MuiDataGrid-row img {
-  height: 25px;
-  width: 25px;
+.MuiDataGrid-root .MuiDataGrid-row .action-container {
+  display: flex;
+  width: 100%;
+}
+.MuiDataGrid-root .MuiDataGrid-row .action-container img {
+  height: 23px;
+  width: 23px;
   cursor: pointer;
+  margin-right: 20px;
 }
 
 #shipments-container {
