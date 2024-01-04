@@ -91,7 +91,12 @@ namespace Markway.Shipments.API.Services
         {
             try
             {
-                Shipment? shipment = await GetAsync(id);
+                Shipment? shipment = await base.GetAsync(id);
+
+                if(shipment is null)
+                {
+                    return false;
+                }
 
                 shipment.Deleted = true;
 

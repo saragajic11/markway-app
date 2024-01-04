@@ -27,6 +27,7 @@ const ActionContainer = ({
         alt='Delete'
         width={23}
         height={23}
+        onClick={onClickDelete}
       />
     </div>
   );

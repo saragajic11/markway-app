@@ -46,7 +46,7 @@ public class ShipmentController : ControllerBase
     // [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
     public async Task<IActionResult> DeleteShipment(int id)
     {
-        return Ok(_shipmentService.DeleteAsync(id));
+        return Ok(await _shipmentService.DeleteAsync(id));
     }
 
     [HttpPost]

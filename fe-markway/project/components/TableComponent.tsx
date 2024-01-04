@@ -1,5 +1,4 @@
 import ShipmentDto from '@/model/ShipmentDto';
-import ExpandableButton from './ExpandableButton';
 import {
   DataGrid,
   GridColDef,
@@ -10,7 +9,7 @@ import {
 import {
   deleteShipment
 } from "@/services/ShipmentService";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import Image from 'next/image';
 import { Box, Typography } from '@mui/material';
@@ -26,6 +25,8 @@ const TableComponent = ({
   openDragDropDialog: any;
   closeDragDropDialog: any;
 }) => {
+  const [updatedListOfShipments, setUpdatedListOfShipments] = useState<ShipmentDto[]>(shipments);
+  console.log("Mijao", updatedListOfShipments);
   const [isCollapsed, setCollapsed] = useState(true);
   const value = { isCollapsed: isCollapsed, setCollapsed: setCollapsed };
 
@@ -38,23 +39,33 @@ const TableComponent = ({
     return format(parsedDate, 'dd.MM.yyyy. hh:mm');
   };
 
-  const onClickPreview = (id: number) => {};
+  const onClickPreview = (id: number) => { };
 
   const onClickAddFile = (id: number) => {
     openDragDropDialog(id);
   };
 
-<<<<<<< Updated upstream
-  const onClickEdit = (id: number) => {};
+  const onClickEdit = (id: number) => { };
 
-  const onClickDelete = (id: number) => {};
-=======
-  const onClickDeleteShipment = (id: number) => {
+  const onClickDelete = async (id: number) => {
+    try {
+      // Call the deleteShipment function to delete the shipment
+      await deleteShipment(id);
 
-    console.log("OVDE SAM ID =" + id);
-    deleteShipment(id);
+      // Update the shipments state by filtering out the shipment with the specified ID
+      setUpdatedListOfShipments(shipments =>
+        shipments.filter(shipment => shipment.id !== id)
+      );
+    } catch (error) {
+      console.error('Error deleting shipment:', error);
+    }
   };
->>>>>>> Stashed changes
+
+  useEffect(() => {
+    setUpdatedListOfShipments(shipments);
+
+  }, [shipments]);
+
 
   const columns: GridColDef[] = [
     {
@@ -128,114 +139,52 @@ const TableComponent = ({
       width: 150,
       maxWidth: 150,
     },
-<<<<<<< Updated upstream
-=======
-    {
-      field: 'Dodaj PDF',
-      headerName: '',
-      type: 'string',
-      renderCell: (params) => (
-        <Image
-          src={'/images/add-document.png'}
-          alt='Add document'
-          onClick={() => onClickAddFile(params.row.id)}
-          width={25}
-          height={25}
-        />
-      ),
-      minWidth: 80,
-      width: 80,
-      maxWidth: 80,
-      resizable: true,
-      sortable: false,
-      hideable: false,
-    },
-    {
-      field: 'Izmeni',
-      headerName: '',
-      type: 'string',
-      renderCell: () => (
-        <Image
-          src={'/images/edit-icon.svg'}
-          alt='Edit'
-          width={25}
-          height={25}
-        />
-      ),
-      resizable: true,
-      minWidth: 80,
-      width: 80,
-      maxWidth: 80,
-      sortable: false,
-      hideable: false,
-    },
-    {
-      field: 'Obriši',
-      headerName: '',
-      type: 'string',
-      renderCell: (params) => (
-        <Image
-          src={'/images/delete-icon.png'}
-          alt='Delete'
-          onClick={() => onClickDeleteShipment(params.row.id)}
-          width={25}
-          height={25}
-        />
-      ),
-      resizable: true,
-      minWidth: 80,
-      width: 80,
-      maxWidth: 80,
-      sortable: false,
-      hideable: false,
-    },
->>>>>>> Stashed changes
   ];
 
-  const rows = !shipments
+  const rows = !updatedListOfShipments
     ? []
-    : shipments?.map((shipment) => ({
-        id: shipment.id,
-        action: (
-          <ActionContainer
-            onClickPreview={() => onClickPreview(shipment.id)}
-            onClickAddFile={() => onClickAddFile(shipment.id)}
-            onClickEdit={() => onClickEdit(shipment.id)}
-            onClickDelete={() => onClickDelete(shipment.id)}
-          />
-        ),
-        customer: shipment.customer.name,
-        loadOnLocation:
-          shipment.shipmentRoutes?.length === 0
-            ? ''
-            : shipment.shipmentRoutes[0].shipmentLoadOnLocations[0]
-                .loadOnLocation.name,
-        loadOnDate:
-          shipment.shipmentRoutes?.length === 0
-            ? ''
-            : formatDate(
-                shipment.shipmentRoutes[0].shipmentLoadOnLocations[0].date
-              ),
-        loadOffLocation:
-          shipment.shipmentRoutes?.length === 0
-            ? ''
-            : shipment.shipmentRoutes[shipment?.shipmentRoutes?.length - 1]
-                .shipmentLoadOnLocations[
-                shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
-                  .shipmentLoadOnLocations?.length - 1
-              ].loadOnLocation.name,
-        loadOffDate:
-          shipment.shipmentRoutes?.length === 0
-            ? ''
-            : formatDate(
-                shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
-                  .shipmentLoadOnLocations[
-                  shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
-                    .shipmentLoadOnLocations?.length - 1
-                ].date
-              ),
-        income: shipment.income,
-      }));
+    : updatedListOfShipments?.map((shipment) => ({
+      id: shipment.id,
+      action: (
+        <ActionContainer
+          onClickPreview={() => onClickPreview(shipment.id)}
+          onClickAddFile={() => onClickAddFile(shipment.id)}
+          onClickEdit={() => onClickEdit(shipment.id)}
+          onClickDelete={() => onClickDelete(shipment.id)}
+        />
+      ),
+      customer: shipment.customer.name,
+      loadOnLocation:
+        shipment.shipmentRoutes?.length === 0
+          ? ''
+          : shipment.shipmentRoutes[0].shipmentLoadOnLocations[0]
+            .loadOnLocation.name,
+      loadOnDate:
+        shipment.shipmentRoutes?.length === 0
+          ? ''
+          : formatDate(
+            shipment.shipmentRoutes[0].shipmentLoadOnLocations[0].date
+          ),
+      loadOffLocation:
+        shipment.shipmentRoutes?.length === 0
+          ? ''
+          : shipment.shipmentRoutes[shipment?.shipmentRoutes?.length - 1]
+            .shipmentLoadOnLocations[
+            shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
+              .shipmentLoadOnLocations?.length - 1
+          ].loadOnLocation.name,
+      loadOffDate:
+        shipment.shipmentRoutes?.length === 0
+          ? ''
+          : formatDate(
+            shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
+              .shipmentLoadOnLocations[
+              shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
+                .shipmentLoadOnLocations?.length - 1
+            ].date
+          ),
+      income: shipment.income,
+    }));
 
   return (
     <DataGrid
