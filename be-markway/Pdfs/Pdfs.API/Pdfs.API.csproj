@@ -81,6 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <Protobuf Include="Protos\example_entity.proto" GrpcServices="Server" />
+    <Protobuf Include="..\..\Users\Users.API\Protos\user.proto" GrpcServices="Client">
+      <Link>Protos\user.proto</Link>  
+    </Protobuf>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Commons\Commons.csproj">

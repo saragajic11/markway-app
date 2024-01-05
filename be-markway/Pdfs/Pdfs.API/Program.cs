@@ -28,6 +28,8 @@ builder.ConfigureCors();
 
 builder.ConfigureKestrel();
 
+builder.AddGrpcClients(systemConfiguration);
+
 builder.Services.AddGrpc();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
