@@ -1,106 +1,133 @@
-<div style="display: flex; flex-direction: column; margin: 50px 20px;">
-    <div style="display: flex;  align-items: center; justify-content: space-between;">
-        <div style="display: flex; flex-direction: column;">
-            <strong>MARKWAY LOG DOO</strong>
-            <strong>Bogoboja Atanackovića 4/2</strong>
-            <strong>21000 Novi Sad, Srbija</strong>
-            <strong>PIB: 113439763</strong>
-            <strong>MB: 21867004</strong>
-            <strong>e-mail: office@markwaylog.com</strong>
-        </div>
-        <div style="display: flex;">
-            <img style="display: block; border: 0px;" src="https://lilly021.com/img/site-logo.svg" width="200" height="200" />
-        </div>
-    </div>
-    <div style="display: flex; width: 100%; justify-content: center;">
-        <strong style="font-size: 20px">Nalog za transport: MARKWAY_SHIPMENT_ID/2024</strong>
-    </div>
-    <div style="width: 100%; display: flex; justify-content: center;">
-        <table style="width: 60%; border-collapse: collapse; margin-top: 30px; padding: 20px;">
-            <tbody style="padding: 20px;">
-                <tr>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">Prevoznik:</td>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_SHIPMENT_CARRIER</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">Tablice:</td>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_SHIPMENT_LICENCE_PLATE</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">Tip vozila:</td>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_SHIPMENT_VEHICLE_TYPE</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">Vrsta robe:</td>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_SHIPMENT_MERCH</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">Broj koleta i težina:</td>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_SHIPMENT_AMOUNT</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">Utovar:</td>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_LOAD_ON_LOCATION</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">Datum utovara:</td>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_LOAD_ON_DATE</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">Izvozna carina:</td>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_EXPORT_CUSTOMS</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">Uvozna carina:</td>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_IMPORT_CUSTOMS</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">Istovar:</td>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_LOAD_OFF_LOCATION</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">Datum istovara:</td>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_LOAD_OFF_DATE</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">Napomena:</td>
-                    <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_SHIPMENT_NOTES</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div style="display: flex; width: 100%; justify-content: center;">
-        <div style="width: 60%; display: flex; flex-direction: column; margin-top: 30px;">
-            <span>Dogovorena cena transporta: <strong>MARKWAY_SHIPMENT_INCOME MARKWAY_SHIPMENT_CURRENCY </strong> po srednjem kursu NBS.</span>
-            <strong>Valuta plaćаnja: 60 dana od prijema dokumentacije preko SEF-a</strong>
-            <strong>Prilikom fakturisanja se pozovite na broj naloga!</strong>
-            <span style="margin-top: 30px; line-height: 22px">
-                PRIMALAC NALOGA PRIHVATA SLEDEĆE USLOVE:
-Vozilo mora imati CMR osiguranje.Vreme za utovar i izvozno carinjenje je 24 časa, a za uvozno carinjenje i istovar 48 časova,bez nadoknade.
-Nepostovanje termina sa datog naloga moze preouzrokovati neplacanje dela vozarine.Vozač je dužan da prisustvuje utovaru i istovaru i sve nepravilnosti vezane za robu mora daupiše u CMR.
-Vozač je odgovoran za osovinski pretovar i za pravilan raspored tereta na vozilu.Auto dan iznosi 150 EURa.Otkazivanje naloga manje od 12h pred utovar se naplaćuje 150 EURa.
-Troškovi izvoznog i uvoznog carinjenja, fito-sanitarnih, veterinarskih, radioloških i sličnihpregleda nisu uključeni u cenu prevoza.Vozač mora strogo da vodi računa o dokumentaciji i svaki EX/T-T5/TC11, EUR1 mora biti
-overen jer je to uslov za naplatu vozarine.Plaćanje transporta nije moguće bez original, pečatranog i potpisanog CMR-a bez ikakvihprimedbi od strane primaoca.
-U slučaju da bilo koji od navedenih uslova nije zadovoljen ne možemo Vam garantovatiisplatu vozarine ili nekog dela iste.Pretovari i dotovari su strogo zabranjeni, osim ako nije drugačije pismeno naznačeno.
-Kašnjenje na utovar ili istovar, nezgode ili kvarovi moraju biti odmah prijavljeni pismenimputem.Vozilo mora biti u tehnički ispravnom stanju i imati svu potrebnu opremu.
-Vozilo i vozač moraju imati sve potrebne dozvole za zemlje kroz koje prolazi pri transportu.Za manjkove robe odgovara prevoznik koga zadužujemo za vrednost robe i transporta.Primalac naloga je dužan da obezbedi dozvole potrebne za prilazak mestu istovara ili mestu
-utovara, ako je režimom saobraćaja zabranjeno za kretanje teretnih vozila.Zaštita imena poslovnih partnera mora biti zagarantovana.Direktan kontakt sa našim poslovnim partnerom nije dozvoljen.
-Ukoliko nam nalog ne vratite overen i potpisan, smatraćemo da se u potpunosti slažete saistim
-            </span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Friendly Template</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 50px 20px;
+        }
+        .header, .transport-info, .payment-terms, .signatories {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        table, th, td {
+            border: 1px solid #DDDDDD;
+            padding: 8px;
+            text-align: left;
+        }
+        img {
+            display: block;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header Section -->
+    <div class="header">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                <strong>MARKWAY LOG DOO</strong>
+                <address>Bogoboja Atanackovića 4/2, 21000 Novi Sad, Srbija</address>
+                <strong>PIB: 113439763</strong>
+                <strong>MB: 21867004</strong>
+                <strong>Email: <a href="mailto:office@markwaylog.com" style="color: #000;">office@markwaylog.com</a></strong>
+            </div>
+            <div>
+                <img src="https://lilly021.com/img/site-logo.svg" alt="Markway Logo">
+            </div>
         </div>
     </div>
 
-    <div style="display: flex; width: 100%; justify-content: center; margin-top: 30px;">
-        <table style="width: 60%; border-collapse: collapse;">
+    <!-- Transport Order Information -->
+<div class="transport-info">
+    <div style="text-align: center;">
+        <strong style="font-size: 18px;">Nalog za transport: MARKWAY_SHIPMENT_ID/2024</strong>
+    </div>
+    <table>
+        <tbody>
             <tr>
-                <td style="border: 1px solid #DDDDDD; padding: 10px;">Nalogodavac:</td>
-                <td style="border: 1px solid #DDDDDD; padding: 10px;">Prevoznik:</td>
+                <td>Prevoznik:</td>
+                <td>MARKWAY_SHIPMENT_CARRIER</td>
             </tr>
             <tr>
-                <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY LOG DOO</td>
-                <td style="border: 1px solid #DDDDDD; padding: 10px;">MARKWAY_SHIPMENT_CARRIER</td>
+                <td>Tablice:</td>
+                <td>MARKWAY_SHIPMENT_LICENCE_PLATE</td>
+            </tr>
+            <tr>
+                <td>Tip vozila:</td>
+                <td>MARKWAY_SHIPMENT_VEHICLE_TYPE</td>
+            </tr>
+            <tr>
+                <td>Vrsta robe:</td>
+                <td>MARKWAY_SHIPMENT_MERCH</td>
+            </tr>
+            <tr>
+                <td>Broj koleta i težina:</td>
+                <td>MARKWAY_SHIPMENT_AMOUNT</td>
+            </tr>
+            <tr>
+                <td>Utovar:</td>
+                <td>MARKWAY_LOAD_ON_LOCATION</td>
+            </tr>
+            <tr>
+                <td>Datum utovara:</td>
+                <td>MARKWAY_LOAD_ON_DATE</td>
+            </tr>
+            <tr>
+                <td>Izvozna carina:</td>
+                <td>MARKWAY_EXPORT_CUSTOMS</td>
+            </tr>
+            <tr>
+                <td>Uvozna carina:</td>
+                <td>MARKWAY_IMPORT_CUSTOMS</td>
+            </tr>
+            <tr>
+                <td>Istovar:</td>
+                <td>MARKWAY_LOAD_OFF_LOCATION</td>
+            </tr>
+            <tr>
+                <td>Datum istovara:</td>
+                <td>MARKWAY_LOAD_OFF_DATE</td>
+            </tr>
+            <tr>
+                <td>Napomena:</td>
+                <td>MARKWAY_SHIPMENT_NOTES</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+    <!-- Payment and Terms Section -->
+    <div class="payment-terms">
+        <p>Dogovorena cena transporta: <strong>MARKWAY_SHIPMENT_INCOME MARKWAY_SHIPMENT_CURRENCY</strong> po srednjem kursu NBS.</p>
+        <!-- Add other terms and conditions as necessary -->
+    </div>
+
+    <!-- Signatories Section -->
+    <div class="signatories">
+        <table>
+            <tr>
+                <td>Nalogodavac: MARKWAY LOG DOO</td>
+                <td>Prevoznik: MARKWAY_SHIPMENT_CARRIER</td>
             </tr>
         </table>
     </div>
 </div>
-</div>
+
+</body>
+</html>

@@ -10,6 +10,7 @@ using Markway.Pdfs.API.Services.Core;
 using static UsersService.GrpcUser;
 using Markway.Commons.Configurations;
 using Markway.Pdfs.API.Services.Grpc.Clients;
+using static Markway.Notification.API.Grpc.GrpcEmail;
 
 namespace Markway.Pdfs.API.Middlewares
 {
@@ -25,6 +26,7 @@ namespace Markway.Pdfs.API.Middlewares
             services.AddScoped<IPdfService, PdfService>();
             services.AddScoped<IElasticSearchService, ElasticSearchService>();
             services.AddScoped<IUserClient, UserClient>();
+            services.AddScoped<INotificationClient, NotificationClient>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
@@ -34,6 +36,15 @@ namespace Markway.Pdfs.API.Middlewares
         {
             builder.Services
                 .AddGrpcClient<GrpcUserClient>(o => o.Address = new Uri(systemConfiguration.GrpcConnections.User))
+                .ConfigureChannel(o =>
+                {
+                    o.UnsafeUseInsecureChannelCallCredentials = true;
+                    HttpClientHandler httpHandler = new();
+                    httpHandler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+                    o.HttpHandler = httpHandler;
+                });
+            builder.Services
+                .AddGrpcClient<GrpcEmailClient>(o => o.Address = new Uri(systemConfiguration.GrpcConnections.Notification))
                 .ConfigureChannel(o =>
                 {
                     o.UnsafeUseInsecureChannelCallCredentials = true;

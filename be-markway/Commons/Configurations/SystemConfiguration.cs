@@ -6,6 +6,7 @@ namespace Markway.Commons.Configurations
     {
         public string DatabaseConnection { get; set; }
         public ELKConfiguration ELKConfiguration { get; set; }
+        public EmailServer EmailServer { get; set; }
         public S3Settings S3Settings { get; set; } = new S3Settings();
         public Jwt Jwt { get; set; } = new Jwt();
 
@@ -23,6 +24,17 @@ namespace Markway.Commons.Configurations
     public class TokenValidation
     {
         public string Key { get; set; }
+    }
+
+    public class EmailServer
+    {
+        public string Host { get; set; }
+        public int Port { get; set; }
+        public bool EnableSsl { get; set; }
+        public string AuthMode { get; set; }
+        public string User { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 
     public class ELKConfiguration

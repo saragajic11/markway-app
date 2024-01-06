@@ -15,6 +15,8 @@ using PuppeteerSharp;
 using Markway.Pdfs.API.Errors;
 using System.Net;
 using UsersService;
+using Markway.Pdfs.API.Services.Grpc.Clients;
+using Markway.Notification.API.Grpc;
 namespace Markway.Pdfs.API.Services
 {
     public class PdfService : BaseService<Pdf>, IPdfService
@@ -22,15 +24,18 @@ namespace Markway.Pdfs.API.Services
         private readonly IMapper _mapper;
         private readonly SystemConfiguration _systemConfiguration;
         private readonly ICurrentUserService _currentUserService;
+        private readonly INotificationClient _notificationClient;
         private readonly string _extension = ".pdf";
 
         public PdfService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork,
-        ILogger<PdfService> logger, SystemConfiguration systemConfiguration, ICurrentUserService currentUserService)
+        ILogger<PdfService> logger, SystemConfiguration systemConfiguration,
+        ICurrentUserService currentUserService, INotificationClient notificationClient)
             : base(logger, unitOfWork, elasticSearchService)
         {
             _mapper = mapper;
             _systemConfiguration = systemConfiguration;
             _currentUserService = currentUserService;
+            _notificationClient = notificationClient;
         }
 
         public async Task<Pdf?> AddAsync(PdfDto dto)
@@ -58,7 +63,7 @@ namespace Markway.Pdfs.API.Services
             try
             {
                 UserReply user = await _currentUserService.GetCurrentUserAsync();
-                
+
                 await new BrowserFetcher().DownloadAsync();
 
                 using (var browser = await Puppeteer.LaunchAsync(new LaunchOptions
@@ -68,14 +73,22 @@ namespace Markway.Pdfs.API.Services
                 }))
                 using (var page = await browser.NewPageAsync())
                 {
+                    string resolvedPdf = await ResolveMarkwayPdfTemplate(dto);
                     // Generate PDF content
-                    await page.SetContentAsync(await ResolveMarkwayPdfTemplate(dto));
+                    await page.SetContentAsync(resolvedPdf);
 
                     // Convert PDF content to a stream
                     var pdfStream = await page.PdfStreamAsync();
 
                     // Upload the generated PDF to S3
                     await UploadPdf(pdfStream, "generated.pdf", "application/pdf");
+
+                    EmailRequest request = new()
+                    {
+                        SendToAddress = user.Email,
+                        Body = resolvedPdf
+                    };
+                    await _notificationClient.SendPdfEmailAsync(request);
                 }
             }
             catch (Exception e)

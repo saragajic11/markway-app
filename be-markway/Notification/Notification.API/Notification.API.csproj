@@ -6,15 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerComposeProjectPath>../../docker-compose.dcproj</DockerComposeProjectPath>
     <UserSecretsId>67826f5a-a468-4607-b068-8ad1d5e4e262</UserSecretsId>
-    <AssemblyName>Pdfs</AssemblyName>
+    <AssemblyName>Notification</AssemblyName>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Pdfs' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Notification' " />
   <ItemGroup>
-    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.7" />
-    <PackageReference Include="AWSSDK.S3" Version="3.7.205.22" />
     <PackageReference Include="NEST" Version="7.17.5" />
-    <PackageReference Include="PuppeteerSharp" Version="13.0.2" />
     <PackageReference Include="Redis.OM" Version="0.4.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.13" />
@@ -80,13 +77,7 @@
     <Folder Include="Services\Grpc\" />
   </ItemGroup>
   <ItemGroup>
-    <Protobuf Include="Protos\example_entity.proto" GrpcServices="Server" />
-    <Protobuf Include="..\..\Users\Users.API\Protos\user.proto" GrpcServices="Client">
-      <Link>Protos\user.proto</Link>  
-    </Protobuf>
-    <Protobuf Include="..\..\Notification\Notification.API\Protos\email.proto" GrpcServices="Client">
-      <Link>Protos\email.proto</Link>  
-    </Protobuf>
+    <Protobuf Include="Protos\email.proto" GrpcServices="Server" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Commons\Commons.csproj">
