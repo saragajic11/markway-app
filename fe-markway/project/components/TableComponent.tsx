@@ -1,5 +1,4 @@
 import ShipmentDto from '@/model/ShipmentDto';
-import ExpandableButton from './ExpandableButton';
 import {
   DataGrid,
   GridColDef,
@@ -7,9 +6,7 @@ import {
   GridToolbarColumnsButton,
   GridToolbarContainer,
 } from '@mui/x-data-grid';
-import {
-  deleteShipment
-} from "@/services/ShipmentService";
+import { deleteShipment } from '@/services/ShipmentService';
 import { useState } from 'react';
 import { format } from 'date-fns';
 import Image from 'next/image';
@@ -21,10 +18,14 @@ const TableComponent = ({
   shipments,
   openDragDropDialog,
   closeDragDropDialog,
+  openDeleteShipmentDialog,
+  closeDeleteShipmentDialog,
 }: {
   shipments: ShipmentDto[];
   openDragDropDialog: any;
   closeDragDropDialog: any;
+  openDeleteShipmentDialog: any;
+  closeDeleteShipmentDialog: any;
 }) => {
   const [isCollapsed, setCollapsed] = useState(true);
   const value = { isCollapsed: isCollapsed, setCollapsed: setCollapsed };
@@ -44,17 +45,13 @@ const TableComponent = ({
     openDragDropDialog(id);
   };
 
-<<<<<<< Updated upstream
   const onClickEdit = (id: number) => {};
 
-  const onClickDelete = (id: number) => {};
-=======
-  const onClickDeleteShipment = (id: number) => {
-
-    console.log("OVDE SAM ID =" + id);
-    deleteShipment(id);
+  const onClickDelete = (id: number) => {
+    console.log('EVE ME', id);
+    openDeleteShipmentDialog();
+    // deleteShipment(id);
   };
->>>>>>> Stashed changes
 
   const columns: GridColDef[] = [
     {
@@ -128,68 +125,6 @@ const TableComponent = ({
       width: 150,
       maxWidth: 150,
     },
-<<<<<<< Updated upstream
-=======
-    {
-      field: 'Dodaj PDF',
-      headerName: '',
-      type: 'string',
-      renderCell: (params) => (
-        <Image
-          src={'/images/add-document.png'}
-          alt='Add document'
-          onClick={() => onClickAddFile(params.row.id)}
-          width={25}
-          height={25}
-        />
-      ),
-      minWidth: 80,
-      width: 80,
-      maxWidth: 80,
-      resizable: true,
-      sortable: false,
-      hideable: false,
-    },
-    {
-      field: 'Izmeni',
-      headerName: '',
-      type: 'string',
-      renderCell: () => (
-        <Image
-          src={'/images/edit-icon.svg'}
-          alt='Edit'
-          width={25}
-          height={25}
-        />
-      ),
-      resizable: true,
-      minWidth: 80,
-      width: 80,
-      maxWidth: 80,
-      sortable: false,
-      hideable: false,
-    },
-    {
-      field: 'Obriši',
-      headerName: '',
-      type: 'string',
-      renderCell: (params) => (
-        <Image
-          src={'/images/delete-icon.png'}
-          alt='Delete'
-          onClick={() => onClickDeleteShipment(params.row.id)}
-          width={25}
-          height={25}
-        />
-      ),
-      resizable: true,
-      minWidth: 80,
-      width: 80,
-      maxWidth: 80,
-      sortable: false,
-      hideable: false,
-    },
->>>>>>> Stashed changes
   ];
 
   const rows = !shipments

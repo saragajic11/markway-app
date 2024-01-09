@@ -11,6 +11,8 @@ import CarrierDialogContext from '@/context/CarrierDialogContext';
 import GetCarrierDto from '@/model/GetCarrierDto';
 import DragDropPdfContext from '@/context/DragDropPdfContext';
 import DragDropPdfDialog from '@/components/DragDropPdfDialog';
+import DeleteShipmentDialogContext from '@/context/DeleteShipmentDialogContext';
+import DeleteShipmentDialog from '@/components/DeleteShipmentDialog';
 
 export default function Shipments() {
   const [shipments, setShipments] = useState<ShipmentDto[] | []>([]);
@@ -21,6 +23,8 @@ export default function Shipments() {
   const [isOpenedCarrierDialog, setOpenedCarrierDialog] = useState(false);
   const [isOpenedDragDropPdfDialog, setOpenedDragDropPdfDialog] =
     useState(false);
+  const [isOpenedDeleteShipmentDialog, setOpenedDeleteShipmentDialog] =
+    useState(false);
 
   const valueCarrier = {
     isOpenedCarrierDialog: isOpenedCarrierDialog,
@@ -30,6 +34,11 @@ export default function Shipments() {
   const valueDragDropPdf = {
     isOpenedDragDropDialog: isOpenedDragDropPdfDialog,
     setOpenedDragDropDialog: setOpenedDragDropPdfDialog,
+  };
+
+  const valueDeleteShipment = {
+    isOpenedDeleteDialog: isOpenedDeleteShipmentDialog,
+    setOpenedDeleteDialog: setOpenedDeleteShipmentDialog,
   };
 
   const [shipmentId, setShipmentId] = useState(1);
@@ -50,6 +59,14 @@ export default function Shipments() {
 
   const closeAddCarrierDialog = () => {
     setOpenedCarrierDialog(false);
+  };
+
+  const openDeleteShipmentDialog = () => {
+    setOpenedDeleteShipmentDialog(true);
+  };
+
+  const closeDeleteShipmentDialog = () => {
+    setOpenedDeleteShipmentDialog(false);
   };
 
   const addNewCarrier = (response: any) => {
@@ -83,6 +100,8 @@ export default function Shipments() {
               shipments={shipments}
               openDragDropDialog={openDragDropDialog}
               closeDragDropDialog={closeDragDropDialog}
+              openDeleteShipmentDialog={openDeleteShipmentDialog}
+              closeDeleteShipmentDialog={closeDeleteShipmentDialog}
             ></TableComponent>
           </div>
           <ShipmentsDrawer
@@ -98,6 +117,9 @@ export default function Shipments() {
       <DragDropPdfContext.Provider value={valueDragDropPdf}>
         <DragDropPdfDialog shipmentId={shipmentId} />
       </DragDropPdfContext.Provider>
+      <DeleteShipmentDialogContext.Provider value={valueDeleteShipment}>
+        <DeleteShipmentDialog shipmentId={shipmentId} />
+      </DeleteShipmentDialogContext.Provider>
     </div>
   );
 }
