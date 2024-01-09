@@ -1,0 +1,15 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Markway.Notification.API.Grpc";
+
+service GrpcEmail {
+  rpc SendEmail (EmailRequest) returns (EmailReply);
+}
+message EmailRequest {
+  string sendToAddress = 1;
+  string body = 2;
+}
+
+message EmailReply {
+  bool isSent = 1;
+}

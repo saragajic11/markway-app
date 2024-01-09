@@ -31,10 +31,10 @@ namespace Markway.Pdfs.API.Controllers
         }
 
         [HttpPost(Endpoints.GENERATE_PDF)]
-        // [Authorize(Policy = Policies.Authorization.FILE_CREATE)]
-        public async Task<IActionResult> GeneratePdf()
+        [Authorize(Policy = Policies.Authorization.FILE_CREATE)]
+        public async Task<IActionResult> GeneratePdf([FromBody] ShipmentMailDto dto)
         {
-            await _pdfService.GenerateAndUploadPdf();
+            await _pdfService.GenerateAndUploadPdf(dto);
 
             return Ok();
         }

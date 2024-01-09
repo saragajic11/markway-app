@@ -25,7 +25,7 @@ namespace Markway.Pdfs.API.Models.DTO
     //     AD_UPDATE = 3,
     // }
 
-    // public class EmailTypeKeys
+    // public class PdfTypeKeys
     // {
     //     public static readonly Dictionary<EmailType, string> Paths = new Dictionary<EmailType, string>()
     //     {
@@ -35,15 +35,23 @@ namespace Markway.Pdfs.API.Models.DTO
     //     };
     // }
 
-    // public class EmailTemplateKeys
-    // {
-    //     public static readonly string ACTIVATION_EMAIL_WELCOME = "ACTIVATION_EMAIL_WELCOME";
-    //     public static readonly string ACTIVATION_EMAIL_ACTIVATION_CODE = "ACTIVATION_EMAIL_ACTIVATION_CODE";
-    //     public static readonly string ACTIVATION_EMAIL_USER_FOLLOW_US_ON = "ACTIVATION_EMAIL_USER_FOLLOW_US_ON";
-    //     public static readonly string REMINDER_EMAIL_SUBSCRIPTION_EXPIRATION = "REMINDER_EMAIL_SUBSCRIPTION_EXPIRATION";
-    //     public static readonly string QC_EMAIL_TITLE = "QC_EMAIL_TITLE";
-    //     public static readonly string QC_EMAIL_FAILURE_REASONS = "QC_EMAIL_FAILURE_REASONS";
-    //     public static readonly string QC_EMAIL_AD_ACTION = "QC_EMAIL_AD_ACTION";
-    //     public static readonly string QC_EMAIL_SUMMARY = "QC_EMAIL_SUMMARY";
-    // }
+    public class PdfTemplateKeys
+    {
+        public static readonly string MARKWAY_SHIPMENT_ID = "MARKWAY_SHIPMENT_ID";
+        public static readonly string MARKWAY_SHIPMENT_CARRIER = "MARKWAY_SHIPMENT_CARRIER";
+        public static readonly string MARKWAY_SHIPMENT_LICENCE_PLATE = "MARKWAY_SHIPMENT_LICENCE_PLATE";
+        public static readonly string MARKWAY_SHIPMENT_VEHICLE_TYPE = "MARKWAY_SHIPMENT_VEHICLE_TYPE";
+        public static readonly string MARKWAY_SHIPMENT_MERCH = "MARKWAY_SHIPMENT_MERCH";
+        public static readonly string MARKWAY_SHIPMENT_AMOUNT = "MARKWAY_SHIPMENT_AMOUNT";
+        public static readonly string MARKWAY_LOAD_ON_LOCATION = "MARKWAY_LOAD_ON_LOCATION";
+        public static readonly string MARKWAY_LOAD_OFF_LOCATION = "MARKWAY_LOAD_OFF_LOCATION";
+        public static readonly string MARKWAY_LOAD_ON_DATE = "MARKWAY_LOAD_ON_DATE";
+        public static readonly string MARKWAY_LOAD_OFF_DATE = "MARKWAY_LOAD_OFF_DATE";
+        public static readonly string MARKWAY_EXPORT_CUSTOMS = "MARKWAY_EXPORT_CUSTOMS";
+        public static readonly string MARKWAY_IMPORT_CUSTOMS = "MARKWAY_IMPORT_CUSTOMS";
+        public static readonly string MARKWAY_SHIPMENT_NOTES = "MARKWAY_SHIPMENT_NOTES";
+        // public static readonly string MARKWAY_SHIPMENT_ID = "MARKWAY_SHIPMENT_ID";
+        // public static readonly string MARKWAY_SHIPMENT_ID = "MARKWAY_SHIPMENT_ID";
+
+    }
 }

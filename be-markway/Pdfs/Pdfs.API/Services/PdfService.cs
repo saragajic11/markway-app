@@ -14,19 +14,28 @@ using Markway.Commons.Configurations;
 using PuppeteerSharp;
 using Markway.Pdfs.API.Errors;
 using System.Net;
+using UsersService;
+using Markway.Pdfs.API.Services.Grpc.Clients;
+using Markway.Notification.API.Grpc;
 namespace Markway.Pdfs.API.Services
 {
     public class PdfService : BaseService<Pdf>, IPdfService
     {
         private readonly IMapper _mapper;
         private readonly SystemConfiguration _systemConfiguration;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly INotificationClient _notificationClient;
         private readonly string _extension = ".pdf";
 
-        public PdfService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<PdfService> logger, SystemConfiguration systemConfiguration)
+        public PdfService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork,
+        ILogger<PdfService> logger, SystemConfiguration systemConfiguration,
+        ICurrentUserService currentUserService, INotificationClient notificationClient)
             : base(logger, unitOfWork, elasticSearchService)
         {
             _mapper = mapper;
             _systemConfiguration = systemConfiguration;
+            _currentUserService = currentUserService;
+            _notificationClient = notificationClient;
         }
 
         public async Task<Pdf?> AddAsync(PdfDto dto)
@@ -49,10 +58,12 @@ namespace Markway.Pdfs.API.Services
             }
         }
 
-        public async Task GenerateAndUploadPdf()
+        public async Task GenerateAndUploadPdf(ShipmentMailDto dto)
         {
             try
             {
+                UserReply user = await _currentUserService.GetCurrentUserAsync();
+
                 await new BrowserFetcher().DownloadAsync();
 
                 using (var browser = await Puppeteer.LaunchAsync(new LaunchOptions
@@ -62,14 +73,22 @@ namespace Markway.Pdfs.API.Services
                 }))
                 using (var page = await browser.NewPageAsync())
                 {
+                    string resolvedPdf = await ResolveMarkwayPdfTemplate(dto);
                     // Generate PDF content
-                    await page.SetContentAsync(await ResolvePdfTemplate(PdfTemplate.GENERATE_PDF));
+                    await page.SetContentAsync(resolvedPdf);
 
                     // Convert PDF content to a stream
                     var pdfStream = await page.PdfStreamAsync();
 
                     // Upload the generated PDF to S3
                     await UploadPdf(pdfStream, "generated.pdf", "application/pdf");
+
+                    EmailRequest request = new()
+                    {
+                        SendToAddress = user.Email,
+                        Body = resolvedPdf
+                    };
+                    await _notificationClient.SendPdfEmailAsync(request);
                 }
             }
             catch (Exception e)
@@ -117,6 +136,29 @@ namespace Markway.Pdfs.API.Services
                 _logger.LogError($"Error in PdfService in UploadPdf {e.Message} in {e.StackTrace}");
                 return;
             }
+        }
+
+        private async Task<string> ResolveMarkwayPdfTemplate(ShipmentMailDto dto)
+        {
+            string baseTemplate = await ResolvePdfTemplate(PdfTemplate.GENERATE_PDF);
+
+            string updatedTemplate = baseTemplate
+                .Replace(PdfTemplateKeys.MARKWAY_SHIPMENT_ID, dto.Id.ToString());
+
+            updatedTemplate = updatedTemplate.Replace(PdfTemplateKeys.MARKWAY_SHIPMENT_CARRIER, dto.Carrier);
+            updatedTemplate = updatedTemplate.Replace(PdfTemplateKeys.MARKWAY_SHIPMENT_LICENCE_PLATE, dto.LicencePlate);
+            updatedTemplate = updatedTemplate.Replace(PdfTemplateKeys.MARKWAY_SHIPMENT_VEHICLE_TYPE, dto.VehicleType);
+            updatedTemplate = updatedTemplate.Replace(PdfTemplateKeys.MARKWAY_SHIPMENT_MERCH, dto.Merch);
+            updatedTemplate = updatedTemplate.Replace(PdfTemplateKeys.MARKWAY_SHIPMENT_AMOUNT, dto.Amount);
+            updatedTemplate = updatedTemplate.Replace(PdfTemplateKeys.MARKWAY_LOAD_ON_LOCATION, dto.LoadOnLocation);
+            updatedTemplate = updatedTemplate.Replace(PdfTemplateKeys.MARKWAY_LOAD_ON_DATE, dto.LoadOnDate);
+            updatedTemplate = updatedTemplate.Replace(PdfTemplateKeys.MARKWAY_LOAD_OFF_DATE, dto.LoadOffDate);
+            updatedTemplate = updatedTemplate.Replace(PdfTemplateKeys.MARKWAY_EXPORT_CUSTOMS, dto.ExportCustoms);
+            updatedTemplate = updatedTemplate.Replace(PdfTemplateKeys.MARKWAY_IMPORT_CUSTOMS, dto.ImportCustoms);
+            updatedTemplate = updatedTemplate.Replace(PdfTemplateKeys.MARKWAY_LOAD_OFF_LOCATION, dto.LoadOffLocation);
+            updatedTemplate = updatedTemplate.Replace(PdfTemplateKeys.MARKWAY_SHIPMENT_NOTES, dto.Notes);
+
+            return updatedTemplate;
         }
 
         private static async Task<string> ResolvePdfTemplate(PdfTemplate pdfTemplate)

@@ -164,6 +164,21 @@
       "HttpHandlerOptions": {
         "UseTracing": true
       }
+    },
+    {
+      "DownstreamPathTemplate": "/api/pdfs/generate",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "pdfs-api",
+          "Port": "7387"
+        }
+      ],
+      "UpstreamPathTemplate": "/pdfs/generate",
+      "UpstreamHttpMethod": ["POST", "GET"],
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      }
     }
   ],
   "GlobalConfiguration": {

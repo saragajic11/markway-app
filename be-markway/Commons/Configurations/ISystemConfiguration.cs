@@ -14,5 +14,6 @@ namespace Markway.Commons.Configurations
         GrpcConnections GrpcConnections { get; set; }
 
         public S3Settings S3Settings { get; set; }
+        public EmailServer EmailServer { get; set; }
     }
 }

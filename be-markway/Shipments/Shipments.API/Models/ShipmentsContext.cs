@@ -66,9 +66,6 @@ namespace Markway.Shipments.API.Models
 
         public DbSet<ShipmentsRoute> ShipmentsRoutes { get; set; }
 
-
-
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (optionsBuilder.IsConfigured)
@@ -80,4 +77,3 @@ namespace Markway.Shipments.API.Models
         }
     }
 }
-
