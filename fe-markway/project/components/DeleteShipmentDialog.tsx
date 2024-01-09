@@ -2,7 +2,13 @@ import DeleteShipmentDialogContext from '@/context/DeleteShipmentDialogContext';
 import { Button, Dialog, DialogTitle } from '@mui/material';
 import { Fragment, useContext } from 'react';
 
-const DeleteShipmentDialog = ({ shipmentId }: { shipmentId: number }) => {
+const DeleteShipmentDialog = ({
+  shipmentId,
+  confirmDeleteShipment,
+}: {
+  shipmentId: number;
+  confirmDeleteShipment: any;
+}) => {
   const { isOpenedDeleteDialog, setOpenedDeleteDialog } = useContext(
     DeleteShipmentDialogContext
   );
@@ -11,7 +17,9 @@ const DeleteShipmentDialog = ({ shipmentId }: { shipmentId: number }) => {
     setOpenedDeleteDialog(false);
   };
 
-  const handleDeleteShipment = () => {};
+  const handleDeleteShipment = () => {
+    confirmDeleteShipment(shipmentId);
+  };
 
   const dialog = (
     <Fragment>
@@ -25,7 +33,7 @@ const DeleteShipmentDialog = ({ shipmentId }: { shipmentId: number }) => {
             Da li ste sigurni da želite da obrišete turu {shipmentId}?
           </DialogTitle>
 
-          <Button type='submit' onClick={handleDeleteShipment}>
+          <Button color='error' onClick={handleDeleteShipment}>
             Potvrdi
           </Button>
           <Button onClick={handleDialogClose}>Otkaži</Button>

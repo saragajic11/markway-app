@@ -6,9 +6,7 @@ import {
   GridToolbarColumnsButton,
   GridToolbarContainer,
 } from '@mui/x-data-grid';
-import {
-  deleteShipment
-} from "@/services/ShipmentService";
+import { deleteShipment } from '@/services/ShipmentService';
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import Image from 'next/image';
@@ -29,8 +27,6 @@ const TableComponent = ({
   openDeleteShipmentDialog: any;
   closeDeleteShipmentDialog: any;
 }) => {
-  const [updatedListOfShipments, setUpdatedListOfShipments] = useState<ShipmentDto[]>(shipments);
-  console.log("Mijao", updatedListOfShipments);
   const [isCollapsed, setCollapsed] = useState(true);
   const value = { isCollapsed: isCollapsed, setCollapsed: setCollapsed };
 
@@ -43,7 +39,7 @@ const TableComponent = ({
     return format(parsedDate, 'dd.MM.yyyy. hh:mm');
   };
 
-  const onClickPreview = (id: number) => { };
+  const onClickPreview = (id: number) => {};
 
   const onClickAddFile = (id: number) => {
     openDragDropDialog(id);
@@ -52,9 +48,7 @@ const TableComponent = ({
   const onClickEdit = (id: number) => {};
 
   const onClickDelete = (id: number) => {
-    console.log('EVE ME', id);
-    openDeleteShipmentDialog();
-    // deleteShipment(id);
+    openDeleteShipmentDialog(id);
   };
 
   const columns: GridColDef[] = [
@@ -131,50 +125,50 @@ const TableComponent = ({
     },
   ];
 
-  const rows = !updatedListOfShipments
+  const rows = !shipments
     ? []
-    : updatedListOfShipments?.map((shipment) => ({
-      id: shipment.id,
-      action: (
-        <ActionContainer
-          onClickPreview={() => onClickPreview(shipment.id)}
-          onClickAddFile={() => onClickAddFile(shipment.id)}
-          onClickEdit={() => onClickEdit(shipment.id)}
-          onClickDelete={() => onClickDelete(shipment.id)}
-        />
-      ),
-      customer: shipment.customer.name,
-      loadOnLocation:
-        shipment.shipmentRoutes?.length === 0
-          ? ''
-          : shipment.shipmentRoutes[0].shipmentLoadOnLocations[0]
-            .loadOnLocation.name,
-      loadOnDate:
-        shipment.shipmentRoutes?.length === 0
-          ? ''
-          : formatDate(
-            shipment.shipmentRoutes[0].shipmentLoadOnLocations[0].date
-          ),
-      loadOffLocation:
-        shipment.shipmentRoutes?.length === 0
-          ? ''
-          : shipment.shipmentRoutes[shipment?.shipmentRoutes?.length - 1]
-            .shipmentLoadOnLocations[
-            shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
-              .shipmentLoadOnLocations?.length - 1
-          ].loadOnLocation.name,
-      loadOffDate:
-        shipment.shipmentRoutes?.length === 0
-          ? ''
-          : formatDate(
-            shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
-              .shipmentLoadOnLocations[
-              shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
-                .shipmentLoadOnLocations?.length - 1
-            ].date
-          ),
-      income: shipment.income,
-    }));
+    : shipments?.map((shipment) => ({
+        id: shipment.id,
+        action: (
+          <ActionContainer
+            onClickPreview={() => onClickPreview(shipment.id)}
+            onClickAddFile={() => onClickAddFile(shipment.id)}
+            onClickEdit={() => onClickEdit(shipment.id)}
+            onClickDelete={() => onClickDelete(shipment.id)}
+          />
+        ),
+        customer: shipment.customer.name,
+        loadOnLocation:
+          shipment.shipmentRoutes?.length === 0
+            ? ''
+            : shipment.shipmentRoutes[0].shipmentLoadOnLocations[0]
+                .loadOnLocation.name,
+        loadOnDate:
+          shipment.shipmentRoutes?.length === 0
+            ? ''
+            : formatDate(
+                shipment.shipmentRoutes[0].shipmentLoadOnLocations[0].date
+              ),
+        loadOffLocation:
+          shipment.shipmentRoutes?.length === 0
+            ? ''
+            : shipment.shipmentRoutes[shipment?.shipmentRoutes?.length - 1]
+                .shipmentLoadOnLocations[
+                shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
+                  .shipmentLoadOnLocations?.length - 1
+              ].loadOnLocation.name,
+        loadOffDate:
+          shipment.shipmentRoutes?.length === 0
+            ? ''
+            : formatDate(
+                shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
+                  .shipmentLoadOnLocations[
+                  shipment.shipmentRoutes[shipment.shipmentRoutes?.length - 1]
+                    .shipmentLoadOnLocations?.length - 1
+                ].date
+              ),
+        income: shipment.income,
+      }));
 
   return (
     <DataGrid

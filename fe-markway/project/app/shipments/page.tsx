@@ -1,6 +1,9 @@
 'use client';
 import { TableComponent } from '@/components';
-import { getAllShipments } from '../../services/ShipmentService';
+import {
+  deleteShipment,
+  getAllShipments,
+} from '../../services/ShipmentService';
 import { Fragment, useEffect, useState } from 'react';
 import ShipmentDto from '../../model/ShipmentDto';
 import { Button, Drawer } from '@mui/material';
@@ -61,12 +64,28 @@ export default function Shipments() {
     setOpenedCarrierDialog(false);
   };
 
-  const openDeleteShipmentDialog = () => {
+  const openDeleteShipmentDialog = (id: number) => {
+    setShipmentId(id);
     setOpenedDeleteShipmentDialog(true);
   };
 
   const closeDeleteShipmentDialog = () => {
     setOpenedDeleteShipmentDialog(false);
+  };
+
+  const confirmDeleteShipment = async (id: number) => {
+    try {
+      // Call the deleteShipment function to delete the shipment
+      await deleteShipment(id);
+
+      // Update the shipments state by filtering out the shipment with the specified ID
+      setShipments((shipments) =>
+        shipments.filter((shipment) => shipment.id !== id)
+      );
+      closeDeleteShipmentDialog();
+    } catch (error) {
+      console.error('Error deleting shipment:', error);
+    }
   };
 
   const addNewCarrier = (response: any) => {
@@ -118,7 +137,10 @@ export default function Shipments() {
         <DragDropPdfDialog shipmentId={shipmentId} />
       </DragDropPdfContext.Provider>
       <DeleteShipmentDialogContext.Provider value={valueDeleteShipment}>
-        <DeleteShipmentDialog shipmentId={shipmentId} />
+        <DeleteShipmentDialog
+          shipmentId={shipmentId}
+          confirmDeleteShipment={confirmDeleteShipment}
+        />
       </DeleteShipmentDialogContext.Provider>
     </div>
   );
