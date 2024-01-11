@@ -5,11 +5,13 @@ const ActionContainer = ({
   onClickAddFile,
   onClickEdit,
   onClickDelete,
+  onClickGeneratePdf,
 }: {
   onClickPreview: any;
   onClickAddFile: any;
   onClickEdit: any;
   onClickDelete: any;
+  onClickGeneratePdf: any;
 }) => {
   return (
     <div className='action-container'>
@@ -28,6 +30,13 @@ const ActionContainer = ({
         width={23}
         height={23}
         onClick={onClickDelete}
+      />
+      <Image
+        src={'/images/generate-pdf.png'}
+        alt='Generate PDF'
+        width={23}
+        height={23}
+        onClick={onClickGeneratePdf}
       />
     </div>
   );

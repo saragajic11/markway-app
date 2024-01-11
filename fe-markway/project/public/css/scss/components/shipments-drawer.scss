@@ -1,81 +1,95 @@
 .MuiDrawer-root {
-    .MuiPaper-root {
-        width: 35%;
+  .MuiPaper-root {
+    width: 35%;
+  }
+
+  #shipments-drawer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding-top: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 30px;
+
+    span {
+      font-size: 26px;
+      color: #353e5d;
     }
 
-    #shipments-drawer-container {
+    #shipments-form {
+      display: flex;
+      flex-direction: column;
+
+      .select-box {
+        margin-top: 20px;
+
+        .MuiInputBase-root {
+          height: 56px;
+        }
+      }
+
+      .MuiTextField-root {
+        margin-top: 20px;
+
+        input {
+          height: 56px;
+          padding: 0px 5px 0px 5px;
+        }
+      }
+
+      .submit-btn {
+        background-color: #f39b03;
+        color: #353e5d;
+        font-weight: bold;
+        height: 70px;
+        margin-top: 30px;
+      }
+
+      .add-route-container {
         display: flex;
         flex-direction: column;
-        justify-content: start;
-        padding-top: 60px;
-        padding-left: 20px;
-        padding-right: 20px;
-        height: 100%;
-        overflow-y: auto;
-        padding-bottom: 30px;
-
-        span {
-            font-size: 26px;
-            color: #353e5d;
+        .add-route-btn {
+          margin-top: 20px;
+          justify-content: center;
+          max-width: 150px;
+          color: #353e5d;
+          border-color: #353e5d;
+          min-height: 52px;
+          max-height: 52px;
         }
+      }
 
-        #shipments-form {
-            display: flex;
-            flex-direction: column;
+      fieldset {
+        border-color: #353e5d;
+      }
 
-            .select-box {
-                margin-top: 20px;
-
-                .MuiInputBase-root {
-                    height: 56px;
-                }
-            }
-
-            .MuiTextField-root {
-                margin-top: 20px;
-
-                input {
-                    height: 56px;
-                    padding: 0px 5px 0px 5px;
-                }
-            }
-
-            .submit-btn {
-                background-color: #f39b03;
-                color: #353e5d;
-                font-weight: bold;
-                height: 70px;
-                margin-top: 30px;
-            }
-
-            fieldset {
-                border-color: #353e5d;
-            }
-
-            div {
-                &.Mui-focused {
-                    fieldset {
-                        border-color: #f39b03;
-                    }
-                }
-            }
-
-            label {
-                &.Mui-focused {
-                    color: #353e5d;
-                }
-            }
-
-            hr {
-                border: 1px solid #353e5d;
-                width: 100%;
-                margin-top: 25px;
-            }
-
-            .load-on-limitter {
-                width: calc(100% - 20px);
-                margin-left: 20px;
-            }
+      div {
+        &.Mui-focused {
+          fieldset {
+            border-color: #f39b03;
+          }
         }
+      }
+
+      label {
+        &.Mui-focused {
+          color: #353e5d;
+        }
+      }
+
+      hr {
+        border: 1px solid #353e5d;
+        width: 100%;
+        margin-top: 25px;
+      }
+
+      .load-on-limitter {
+        width: calc(100% - 20px);
+        margin-left: 20px;
+      }
     }
+  }
 }

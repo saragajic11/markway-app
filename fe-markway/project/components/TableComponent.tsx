@@ -51,6 +51,8 @@ const TableComponent = ({
     openDeleteShipmentDialog(id);
   };
 
+  const onClickGeneratePdf = (id: number) => {};
+
   const columns: GridColDef[] = [
     {
       field: 'Akcije',
@@ -62,11 +64,12 @@ const TableComponent = ({
           onClickAddFile={() => onClickAddFile(params.row.id)}
           onClickEdit={() => onClickEdit(params.row.id)}
           onClickDelete={() => onClickDelete(params.row.id)}
+          onClickGeneratePdf={() => onClickGeneratePdf(params.row.id)}
         />
       ),
-      minWidth: 200,
-      width: 200,
-      maxWidth: 200,
+      minWidth: 230,
+      width: 230,
+      maxWidth: 230,
       sortable: false,
     },
     {
@@ -135,6 +138,7 @@ const TableComponent = ({
             onClickAddFile={() => onClickAddFile(shipment.id)}
             onClickEdit={() => onClickEdit(shipment.id)}
             onClickDelete={() => onClickDelete(shipment.id)}
+            onClickGeneratePdf={() => onClickGeneratePdf(shipment.id)}
           />
         ),
         customer: shipment.customer.name,
