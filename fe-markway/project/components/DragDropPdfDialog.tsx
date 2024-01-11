@@ -63,9 +63,7 @@ const DragDropPdfDialog = ({ shipmentId }: { shipmentId: number }) => {
     if (files.length === 0) {
       //nije submitovan nijedan fajl
     } else {
-      attachFile(files[0]).then((response) => {
-        console.log('Caooo', response?.data);
-      });
+      attachFile(files[0]).then((response) => {});
     }
   };
 

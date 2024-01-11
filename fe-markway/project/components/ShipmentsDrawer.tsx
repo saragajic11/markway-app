@@ -143,27 +143,31 @@ const ShipmentsDrawer = ({
   };
 
   const onSubmitAddShipmentForm = (data: any) => {
+    const shipmentRoutes = [];
+
     const shipmentLoadLocation = [];
     const countLoadOnLocations = countNumberOfAttributes(
       data,
-      'loadOnLocationDate'
+      'loadOnLocationDate--'
     );
     const countLoadOffLocations = countNumberOfAttributes(
       data,
-      'loadOffLocationDate'
+      'loadOffLocationDate--'
     );
+    const loadOnLocationFirstRoute = 'loadOnLocation--';
+    const loadOnLocationDateFirstRoute = 'loadOnLocationDate--';
     shipmentLoadLocation.push({
       loadOnLocation: new LoadOnLocationDto(
-        data.loadOnLocation.id,
-        data.loadOnLocation.name,
-        data.loadOnLocation.address
+        data[loadOnLocationFirstRoute].id,
+        data[loadOnLocationFirstRoute].name,
+        data[loadOnLocationFirstRoute].address
       ),
       type: 0,
-      date: data.loadOnLocationDate,
+      date: data[loadOnLocationDateFirstRoute],
     });
     for (let i = 0; i < countLoadOnLocations - 1; i++) {
-      const name = 'loadOnLocation' + i;
-      const date = 'loadOnLocationDate' + i;
+      const name = 'loadOnLocation-' + '-' + i;
+      const date = 'loadOnLocationDate-' + '-' + i;
       shipmentLoadLocation.push({
         loadOnLocation: new LoadOnLocationDto(
           data[name].id,
@@ -174,18 +178,20 @@ const ShipmentsDrawer = ({
         date: data[date],
       });
     }
+    const loadOffLocationFirstRoute = 'loadOffLocation--';
+    const loadOffLocationDateFirstRoute = 'loadOffLocationDate--';
     shipmentLoadLocation.push({
       loadOnLocation: new LoadOnLocationDto(
-        data.loadOffLocation.id,
-        data.loadOffLocation.name,
-        data.loadOffLocation.address
+        data[loadOffLocationFirstRoute].id,
+        data[loadOffLocationFirstRoute].name,
+        data[loadOffLocationFirstRoute].address
       ),
       type: 1,
-      date: data.loadOffLocationDate,
+      date: data[loadOffLocationDateFirstRoute],
     });
     for (let i = 0; i < countLoadOffLocations - 1; i++) {
-      const name = 'loadOffLocation' + i;
-      const date = 'loadOffLocationDate' + i;
+      const name = 'loadOffLocation' + '-' + i;
+      const date = 'loadOffLocationDate' + '-' + i;
       shipmentLoadLocation.push({
         loadOnLocation: new LoadOnLocationDto(
           data[name].id,
@@ -213,8 +219,6 @@ const ShipmentsDrawer = ({
       ),
       type: 1,
     });
-    //TODO: Implementirati mogucnost dodavanja jos Ruta u okviru shipmenta
-    const shipmentRoutes = [];
     const route = new RouteDto(
       data.carrier,
       data.outcome,
@@ -228,8 +232,112 @@ const ShipmentsDrawer = ({
     );
     shipmentRoutes.push(route);
 
-    //TODO: srediti logiku za notes
-    // const shipmentNote = new NoteDto(data.note);
+    //this part will be executed only if shipment contains more than 1 route
+
+    const countRoutes = countNumberOfAttributes(data, 'carrier');
+    for (let i = 0; i < countRoutes - 1; i++) {
+      const carrier = 'carrier' + i;
+      const outcome = 'outcome' + i;
+      const vehicleType = 'vehicleType' + i;
+      const licencePlate = 'licencePlate' + i;
+      const currency = 'currency' + i;
+      const status = 'status' + i;
+      const shipmentLoadLocationAddedRoute = [];
+      const shipmentCustomsAddedRoute = [];
+      const borderCrossings = 'borderCrossings' + i;
+      const countLoadOnLocationsAddedRoute = countNumberOfAttributes(
+        data,
+        'loadOnLocationDate-' + i + '-'
+      );
+      const countLoadOffLocationsAddedRoute = countNumberOfAttributes(
+        data,
+        'loadOffLocationDate-' + i + '-'
+      );
+
+      shipmentCustomsAddedRoute.push({
+        custom: new CustomsDto(
+          data['importDuty' + i].id,
+          data['importDuty' + i].name,
+          data['importDuty' + i].address
+        ),
+        type: 0,
+      });
+      shipmentCustomsAddedRoute.push({
+        custom: new CustomsDto(
+          data['exportDuty' + i].id,
+          data['exportDuty' + i].name,
+          data['exportDuty' + i].address
+        ),
+        type: 1,
+      });
+
+      const loadOnLocationAddedRoute = 'loadOnLocation-' + i + '-';
+      const loadOnLocationDateAddedRoute = 'loadOnLocationDate-' + i + '-';
+      shipmentLoadLocationAddedRoute.push({
+        loadOnLocation: new LoadOnLocationDto(
+          data[loadOnLocationAddedRoute].id,
+          data[loadOnLocationAddedRoute].name,
+          data[loadOnLocationAddedRoute].address
+        ),
+        type: 0,
+        date: data[loadOnLocationDateAddedRoute],
+      });
+      for (let j = 0; j < countLoadOnLocationsAddedRoute - 1; j++) {
+        const name = 'loadOnLocation-' + i + '-' + j;
+        const date = 'loadOnLocationDate' + i + '-' + j;
+        shipmentLoadLocationAddedRoute.push({
+          loadOnLocation: new LoadOnLocationDto(
+            data[name].id,
+            data[name].name,
+            data[name].address
+          ),
+          type: 0,
+          date: data[date],
+        });
+      }
+
+      const loadOffLocationAddedRoute = 'loadOffLocation-' + i + '-';
+      const loadOffLocationDateAddedRoute = 'loadOffLocationDate-' + i + '-';
+      shipmentLoadLocationAddedRoute.push({
+        loadOnLocation: new LoadOnLocationDto(
+          data[loadOffLocationAddedRoute].id,
+          data[loadOffLocationAddedRoute].name,
+          data[loadOffLocationAddedRoute].address
+        ),
+        type: 1,
+        date: data[loadOffLocationDateAddedRoute],
+      });
+      for (let j = 0; j < countLoadOffLocationsAddedRoute - 1; j++) {
+        const name = 'loadOffLocation-' + i + '-' + j;
+        const date = 'loadOffLocationDate-' + i + '-' + j;
+        shipmentLoadLocationAddedRoute.push({
+          loadOnLocation: new LoadOnLocationDto(
+            data[name].id,
+            data[name].name,
+            data[name].address
+          ),
+          type: 1,
+          date: data[date],
+        });
+      }
+
+      shipmentRoutes.push(
+        new RouteDto(
+          data[carrier],
+          data[outcome],
+          data[vehicleType].name,
+          data[licencePlate],
+          data[currency].name,
+          data[status].id,
+          shipmentLoadLocationAddedRoute,
+          shipmentCustoms,
+          data[borderCrossings]
+        )
+      );
+    }
+
+    // //TODO: srediti logiku za notes
+    // // const shipmentNote = new NoteDto(data.note);
     const shipmentNote = { id: 1, description: 'Napomena 1' };
 
     const shipment = new AddShipmentDto(

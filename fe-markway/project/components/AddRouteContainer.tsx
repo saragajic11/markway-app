@@ -102,6 +102,7 @@ const AddRouteContainer = ({
           form={form}
           loadLocations={loadLocations}
           loadLocationType={0}
+          route={''}
         />
         <span className='load-on-limitter'>Istovar</span>
         <LoadLocationContainer
@@ -113,6 +114,7 @@ const AddRouteContainer = ({
           form={form}
           loadLocations={loadLocations}
           loadLocationType={1}
+          route={''}
         />
 
         <SelectControl
@@ -169,7 +171,7 @@ const AddRouteContainer = ({
           <div key={div.id} className='add-route-container'>
             <span>Ruta {index + 2}</span>
             <SelectControl
-              name='carrier'
+              name={'carrier' + index}
               value={values['carrier']}
               setValue={setValue}
               control={control}
@@ -185,10 +187,10 @@ const AddRouteContainer = ({
               InputProps={{
                 inputProps: { min: 0 },
               }}
-              name='outcome'
+              name={'outcome' + index}
             />
             <SelectControl
-              name='currency'
+              name={'currency' + index}
               value={values['currency']}
               setValue={setValue}
               control={control}
@@ -198,7 +200,7 @@ const AddRouteContainer = ({
               valueKey={'id'}
             />
             <SelectControl
-              name='vehicleType'
+              name={'vehicleType' + index}
               value={values['vehicleType']}
               setValue={setValue}
               control={control}
@@ -207,7 +209,10 @@ const AddRouteContainer = ({
               nameKey={'name'}
               valueKey={'id'}
             />
-            <TextFieldControl label='Registarske tablice' name='licencePlate' />
+            <TextFieldControl
+              label='Registarske tablice'
+              name={'licencePlate' + index}
+            />
             <span className='load-on-limitter'>Utovar</span>
             <LoadLocationContainer
               values={values}
@@ -218,6 +223,7 @@ const AddRouteContainer = ({
               form={form}
               loadLocations={loadLocations}
               loadLocationType={0}
+              route={index}
             />
             <span className='load-on-limitter'>Istovar</span>
             <LoadLocationContainer
@@ -229,10 +235,11 @@ const AddRouteContainer = ({
               form={form}
               loadLocations={loadLocations}
               loadLocationType={1}
+              route={index}
             />
 
             <SelectControl
-              name='importDuty'
+              name={'importDuty' + index}
               value={values['importDuty']}
               setValue={setValue}
               control={control}
@@ -242,7 +249,7 @@ const AddRouteContainer = ({
               valueKey={'id'}
             />
             <SelectControl
-              name='exportDuty'
+              name={'exportDuty' + index}
               value={values['exportDuty']}
               setValue={setValue}
               control={control}
@@ -252,7 +259,7 @@ const AddRouteContainer = ({
               valueKey={'id'}
             />
             <SelectControl
-              name='borderCrossings'
+              name={'borderCrossings' + index}
               value={values['borderCrossings']}
               setValue={setValue}
               control={control}
@@ -262,7 +269,7 @@ const AddRouteContainer = ({
               valueKey={'id'}
             />
             <SelectControl
-              name='status'
+              name={'status' + index}
               value={values['status']}
               setValue={setValue}
               control={control}
