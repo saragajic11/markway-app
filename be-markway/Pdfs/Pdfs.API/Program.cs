@@ -9,6 +9,9 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 ISystemConfiguration systemConfiguration = builder.AddSystemConfiguration();
 
+Console.WriteLine($"{systemConfiguration.GeneratePdfApi}");
+Console.WriteLine($"{systemConfiguration.GrpcConnections.Notification}");
+
 builder.ConfigureDatabase(systemConfiguration);
 
 builder.Services.ConfigureElasticSearch(systemConfiguration);

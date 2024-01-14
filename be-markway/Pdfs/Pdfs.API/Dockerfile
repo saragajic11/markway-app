@@ -22,6 +22,8 @@ RUN dotnet publish "Pdfs.API.csproj" -c Release -o /app/publish /p:UseAppHost=fa
 FROM base AS final
 WORKDIR /app
 
+ADD Pdfs/Pdfs.API/Resources/Templates/ /app/Resources/Templates/
+
 COPY --from=publish /app/publish .
 
 HEALTHCHECK --interval=5s --timeout=10s --retries=5 CMD curl --fail http://users-api:7387/health || exit 1

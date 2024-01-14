@@ -78,6 +78,7 @@ services:
       - SYSTEMCONFIGURATION__S3SETTINGS__REGION=${S3_REGION}
       - SYSTEMCONFIGURATION__GRPCCONNECTIONS__USER=${GRPC_USERS_SERVICE}
       - SYSTEMCONFIGURATION__GRPCCONNECTIONS__NOTIFICATION=${GRPC_NOTIFICATION_SERVICE}
+      - SYSTEMCONFIGURATION__GENERATEPDFAPI=${GENERATE_API}
     networks:
       - net_users
   
@@ -123,6 +124,13 @@ services:
     networks:
       - net_authn
       - net_users
+  
+  generate-pdfs-api:
+    image: ${DOCKER_REGISTRY-}generateservice
+    build:
+      context: GeneratePdf
+    ports:
+      - '9387:9387'
 
   postgres_db:
     image: postgres:14.1-alpine

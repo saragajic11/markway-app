@@ -10,6 +10,7 @@ echo JWT_ISSUER_SIGNING_KEY=$(openssl rand -base64 32) >> .env.dev
 echo JWT_AUTHORITY=http://identity-api/ >> .env.dev
 echo GRPC_USERS_SERVICE=http://$LAN_IP_ADDRESS:6287 >> .env.dev
 echo GRPC_NOTIFICATION_SERVICE=http://$LAN_IP_ADDRESS:8287 >> .env.dev
+echo GENERATE_API=http://$LAN_IP_ADDRESS:9387/generate-pdf >> .env.dev
 echo EMAILSERVER_HOST=smtp.sendgrid.net >> .env.dev
 echo EMAILSERVER_PORT=587 >> .env.dev
 echo EMAILSERVER_ENABLE_SSL=true >> .env.dev
