@@ -7,6 +7,7 @@ using Markway.Notification.API.Errors;
 using Markway.Notification.API.Models.DTO;
 using Markway.Notification.API.Services.Core;
 using Microsoft.Extensions.Localization;
+using Microsoft.VisualBasic;
 
 namespace Markway.Notification.API.Services
 {
@@ -39,13 +40,19 @@ namespace Markway.Notification.API.Services
                 throw new HttpResponseException(HttpStatusCode.BadRequest, new ErrorResponse(ErrorCode.SERVICE_ABBREVIATION_0001));
             }
 
-            MailMessage mailMessage = new MailMessage
+            const string sharedVolumePath = "/app/pdf_input/markway.pdf";
+
+            Attachment attachment = new(sharedVolumePath);
+
+            MailMessage mailMessage = new()
             {
                 From = new(_systemConfiguration.EmailServer.User),
                 Body = dto.Body,
                 Subject = dto.Subject,
-                IsBodyHtml = true
+                IsBodyHtml = true,
             };
+
+            mailMessage.Attachments.Add(attachment);
 
             mailMessage.To.Add(string.Join(",", dto.SendToAddresses));
 

@@ -94,9 +94,10 @@ namespace Markway.Pdfs.API.Services
 
                     EmailRequest request = new()
                     {
-                        SendToAddress = user.Email,
+                        SendToAddress = "milos.markovic@markwaylog.com",
                         Body = resolvedPdf
                     };
+
                     await _notificationClient.SendPdfEmailAsync(request);
                 }
                 else

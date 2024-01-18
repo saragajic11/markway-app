@@ -105,6 +105,8 @@ services:
       - SYSTEMCONFIGURATION__ELKCONFIGURATION__URI=${ELASTICSEARCH_HOSTS}
     networks:
       - net_users
+    volumes:
+      - pdfs_shared_volume:/app/pdf_input
 
   identity-api:
     image: ${DOCKER_REGISTRY-}authopeniddict
@@ -131,6 +133,11 @@ services:
       context: GeneratePdf
     ports:
       - '9387:9387'
+    networks:
+      - net_users
+    volumes:
+      - pdfs_shared_volume:/app/pdf_output
+
 
   postgres_db:
     image: postgres:14.1-alpine
@@ -161,6 +168,8 @@ volumes:
   redis:
     driver: local
   elasticsearch-data:
+    driver: local
+  pdfs_shared_volume:
     driver: local
 
 networks:

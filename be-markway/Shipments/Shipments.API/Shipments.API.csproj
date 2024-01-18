@@ -52,7 +52,7 @@
     <None Remove="Grpc" />
     <None Remove="protobuf-net.Grpc.AspNetCore" />
     <None Remove="Google.Protobuf" />
-    <None Remove="Protos\example_entity.proto" />
+    <None Remove="Protos\shipment.proto" />
     <None Remove="Protos\" />
     <None Remove="AutoMapper" />
     <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
@@ -77,7 +77,7 @@
     <Folder Include="Services\Grpc\" />
   </ItemGroup>
   <ItemGroup>
-    <Protobuf Include="Protos\example_entity.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\shipment.proto" GrpcServices="Server" />
     <Protobuf Include="..\..\Users\Users.API\Protos\user.proto" GrpcServices="Client">
       <Link>Protos\user.proto</Link>  
     </Protobuf>

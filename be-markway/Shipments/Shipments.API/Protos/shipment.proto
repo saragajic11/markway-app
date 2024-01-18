@@ -1,0 +1,26 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Markway.Shipments.API.Grpc";
+
+service GrpcEntity {
+  rpc GetShipmentById (ShipmentRequest) returns (ShipmentReply);
+}
+message ShipmentRequest {
+  int64 id = 1;
+}
+
+message ShipmentReply {
+  int64 id = 1;
+  string carrier = 2;
+  string licencePlate = 3;
+  string vehicleType = 4;
+  string merch = 5;
+  string amount = 6;
+  string loadOnLocation = 7;
+  string loadOffLocation = 8;
+  string loadOnDate = 9;
+  string loadOffDate = 10;
+  string ExportCustoms = 11;
+  string ImportCustoms = 12;
+  string Notes = 13;
+}
