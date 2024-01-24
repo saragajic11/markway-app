@@ -3,15 +3,14 @@ import { request } from '../base/HTTP';
 import HttpMethod from '../constants/HttpMethod';
 
 export async function getAllShipments() {
-
   const accessToken = window.localStorage.getItem('access_token');
-  
+
   const headers = {
-    'Authorization': `Bearer ${accessToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
 
-  return await request(`/shipment`, [], HttpMethod.GET, { headers: headers});
+  return await request(`/shipment`, [], HttpMethod.GET, { headers: headers });
 }
 
 export async function getShipmentLoadOnLocationByShipmentIdAndType(data) {
@@ -46,9 +45,9 @@ export async function getAllCustomers() {
 
 export async function addShipment(shipment: any) {
   const accessToken = window.localStorage.getItem('access_token');
-  
+
   const headers = {
-    'Authorization': `Bearer ${accessToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
   return await request(`/shipment`, shipment, HttpMethod.POST, { headers });
@@ -56,15 +55,27 @@ export async function addShipment(shipment: any) {
 
 export async function deleteShipment(shipmentId: any) {
   const accessToken = window.localStorage.getItem('access_token');
-  
+
   const headers = {
-    'Authorization': `Bearer ${accessToken}`,
+    Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json',
   };
 
-  return await request(`/shipment/${shipmentId}`, [], HttpMethod.DELETE, { headers });
+  return await request(`/shipment/${shipmentId}`, [], HttpMethod.DELETE, {
+    headers,
+  });
 }
 
 export async function attachFile(file: any) {
   return await request(`/pdfs`, file, HttpMethod.POST);
+}
+
+export async function addCustomer(customer: any) {
+  const accessToken = window.localStorage.getItem('access_token');
+
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  return await request(`/customer`, customer, HttpMethod.POST, { headers });
 }

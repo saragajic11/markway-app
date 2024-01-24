@@ -1,0 +1,75 @@
+#customers-page {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  align-items: center;
+  height: 90vh;
+  margin-bottom: 50px;
+  .heading-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    font-size: 26px;
+    color: #353e5d;
+    align-items: center;
+
+    button {
+      background-color: #f39b03;
+      color: #353e5d;
+      font-weight: bold;
+      height: 50px;
+    }
+  }
+
+  .customers-table-action-container {
+    img {
+      margin-right: 20px;
+    }
+  }
+}
+
+.MuiDrawer-root {
+  .MuiPaper-root {
+    width: 25%;
+  }
+
+  #add-customer-drawer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding-top: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 30px;
+
+    span {
+      font-size: 26px;
+      color: #353e5d;
+    }
+
+    .add-customer-form {
+      display: flex;
+      flex-direction: column;
+
+      .MuiTextField-root {
+        margin-top: 20px;
+
+        input {
+          height: 50px;
+          padding: 0px 5px 0px 5px;
+        }
+      }
+
+      .submit-btn {
+        background-color: #f39b03;
+        color: #353e5d;
+        font-weight: bold;
+        height: 70px;
+        margin-top: 30px;
+      }
+    }
+  }
+}
