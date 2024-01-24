@@ -10,6 +10,7 @@ namespace Markway.Commons.Configurations
         Jwt Jwt { get; }
 
         string RedisConnectionString { get; }
+        string GeneratePdfApi { get; }
 
         GrpcConnections GrpcConnections { get; set; }
 

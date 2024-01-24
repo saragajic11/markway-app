@@ -50,7 +50,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGrpcService<GrpcEntityService>();
+app.MapGrpcService<GrpcShipmentService>();
 
 app.UseRouting();
 

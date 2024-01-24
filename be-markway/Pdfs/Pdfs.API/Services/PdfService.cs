@@ -17,6 +17,8 @@ using System.Net;
 using UsersService;
 using Markway.Pdfs.API.Services.Grpc.Clients;
 using Markway.Notification.API.Grpc;
+using System.Text;
+using Newtonsoft.Json;
 namespace Markway.Pdfs.API.Services
 {
     public class PdfService : BaseService<Pdf>, IPdfService
@@ -60,44 +62,57 @@ namespace Markway.Pdfs.API.Services
 
         public async Task GenerateAndUploadPdf(ShipmentMailDto dto)
         {
+            UserReply user = await _currentUserService.GetCurrentUserAsync();
+
             try
             {
-                UserReply user = await _currentUserService.GetCurrentUserAsync();
+                using HttpClient httpClient = new();
+                string resolvedPdf = await ResolveMarkwayPdfTemplate(dto);
 
-                await new BrowserFetcher().DownloadAsync();
-
-                using (var browser = await Puppeteer.LaunchAsync(new LaunchOptions
+                var payload = new
                 {
-                    Headless = true,
-                    Args = new[] { "--no-sandbox" } // This is needed for running in certain environments, like Linux containers
-                }))
-                using (var page = await browser.NewPageAsync())
+                    html_string = resolvedPdf
+                };
+
+                var content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await httpClient.PostAsync(_systemConfiguration.GeneratePdfApi, content);
+
+                if (response.IsSuccessStatusCode)
                 {
-                    string resolvedPdf = await ResolveMarkwayPdfTemplate(dto);
-                    // Generate PDF content
-                    await page.SetContentAsync(resolvedPdf);
+                    // Read the PDF content from the response
+                    byte[] pdfContent = await response.Content.ReadAsByteArrayAsync();
 
-                    // Convert PDF content to a stream
-                    var pdfStream = await page.PdfStreamAsync();
+                    await using (var memoryStream = new MemoryStream(pdfContent))
+                    {
+                        // Provide the filename and content type (for example, "application/pdf")
+                        const string contentType = "application/pdf";
 
-                    // Upload the generated PDF to S3
-                    await UploadPdf(pdfStream, "generated.pdf", "application/pdf");
+                        // Call the UploadPdf method with the MemoryStream
+                        await UploadPdf(memoryStream, contentType);
+                    }
 
                     EmailRequest request = new()
                     {
-                        SendToAddress = user.Email,
+                        SendToAddress = "milos.markovic@markwaylog.com",
                         Body = resolvedPdf
                     };
+
                     await _notificationClient.SendPdfEmailAsync(request);
                 }
+                else
+                {
+                    return;
+                }
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 _logger.LogError($"Error in PdfService in GenerateAndUploadPdf {e.Message} in {e.StackTrace}");
+                return;
             }
         }
 
-        private async Task UploadPdf(Stream fileStream, string fileName, string contentType)
+        private async Task UploadPdf(Stream fileStream, string contentType)
         {
             if (fileStream == null || fileStream.Length == 0)
             {
@@ -108,7 +123,7 @@ namespace Markway.Pdfs.API.Services
             {
                 using (var client = new AmazonS3Client(_systemConfiguration.S3Settings.AccessKey, _systemConfiguration.S3Settings.AccessSecret, RegionEndpoint.GetBySystemName(_systemConfiguration.S3Settings.Region)))
                 {
-                    var key = Guid.NewGuid() + Path.GetExtension(fileName); // Unique key for the S3 object
+                    var key = Guid.NewGuid() + "_generatedPdf" + Guid.NewGuid(); // Unique key for the S3 object
 
                     var putRequest = new PutObjectRequest
                     {

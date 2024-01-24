@@ -14,7 +14,6 @@ public class NotificationClient : INotificationClient
 {
     private readonly ILogger _logger;
     private readonly GrpcEmailClient _grpcEmailClient;
-    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public NotificationClient(ILogger<NotificationClient> logger, GrpcEmailClient grpcEmailClient)
     {

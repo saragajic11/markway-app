@@ -9,8 +9,8 @@ namespace Markway.Commons.Configurations
         public EmailServer EmailServer { get; set; }
         public S3Settings S3Settings { get; set; } = new S3Settings();
         public Jwt Jwt { get; set; } = new Jwt();
-
         public string RedisConnectionString { get; set; }
+        public string GeneratePdfApi { get; set; }
         public GrpcConnections GrpcConnections { get; set; } = new GrpcConnections();
     }
 

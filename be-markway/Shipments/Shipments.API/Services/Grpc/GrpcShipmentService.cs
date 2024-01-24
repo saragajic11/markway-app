@@ -13,26 +13,26 @@ using Markway.Shipments.API.Services.Core;
 
 namespace Markway.Shipments.API.Services.Grpc
 {
-    public class GrpcEntityService : GrpcEntity.GrpcEntityBase
+    public class GrpcShipmentService : GrpcEntity.GrpcEntityBase
     {
-        private readonly ICustomerService _entityService;
+        private readonly IShipmentService _entityService;
         private readonly IMapper _mapper;
 
-        public GrpcEntityService(ICustomerService entityService, IMapper mapper)
+        public GrpcShipmentService(IShipmentService entityService, IMapper mapper)
         {
             _entityService = entityService;
             _mapper = mapper;
         }
 
         // [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
-        public override async Task<EntityReply> GetEntityById(
-            EntityRequest request,
+        public override async Task<ShipmentReply> GetShipmentById(
+            ShipmentRequest request,
             ServerCallContext context
         )
         {
-            Customer entity = await _entityService.GetAsync(request.Id);
+            Shipment entity = await _entityService.GetAsync(request.Id);
 
-            return _mapper.Map<EntityReply>(entity);
+            return _mapper.Map<ShipmentReply>(entity);
         }
     }
 }

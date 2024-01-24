@@ -78,6 +78,7 @@ services:
       - SYSTEMCONFIGURATION__S3SETTINGS__REGION=${S3_REGION}
       - SYSTEMCONFIGURATION__GRPCCONNECTIONS__USER=${GRPC_USERS_SERVICE}
       - SYSTEMCONFIGURATION__GRPCCONNECTIONS__NOTIFICATION=${GRPC_NOTIFICATION_SERVICE}
+      - SYSTEMCONFIGURATION__GENERATEPDFAPI=${GENERATE_API}
     networks:
       - net_users
   
@@ -104,6 +105,8 @@ services:
       - SYSTEMCONFIGURATION__ELKCONFIGURATION__URI=${ELASTICSEARCH_HOSTS}
     networks:
       - net_users
+    volumes:
+      - pdfs_shared_volume:/app/pdf_input
 
   identity-api:
     image: ${DOCKER_REGISTRY-}authopeniddict
@@ -123,6 +126,18 @@ services:
     networks:
       - net_authn
       - net_users
+  
+  generate-pdfs-api:
+    image: ${DOCKER_REGISTRY-}generateservice
+    build:
+      context: GeneratePdf
+    ports:
+      - '9387:9387'
+    networks:
+      - net_users
+    volumes:
+      - pdfs_shared_volume:/app/pdf_output
+
 
   postgres_db:
     image: postgres:14.1-alpine
@@ -153,6 +168,8 @@ volumes:
   redis:
     driver: local
   elasticsearch-data:
+    driver: local
+  pdfs_shared_volume:
     driver: local
 
 networks:
