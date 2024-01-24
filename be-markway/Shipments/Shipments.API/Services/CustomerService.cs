@@ -37,5 +37,44 @@ namespace Markway.Shipments.API.Services
                 return null;
             }
         }
+
+        public async Task<bool> DeleteAsync(long id)
+        {
+            try
+            {
+                Customer? customer = await base.GetAsync(id);
+
+                if (customer is null)
+                {
+                    return false;
+                }
+
+                customer.Deleted = true;
+
+                await base.UpdateAsync(customer);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
+                return false;
+            }
+        }
+
+        public async Task<IList<Customer>> GetAllAsync(PageRequest pageRequest)
+        {
+            try
+            {
+                Console.WriteLine("Caoo");
+                IList<Customer> listOfCustomers = await _unitOfWork.Customers.GetAllAsync();
+                return listOfCustomers;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
+                return null;
+            }
+        }
     }
 }

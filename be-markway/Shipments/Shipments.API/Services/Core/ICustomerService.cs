@@ -11,5 +11,7 @@ namespace Markway.Shipments.API.Services.Core
         Task<IList<Customer>> GetAllAsync(PageRequest pageRequest);
 
         Task<Customer?> GetAsync(long id);
+
+        Task<bool> DeleteAsync(long id);
     }
 }

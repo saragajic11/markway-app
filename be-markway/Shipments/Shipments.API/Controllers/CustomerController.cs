@@ -49,4 +49,11 @@ public class CustomerController : ControllerBase
 
         return Ok(_mapper.Map<CustomerDto>(customer));
     }
+
+    [HttpDelete("{id}")]
+    // [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
+    public async Task<IActionResult> DeleteShipment(int id)
+    {
+        return Ok(await _customerService.DeleteAsync(id));
+    }
 }

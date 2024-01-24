@@ -1,10 +1,19 @@
 import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import CustomersTableActionContainer from './CustomersTableActionContainer';
 
-const CustomersTableComponent = ({ customers }: { customers: any }) => {
+const CustomersTableComponent = ({
+  customers,
+  openDeleteCustomerDialog,
+}: {
+  customers: any;
+  openDeleteCustomerDialog: any;
+  closeDeleteCustomerDialog: any;
+}) => {
   const onClickEdit = (id: number) => {};
 
-  const onClickDelete = (id: number) => {};
+  const onClickDelete = (id: number) => {
+    openDeleteCustomerDialog(id);
+  };
 
   const columns: GridColDef[] = [
     {

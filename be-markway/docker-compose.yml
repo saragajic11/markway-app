@@ -81,7 +81,7 @@ services:
       - SYSTEMCONFIGURATION__GENERATEPDFAPI=${GENERATE_API}
     networks:
       - net_users
-  
+
   notifications-api:
     image: ${DOCKER_REGISTRY-}notifications
     build:
@@ -126,7 +126,7 @@ services:
     networks:
       - net_authn
       - net_users
-  
+
   generate-pdfs-api:
     image: ${DOCKER_REGISTRY-}generateservice
     build:
@@ -137,7 +137,6 @@ services:
       - net_users
     volumes:
       - pdfs_shared_volume:/app/pdf_output
-
 
   postgres_db:
     image: postgres:14.1-alpine

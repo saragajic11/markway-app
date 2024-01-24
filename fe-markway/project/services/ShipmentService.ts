@@ -79,3 +79,16 @@ export async function addCustomer(customer: any) {
   };
   return await request(`/customer`, customer, HttpMethod.POST, { headers });
 }
+
+export async function deleteCustomer(customerId: any) {
+  const accessToken = window.localStorage.getItem('access_token');
+
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+
+  return await request(`/customer/${customerId}`, [], HttpMethod.DELETE, {
+    headers,
+  });
+}
