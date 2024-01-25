@@ -28,6 +28,7 @@ const AddCustomerDrawerContainer = ({
         <TextFieldControl label='Broj žiro računa' name='accountNumber' />
         <TextFieldControl label='IBAN' name='iban' />
         <TextFieldControl label='SWIFT' name='swift' />
+        <TextFieldControl label='Rok plaćanja' name='dateOfPayment' />
         <Button type='submit' className='submit-btn'>
           Potvrdi
         </Button>

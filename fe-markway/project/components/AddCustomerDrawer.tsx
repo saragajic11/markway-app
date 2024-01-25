@@ -44,6 +44,7 @@ const AddCustomerDrawer = ({
       setValue('accountNumber', customerToEdit?.accountNumber);
       setValue('iban', customerToEdit?.iban);
       setValue('swift', customerToEdit?.swift);
+      setValue('dateOfPayment', customerToEdit?.dateOfPayment);
     } else {
       form.reset();
     }

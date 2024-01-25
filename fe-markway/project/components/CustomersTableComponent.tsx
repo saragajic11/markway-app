@@ -126,6 +126,15 @@ const CustomersTableComponent = ({
       width: 200,
       maxWidth: 200,
     },
+    {
+      field: 'dateOfPayment',
+      headerName: 'Rok plaćanja',
+      type: 'long',
+      resizable: true,
+      minWidth: 200,
+      width: 200,
+      maxWidth: 200,
+    },
   ];
 
   const rows = !customers
@@ -148,6 +157,7 @@ const CustomersTableComponent = ({
         accountNumber: customer.accountNumber,
         iban: customer.iban,
         swift: customer.swift,
+        dateOfPayment: customer.dateOfPayment,
       }));
 
   return (
