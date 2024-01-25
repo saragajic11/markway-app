@@ -15,12 +15,27 @@ const Header = () => {
   const navigateToHome = () => {
     router.push('/');
   };
+
+  const navigateToCarriers = () => {
+    router.push('/carriers');
+  };
+
+  const navigateToCustomers = () => {
+    router.push('/customers');
+  };
+
   return (
     <div id='header-container'>
       <div className='logo-container' onClick={navigateToHome}>
         <img alt='markway-logo' className='logo' src={'/images/logo.png'} />
       </div>
       <div className='option-container'>
+        <span className='customers' onClick={navigateToCustomers}>
+          Klijenti
+        </span>
+        <span className='carriers' onClick={navigateToCarriers}>
+          Prevoznici
+        </span>
         <span className='sign-in' onClick={navigateToLogin}>
           Prijavi se
         </span>

@@ -25,5 +25,7 @@ namespace Markway.Shipments.API.Models.DTO
         public string? Iban { get; set; }
 
         public string? Swift { get; set; }
+
+        public long? DateOfPayment { get; set; }
     }
 }

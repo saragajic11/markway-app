@@ -9,5 +9,29 @@ public class Carrier : Entity
     public string? Name { get; set; }
 
     [Required]
-    public string? Email {get; set;}
+    public string? Address { get; set; }
+
+    [Required]
+    public string? Pib { get; set; }
+
+    [Required]
+    public string? IdentificationNumber { get; set; }
+
+    [Required]
+    public string? Email { get; set; }
+
+    [Required]
+    public string? Phone { get; set; }
+
+    [Required]
+    public string? ContactPerson { get; set; }
+
+    [Required]
+    public string? AccountNumber { get; set; }
+
+    [Required]
+    public string? Iban { get; set; }
+
+    [Required]
+    public string? Swift { get; set; }
 }

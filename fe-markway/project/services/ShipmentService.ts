@@ -13,7 +13,7 @@ export async function getAllShipments() {
   return await request(`/shipment`, [], HttpMethod.GET, { headers: headers });
 }
 
-export async function getShipmentLoadOnLocationByShipmentIdAndType(data) {
+export async function getShipmentLoadOnLocationByShipmentIdAndType(data: any) {
   return await request(
     `/shipmentloadonlocation/getByShipmentAndType?shipmentId=${data.shipmentId}&type=${data.type}`
   );
@@ -101,6 +101,31 @@ export async function editCustomer(customerId: number, customer: any) {
     'Content-Type': 'application/json',
   };
   return await request(`/customer/${customerId}`, customer, HttpMethod.PUT, {
+    headers,
+  });
+}
+
+export async function editCarrier(carrierId: number, carrier: any) {
+  const accessToken = window.localStorage.getItem('access_token');
+
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  return await request(`/carrier/${carrierId}`, carrier, HttpMethod.PUT, {
+    headers,
+  });
+}
+
+export async function deleteCarrier(carrierId: any) {
+  const accessToken = window.localStorage.getItem('access_token');
+
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+
+  return await request(`/carrier/${carrierId}`, [], HttpMethod.DELETE, {
     headers,
   });
 }

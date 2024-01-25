@@ -76,6 +76,21 @@
       }
     },
     {
+      "DownstreamPathTemplate": "/api/carrier/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "shipments-api",
+          "Port": "5387"
+        }
+      ],
+      "UpstreamPathTemplate": "/carrier/{id}",
+      "UpstreamHttpMethod": ["PUT", "POST", "GET", "DELETE"],
+      "HttpHandlerOptions": {
+        "UseTracing": true
+      }
+    },
+    {
       "DownstreamPathTemplate": "/api/loadonlocation",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

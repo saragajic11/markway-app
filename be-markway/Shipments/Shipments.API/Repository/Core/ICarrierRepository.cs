@@ -6,6 +6,7 @@ namespace Markway.Shipments.API.Repository.Core
 {
     public interface ICarrierRepository : IBaseRepository<Carrier>
     {
+        public Task<IList<Carrier>> GetAllAsync();
     }
 }
 

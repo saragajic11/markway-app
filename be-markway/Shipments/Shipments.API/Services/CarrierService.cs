@@ -37,5 +37,60 @@ namespace Markway.Shipments.API.Services
                 return null;
             }
         }
+
+        public async Task<IList<Carrier>> GetAllAsync(PageRequest pageRequest)
+        {
+            try
+            {
+                IList<Carrier> listOfCarriers = await _unitOfWork.Carriers.GetAllAsync();
+                return listOfCarriers;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
+                return null;
+            }
+        }
+
+        public async Task<bool> DeleteAsync(long id)
+        {
+            try
+            {
+                Carrier? carrier = await base.GetAsync(id);
+
+                if (carrier is null)
+                {
+                    return false;
+                }
+
+                carrier.Deleted = true;
+
+                await base.UpdateAsync(carrier);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
+                return false;
+            }
+        }
+
+        public async Task<Carrier> UpdateAsync(long id, CarrierDto carrierDto)
+        {
+            try
+            {
+                Carrier carrier = await _unitOfWork.Carriers.GetAsync(id);
+                Carrier updatedCarrier = _unitOfWork.Carriers.Update(_mapper.Map(carrierDto, carrier));
+                await _unitOfWork.Complete();
+
+                return updatedCarrier;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
+                return null;
+            }
+        }
     }
 }

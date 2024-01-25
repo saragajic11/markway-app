@@ -2,6 +2,7 @@
 
 using Markway.Shipments.API.Models;
 using Markway.Shipments.API.Repository.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Markway.Shipments.API.Repository
 {
@@ -9,5 +10,12 @@ namespace Markway.Shipments.API.Repository
     {
         public CarrierRepository(ShipmentsContext context)
             : base(context) { }
+
+        public async Task<IList<Carrier>> GetAllAsync()
+        {
+            return await ShipmentsContext.Carriers
+            .Where(carrier => !carrier.Deleted)
+            .ToListAsync();
+        }
     }
 }

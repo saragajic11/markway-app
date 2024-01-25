@@ -48,4 +48,17 @@ public class CarrierController : ControllerBase
 
         return Ok(_mapper.Map<CarrierDto>(entity));
     }
+
+    [HttpDelete("{id}")]
+    // [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
+    public async Task<IActionResult> DeleteCarrier(int id)
+    {
+        return Ok(await _carrierService.DeleteAsync(id));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> EditCarrier([FromRoute] int id, [FromBody] CarrierDto carrierDto)
+    {
+        return Ok(await _carrierService.UpdateAsync(id, carrierDto));
+    }
 }

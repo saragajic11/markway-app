@@ -11,5 +11,9 @@ namespace Markway.Shipments.API.Services.Core
         Task<IList<Carrier>> GetAllAsync(PageRequest pageRequest);
 
         Task<Carrier?> GetAsync(long id);
+
+        Task<bool> DeleteAsync(long id);
+
+        Task<Carrier?> UpdateAsync(long id, CarrierDto carrierDto);
     }
 }

@@ -34,4 +34,7 @@ public class Customer : Entity
 
     [Required]
     public string? Swift { get; set; }
+
+    [Required]
+    public long? DateOfPayment { get; set; }
 }
