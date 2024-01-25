@@ -52,8 +52,14 @@ public class CustomerController : ControllerBase
 
     [HttpDelete("{id}")]
     // [Authorize(Policy = Policies.Authorization.ACTION_ENTITY_NAME)]
-    public async Task<IActionResult> DeleteShipment(int id)
+    public async Task<IActionResult> DeleteCustomer(int id)
     {
         return Ok(await _customerService.DeleteAsync(id));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> EditCustomer([FromRoute] int id, [FromBody] CustomerDto customerDto)
+    {
+        return Ok(await _customerService.UpdateAsync(id, customerDto));
     }
 }

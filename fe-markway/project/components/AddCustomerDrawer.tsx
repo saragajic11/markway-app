@@ -1,12 +1,20 @@
 import AddCustomerDrawerContext from '@/context/AddCustomerDrawerContext';
 import { Drawer } from '@mui/material';
-import { Fragment, useContext } from 'react';
+import { Fragment, useContext, useEffect } from 'react';
 import AddCustomerDrawerContainer from './AddCustomerDrawerContainer';
 import { useForm } from 'react-hook-form';
-import { addCustomer } from '@/services/ShipmentService';
+import { addCustomer, editCustomer } from '@/services/ShipmentService';
 import ToastContext from '@/context/ToastContext';
 
-const AddCustomerDrawer = () => {
+const AddCustomerDrawer = ({
+  customerId,
+  isEditMode,
+  customerToEdit,
+}: {
+  customerId: number;
+  customerToEdit: any;
+  isEditMode: boolean | false;
+}) => {
   const { isOpened, setOpened } = useContext(AddCustomerDrawerContext);
   const { setToastOpened } = useContext(ToastContext);
 
@@ -23,6 +31,23 @@ const AddCustomerDrawer = () => {
 
       setOpened(!isOpened);
     };
+
+  useEffect(() => {
+    if (isEditMode) {
+      setValue('name', customerToEdit?.name);
+      setValue('address', customerToEdit?.address);
+      setValue('pib', customerToEdit?.pib);
+      setValue('identificationNumber', customerToEdit?.identificationNumber);
+      setValue('email', customerToEdit?.email);
+      setValue('phone', customerToEdit?.phone);
+      setValue('contactPerson', customerToEdit?.contactPerson);
+      setValue('accountNumber', customerToEdit?.accountNumber);
+      setValue('iban', customerToEdit?.iban);
+      setValue('swift', customerToEdit?.swift);
+    } else {
+      form.reset();
+    }
+  }, [customerToEdit]);
 
   const form = useForm();
   const {
@@ -43,15 +68,27 @@ const AddCustomerDrawer = () => {
   };
 
   const onSubmitAddCustomer = (data: any) => {
-    addCustomer(data).then((response) => {
-      if (response?.status === 200) {
-        //TODO: implementirati refresh stranice u slucaju uspesnog dodavanja klijenta
-        setToastOpened(true, true, 'Uspešno dodat klijent');
-      } else {
-        setToastOpened(true, true, 'Greška prilikom dodavanja klijenta');
-      }
-      setOpened(false);
-    });
+    isEditMode
+      ? editCustomer(customerId, { ...data, id: customerId }).then(
+          (response) => {
+            if (response?.status === 200) {
+              //TODO: implementirati refresh stranice u slucaju uspesnog dodavanja klijenta
+              setToastOpened(true, true, 'Uspešno izmenjen klijent');
+            } else {
+              setToastOpened(true, false, 'Greška prilikom izmene klijenta');
+            }
+            setOpened(false);
+          }
+        )
+      : addCustomer(data).then((response) => {
+          if (response?.status === 200) {
+            //TODO: implementirati refresh stranice u slucaju uspesnog dodavanja klijenta
+            setToastOpened(true, true, 'Uspešno dodat klijent');
+          } else {
+            setToastOpened(true, true, 'Greška prilikom dodavanja klijenta');
+          }
+          setOpened(false);
+        });
   };
 
   const drawer = (
@@ -63,6 +100,7 @@ const AddCustomerDrawer = () => {
             <AddCustomerDrawerContainer
               form={form}
               onSubmit={handleSubmit(onSubmitAddCustomer)}
+              isEditMode={isEditMode}
             />
           </div>
         </Drawer>

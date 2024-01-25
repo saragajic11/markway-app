@@ -76,5 +76,23 @@ namespace Markway.Shipments.API.Services
                 return null;
             }
         }
+
+        public async Task<Customer> UpdateAsync(long id, CustomerDto customerDto)
+        {
+            try
+            {
+                Console.WriteLine("Caosi");
+                Customer customer = await _unitOfWork.Customers.GetAsync(id);
+                Customer updatedCustomer = _unitOfWork.Customers.Update(_mapper.Map(customerDto, customer));
+                await _unitOfWork.Complete();
+
+                return updatedCustomer;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
+                return null;
+            }
+        }
     }
 }

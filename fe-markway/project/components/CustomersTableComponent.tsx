@@ -4,12 +4,17 @@ import CustomersTableActionContainer from './CustomersTableActionContainer';
 const CustomersTableComponent = ({
   customers,
   openDeleteCustomerDialog,
+  closeDeleteCustomerDialog,
+  setEditMode,
 }: {
   customers: any;
   openDeleteCustomerDialog: any;
   closeDeleteCustomerDialog: any;
+  setEditMode: any;
 }) => {
-  const onClickEdit = (id: number) => {};
+  const onClickEdit = (id: number) => {
+    setEditMode(true, id);
+  };
 
   const onClickDelete = (id: number) => {
     openDeleteCustomerDialog(id);

@@ -5,9 +5,11 @@ import { Button } from '@mui/material';
 const AddCustomerDrawerContainer = ({
   form,
   onSubmit,
+  isEditMode,
 }: {
   form: any;
   onSubmit: any;
+  isEditMode: boolean;
 }) => {
   return (
     <FormProvider {...form}>

@@ -92,3 +92,15 @@ export async function deleteCustomer(customerId: any) {
     headers,
   });
 }
+
+export async function editCustomer(customerId: number, customer: any) {
+  const accessToken = window.localStorage.getItem('access_token');
+
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  return await request(`/customer/${customerId}`, customer, HttpMethod.PUT, {
+    headers,
+  });
+}

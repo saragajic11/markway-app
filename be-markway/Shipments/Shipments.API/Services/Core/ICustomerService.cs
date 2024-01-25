@@ -13,5 +13,7 @@ namespace Markway.Shipments.API.Services.Core
         Task<Customer?> GetAsync(long id);
 
         Task<bool> DeleteAsync(long id);
+
+        Task<Customer?> UpdateAsync(long id, CustomerDto customerDto);
     }
 }
