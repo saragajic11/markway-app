@@ -35,6 +35,14 @@
       position: relative;
       cursor: pointer;
 
+      &.carriers {
+        margin-right: 20px;
+      }
+
+      &.customers {
+        margin-right: 20px;
+      }
+
       &.sign-in {
         margin-right: 20px;
       }
