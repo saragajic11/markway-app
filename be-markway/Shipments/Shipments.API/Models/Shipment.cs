@@ -23,6 +23,9 @@ public class Shipment : Entity
     public long? Profit { get; set; }
 
     [Required]
+    public Status? Status { get; set; }
+
+    [Required]
     public long? CustomerId { get; set; }
 
     [ForeignKey("CustomerId")]

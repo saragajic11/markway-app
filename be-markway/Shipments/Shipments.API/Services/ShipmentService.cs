@@ -93,7 +93,7 @@ namespace Markway.Shipments.API.Services
             {
                 Shipment? shipment = await base.GetAsync(id);
 
-                if(shipment is null)
+                if (shipment is null)
                 {
                     return false;
                 }
@@ -131,6 +131,24 @@ namespace Markway.Shipments.API.Services
                     }
                 }
                 return listOfShipments;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
+                return null;
+            }
+        }
+
+        public async Task<Shipment> UpdateStatusAsync(long id, long statusId)
+        {
+            try
+            {
+                Shipment shipment = await _unitOfWork.Shipments.GetAsync(id);
+                shipment.Status = (Constants.Status)statusId;
+                Shipment updatedShipment = _unitOfWork.Shipments.Update(shipment);
+                await _unitOfWork.Complete();
+
+                return updatedShipment;
             }
             catch (Exception e)
             {

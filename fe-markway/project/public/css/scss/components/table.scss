@@ -55,5 +55,44 @@
         margin-right: 20px;
       }
     }
+
+    #status-container {
+      button {
+        border-radius: 20px;
+        font-size: 13px;
+        border: 1px solid black;
+
+        &.status-1 {
+          color: black;
+        }
+
+        &.status-2 {
+          color: black;
+          border-color: black;
+          font-weight: bold;
+        }
+
+        &.status-3 {
+          background-color: yellow;
+          color: black;
+        }
+
+        &.status-4 {
+          background-color: red;
+          color: white;
+          font-weight: bold;
+        }
+
+        &.status-5 {
+          background-color: green;
+          color: white;
+        }
+
+        &.status-6 {
+          background-color: black;
+          color: white;
+        }
+      }
+    }
   }
 }

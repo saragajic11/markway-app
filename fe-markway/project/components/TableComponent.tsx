@@ -1,18 +1,11 @@
 import ShipmentDto from '@/model/ShipmentDto';
-import {
-  DataGrid,
-  GridColDef,
-  GridToolbar,
-  GridToolbarColumnsButton,
-  GridToolbarContainer,
-} from '@mui/x-data-grid';
-import { deleteShipment } from '@/services/ShipmentService';
-import { useState, useEffect } from 'react';
+import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
+import { editShipmentStatus } from '@/services/ShipmentService';
+import { useState, useEffect, useContext } from 'react';
 import { format } from 'date-fns';
-import Image from 'next/image';
-import { Box, Typography } from '@mui/material';
-import RouteContainer from './RouteContainer';
 import ActionContainer from './ActionContainer';
+import StatusContainer from './StatusContainer';
+import ToastContext from '@/context/ToastContext';
 
 const TableComponent = ({
   shipments,
@@ -20,15 +13,19 @@ const TableComponent = ({
   closeDragDropDialog,
   openDeleteShipmentDialog,
   closeDeleteShipmentDialog,
+  notifyParentOfStatusUpdate,
 }: {
   shipments: ShipmentDto[];
   openDragDropDialog: any;
   closeDragDropDialog: any;
   openDeleteShipmentDialog: any;
   closeDeleteShipmentDialog: any;
+  notifyParentOfStatusUpdate: any;
 }) => {
   const [isCollapsed, setCollapsed] = useState(true);
   const value = { isCollapsed: isCollapsed, setCollapsed: setCollapsed };
+
+  const { setToastOpened } = useContext(ToastContext);
 
   const onClickOpen = (id: number) => {
     // setCollapsed(!isCollapsed);
@@ -52,6 +49,21 @@ const TableComponent = ({
   };
 
   const onClickGeneratePdf = (id: number) => {};
+
+  const onClickUpdateStatus = (shipmentId: number, statusId: number) => {
+    if (statusId !== 6) {
+      statusId = statusId + 1;
+    } else {
+      statusId = 1;
+    }
+    editShipmentStatus(shipmentId, statusId).then((response) => {
+      if (response?.status === 200) {
+        notifyParentOfStatusUpdate(shipmentId, statusId);
+      } else {
+        setToastOpened(true, false, 'Greška prilikom izmene statusa');
+      }
+    });
+  };
 
   const columns: GridColDef[] = [
     {
@@ -126,6 +138,23 @@ const TableComponent = ({
       width: 150,
       maxWidth: 150,
     },
+    {
+      field: 'status',
+      headerName: 'Status',
+      type: 'string',
+      resizable: true,
+      minWidth: 150,
+      width: 150,
+      maxWidth: 150,
+      renderCell: (params) => (
+        <StatusContainer
+          statusId={params.row.statusId}
+          onClick={() =>
+            onClickUpdateStatus(params.row.id, params.row.statusId)
+          }
+        />
+      ),
+    },
   ];
 
   const rows = !shipments
@@ -172,6 +201,13 @@ const TableComponent = ({
                 ].date
               ),
         income: shipment.income,
+        statusId: shipment.status,
+        status: (
+          <StatusContainer
+            statusId={shipment.status}
+            onClick={() => onClickUpdateStatus(shipment.id, shipment.status)}
+          />
+        ),
       }));
 
   return (

@@ -20,8 +20,6 @@ namespace Markway.Shipments.API.Models.DTO
 
         public string? Currency { get; set; }
 
-        public Status? Status { get; set; }
-
         public long? ShipmentId { get; set; }
 
         public IList<ShipmentLoadOnLocationDto>? ShipmentLoadOnLocations { get; set; }

@@ -27,7 +27,7 @@ namespace Markway.AuthOpenIddict.Controllers
         private readonly GrpcUserClient _grpcUserClient;
         private readonly ILogger _logger;
 
-        public AuthorizationController(GrpcUserClient grpcUserClient,  ILogger<AuthorizationController> logger)
+        public AuthorizationController(GrpcUserClient grpcUserClient, ILogger<AuthorizationController> logger)
         {
             _grpcUserClient = grpcUserClient;
             _logger = logger;
@@ -122,8 +122,6 @@ namespace Markway.AuthOpenIddict.Controllers
         [HttpPost(Endpoints.TOKEN), Produces("application/json")]
         public async Task<IActionResult> Exchange()
         {
-            Console.WriteLine("OVDE SAM DOSAO 1");
-
             OpenIddictRequest request = HttpContext.GetOpenIddictServerRequest() ??
                                     throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
 
@@ -131,20 +129,16 @@ namespace Markway.AuthOpenIddict.Controllers
 
             if (request.IsPasswordGrantType())
             {
-                Console.WriteLine("OVDE SAM DOSAO 2");
                 CredentialsResponse credentials = await ResolveUserCredentials(request.Username);
 
                 if (!UserStatus.ACTIVE.Equals(Enum.Parse(typeof(UserStatus), credentials.Status)))
                 {
                     throw new BadHttpRequestException("The specified user credentials are invalid.");
                 }
-            Console.WriteLine("OVDE SAM DOSAO 3");
 
                 ClaimsIdentity claimsIdentity = await ResolveUserIdentity(request.Password, credentials);
                 claimsPrincipal = new(claimsIdentity);
                 claimsPrincipal.SetScopes(new string[] { OpenIddictConstants.Scopes.OpenId, OpenIddictConstants.Scopes.OfflineAccess });
-                
-            Console.WriteLine("OVDE SAM DOSAO 4");
 
                 return SignIn(claimsPrincipal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
             }
@@ -196,8 +190,6 @@ namespace Markway.AuthOpenIddict.Controllers
                 throw new BadHttpRequestException("The specified user credentials are invalid.");
             }
 
-            Console.WriteLine("OVDE SAM DOSAO 8");
-
             UserRequest userRequest = new UserRequest { Username = credentials.Username };
             UserReply user = await _grpcUserClient.GetUserByUsernameAsync(userRequest);
 
@@ -213,7 +205,6 @@ namespace Markway.AuthOpenIddict.Controllers
 
             foreach (string role in user.Roles)
             {
-            Console.WriteLine("OVDE SAM DOSAO 9");
 
                 foreach (string permission in Roles.RolePermissions.GetValueOrDefault(role))
                 {
@@ -230,8 +221,6 @@ namespace Markway.AuthOpenIddict.Controllers
         {
             try
             {
-            Console.WriteLine("OVDE SAM DOSAO 10");
-
                 UserRequest userRequest = new UserRequest { Username = username };
                 return await _grpcUserClient.GetUserCredentialsAsync(userRequest);
             }

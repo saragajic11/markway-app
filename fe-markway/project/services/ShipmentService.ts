@@ -129,3 +129,15 @@ export async function deleteCarrier(carrierId: any) {
     headers,
   });
 }
+
+export async function editShipmentStatus(id: number, statusId: any) {
+  const accessToken = window.localStorage.getItem('access_token');
+
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  return await request(`/shipment/status/${id}`, statusId, HttpMethod.PUT, {
+    headers,
+  });
+}

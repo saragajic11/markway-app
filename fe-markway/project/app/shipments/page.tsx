@@ -106,6 +106,17 @@ export default function Shipments() {
     setOpenedDragDropPdfDialog(false);
   };
 
+  const statusUpdated = (shipmentId: number, statusId: number) => {
+    const shipmentIndex = shipments.findIndex(
+      (shipment) => shipment.id === shipmentId
+    );
+    if (shipmentIndex !== -1) {
+      const updatedShipments = [...shipments];
+      updatedShipments[shipmentIndex].status = statusId;
+      setShipments(updatedShipments);
+    }
+  };
+
   return (
     <div>
       <DrawerContext.Provider value={value}>
@@ -121,6 +132,7 @@ export default function Shipments() {
               closeDragDropDialog={closeDragDropDialog}
               openDeleteShipmentDialog={openDeleteShipmentDialog}
               closeDeleteShipmentDialog={closeDeleteShipmentDialog}
+              notifyParentOfStatusUpdate={statusUpdated}
             ></TableComponent>
           </div>
           <ShipmentsDrawer

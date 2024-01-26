@@ -25,7 +25,6 @@ const AddCustomerDrawer = ({
         ((event as React.KeyboardEvent).key === 'Tab' ||
           (event as React.KeyboardEvent).key === 'Shift')
       ) {
-        console.log('?');
         return;
       }
 

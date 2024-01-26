@@ -18,6 +18,8 @@ namespace Markway.Shipments.API.Models.DTO
 
         public long? Profit { get; set; }
 
+        public Status? Status { get; set; }
+
         public long? CustomerId { get; set; }
 
         public CustomerDto? Customer { get; set; }

@@ -2,7 +2,6 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Markway.Shipments.API.Constants;
 
 namespace Markway.Shipments.API.Models;
 public class ShipmentsRoute : Entity
@@ -25,9 +24,6 @@ public class ShipmentsRoute : Entity
     [Required]
     public string? Currency { get; set; }
 
-    [Required]
-    public Status? Status { get; set; }
-    
     public long? ShipmentId { get; set; }
 
     [ForeignKey("ShipmentId")]

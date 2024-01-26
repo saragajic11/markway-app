@@ -66,7 +66,6 @@ namespace Markway.Shipments.API.Services
         {
             try
             {
-                Console.WriteLine("Caoo");
                 IList<Customer> listOfCustomers = await _unitOfWork.Customers.GetAllAsync();
                 return listOfCustomers;
             }
@@ -81,7 +80,6 @@ namespace Markway.Shipments.API.Services
         {
             try
             {
-                Console.WriteLine("Caosi");
                 Customer customer = await _unitOfWork.Customers.GetAsync(id);
                 Customer updatedCustomer = _unitOfWork.Customers.Update(_mapper.Map(customerDto, customer));
                 await _unitOfWork.Complete();
