@@ -64,4 +64,11 @@ public class ShipmentController : ControllerBase
     {
         return Ok(await _shipmentService.UpdateStatusAsync(id, statusId));
     }
+
+    [HttpPut("{id}")]
+    [Authorize(Policy = Policies.Authorization.SHIPMENT_CREATE)]
+    public async Task<IActionResult> UpdateShipment([FromRoute] int id, [FromBody] ShipmentDto shipmentDto)
+    {
+        return Ok(await _shipmentService.UpdateShipmentAsync(id, shipmentDto));
+    }
 }

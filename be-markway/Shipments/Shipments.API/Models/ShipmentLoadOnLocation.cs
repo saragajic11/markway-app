@@ -19,6 +19,10 @@ public class ShipmentLoadOnLocation : Entity
     [ForeignKey("RouteId")]
     public ShipmentsRoute? Route { get; set; }
 
+    public string? Merch { get; set; }
+
+    public long? MerchAmount { get; set; }
+
     [Required]
     public long? LoadOnLocationId { get; set; }
 

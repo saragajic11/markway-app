@@ -13,7 +13,10 @@ public class ShipmentsRoute : Entity
     public Carrier? Carrier { get; set; }
 
     [Required]
-    public long Outcome { get; set; }
+    public long? Outcome { get; set; }
+
+    [Required]
+    public string? OutcomeCurrency { get; set; }
 
     [Required]
     public string? VehicleType { get; set; }
@@ -22,7 +25,7 @@ public class ShipmentsRoute : Entity
     public string? LicencePlate { get; set; }
 
     [Required]
-    public string? Currency { get; set; }
+    public long? DateOfPayment { get; set; }
 
     public long? ShipmentId { get; set; }
 
@@ -37,4 +40,10 @@ public class ShipmentsRoute : Entity
 
     [ForeignKey("BorderCrossingId")]
     public BorderCrossing? BorderCrossing { get; set; }
+
+    [Required]
+    public long? NoteId { get; set; }
+
+    [ForeignKey("NoteId")]
+    public Note? Note { get; set; }
 }

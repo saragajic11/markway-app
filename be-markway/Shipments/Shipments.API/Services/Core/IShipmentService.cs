@@ -15,5 +15,8 @@ namespace Markway.Shipments.API.Services.Core
         Task<bool> DeleteAsync(long id);
 
         Task<Shipment?> UpdateStatusAsync(long id, long statusId);
+
+        Task<Shipment?> UpdateShipmentAsync(long id, ShipmentDto shipmentDto);
+
     }
 }

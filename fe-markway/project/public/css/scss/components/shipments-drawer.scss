@@ -88,8 +88,17 @@
 
       .load-on-limitter {
         width: calc(100% - 20px);
+        margin-top: 15px;
         margin-left: 20px;
       }
     }
+  }
+}
+.price-container {
+  display: flex;
+  justify-content: space-around;
+
+  .price {
+    margin-right: 15px;
   }
 }

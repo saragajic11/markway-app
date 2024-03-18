@@ -34,10 +34,20 @@ const ShipmentsDrawer = ({
   openAddCarrierDialog,
   newCarrier,
   closeAddCarrierDialog,
+  startCustomers,
+  startCustoms,
+  startBorderCrossings,
+  startCarriers,
+  startLoadLocations,
 }: {
   openAddCarrierDialog: any;
   newCarrier: any;
   closeAddCarrierDialog: any;
+  startCustomers: any;
+  startCustoms: any;
+  startBorderCrossings: any;
+  startCarriers: any;
+  startLoadLocations: any;
 }) => {
   const { isOpened, setOpened } = useContext(DrawerContext);
   const [listOfStatus, setListOfStatus] = useState([]);
@@ -55,22 +65,24 @@ const ShipmentsDrawer = ({
   const [customers, setCustomers] = useState<CustomerDto[] | []>([]);
 
   useEffect(() => {
-    getAllCarriers().then((response) => {
-      setListOfCarriers(response?.data);
-    });
-    getAllLoadLocations().then((response) => {
-      setLoadLocations(response?.data);
-    });
-    getAllCustoms().then((response) => {
-      setCustoms(response?.data);
-    });
-    getAllBorderCrossings().then((response) => {
-      setBorderCrossings(response?.data);
-    });
-    getAllCustomers().then((response) => {
-      setCustomers(response?.data);
-    });
-  }, []);
+    setLoadLocations(startLoadLocations);
+  }, startLoadLocations);
+
+  useEffect(() => {
+    setCustomers(startCustomers);
+  }, [startCustomers]);
+
+  useEffect(() => {
+    setBorderCrossings(startBorderCrossings);
+  }, [startBorderCrossings]);
+
+  useEffect(() => {
+    setCustoms(startCustoms);
+  }, [startCustoms]);
+
+  useEffect(() => {
+    setListOfCarriers(startCarriers);
+  }, [startCarriers]);
 
   useEffect(() => {
     if (newCarrier) {
@@ -156,6 +168,8 @@ const ShipmentsDrawer = ({
     );
     const loadOnLocationFirstRoute = 'loadOnLocation--';
     const loadOnLocationDateFirstRoute = 'loadOnLocationDate--';
+    const loadOnLocationMerchFirstRoute = 'loadOnLocationMerch--';
+    const loadOnLocationMerchAmountFirstRoute = 'loadOnLocationMerchAmount--';
     shipmentLoadLocation.push({
       loadOnLocation: new LoadOnLocationDto(
         data[loadOnLocationFirstRoute].id,
@@ -164,10 +178,15 @@ const ShipmentsDrawer = ({
       ),
       type: 0,
       date: data[loadOnLocationDateFirstRoute],
+      merch: data[loadOnLocationMerchFirstRoute],
+      merchAmount: data[loadOnLocationMerchAmountFirstRoute],
     });
     for (let i = 0; i < countLoadOnLocations - 1; i++) {
       const name = 'loadOnLocation-' + '-' + i;
       const date = 'loadOnLocationDate-' + '-' + i;
+      const merch = 'loadOnLocationMerch-' + '-' + i;
+      const merchAmount = 'loadOnLocationMerchAmount-' + '-' + i;
+
       shipmentLoadLocation.push({
         loadOnLocation: new LoadOnLocationDto(
           data[name].id,
@@ -176,6 +195,8 @@ const ShipmentsDrawer = ({
         ),
         type: 0,
         date: data[date],
+        merch: data[merch],
+        merchAmount: data[merchAmount],
       });
     }
     const loadOffLocationFirstRoute = 'loadOffLocation--';
@@ -188,6 +209,8 @@ const ShipmentsDrawer = ({
       ),
       type: 1,
       date: data[loadOffLocationDateFirstRoute],
+      merch: undefined,
+      merchAmount: undefined,
     });
     for (let i = 0; i < countLoadOffLocations - 1; i++) {
       const name = 'loadOffLocation' + '-' + i;
@@ -200,6 +223,8 @@ const ShipmentsDrawer = ({
         ),
         type: 1,
         date: data[date],
+        merch: undefined,
+        merchAmount: undefined,
       });
     }
     const shipmentCustoms = [];
@@ -219,16 +244,19 @@ const ShipmentsDrawer = ({
       ),
       type: 1,
     });
+    const shipmentNote = { id: 1, description: 'Napomena 1' };
+    const shipmentNotes = [shipmentNote];
     const route = new RouteDto(
       data.carrier,
       data.outcome,
+      data.outcomeCurrency.name,
       data.vehicleType.name,
       data.licencePlate,
-      data.currency.name,
-      data.status.id,
       shipmentLoadLocation,
       shipmentCustoms,
-      data.borderCrossings
+      data.borderCrossings,
+      shipmentNote,
+      data.dateOfPayment
     );
     shipmentRoutes.push(route);
 
@@ -238,6 +266,8 @@ const ShipmentsDrawer = ({
     for (let i = 0; i < countRoutes - 1; i++) {
       const carrier = 'carrier' + i;
       const outcome = 'outcome' + i;
+      const outcomeCurrency = 'outcomeCurrency' + i;
+      const dateOfPayment = 'dateOfPayment' + i;
       const vehicleType = 'vehicleType' + i;
       const licencePlate = 'licencePlate' + i;
       const currency = 'currency' + i;
@@ -273,6 +303,10 @@ const ShipmentsDrawer = ({
 
       const loadOnLocationAddedRoute = 'loadOnLocation-' + i + '-';
       const loadOnLocationDateAddedRoute = 'loadOnLocationDate-' + i + '-';
+      const loadOnLocationMerchAddedRoute = 'loadOnLocationMerch-' + i + '-';
+      const loadOnLocationMerchAmountAddedRoute =
+        'loadOnLocationMerchAmount-' + i + '-';
+
       shipmentLoadLocationAddedRoute.push({
         loadOnLocation: new LoadOnLocationDto(
           data[loadOnLocationAddedRoute].id,
@@ -281,10 +315,15 @@ const ShipmentsDrawer = ({
         ),
         type: 0,
         date: data[loadOnLocationDateAddedRoute],
+        merch: data[loadOnLocationMerchAddedRoute],
+        merchAmount: data[loadOnLocationMerchAmountAddedRoute],
       });
       for (let j = 0; j < countLoadOnLocationsAddedRoute - 1; j++) {
         const name = 'loadOnLocation-' + i + '-' + j;
-        const date = 'loadOnLocationDate' + i + '-' + j;
+        const date = 'loadOnLocationDate-' + i + '-' + j;
+        const merch = 'loadOnLocationMerch-' + i + '-' + j;
+        const merchAmount = 'loadOnLocationMerchAmount-' + i + '-' + j;
+
         shipmentLoadLocationAddedRoute.push({
           loadOnLocation: new LoadOnLocationDto(
             data[name].id,
@@ -293,6 +332,8 @@ const ShipmentsDrawer = ({
           ),
           type: 0,
           date: data[date],
+          merch: data[merch],
+          merchAmount: data[merchAmount],
         });
       }
 
@@ -306,6 +347,8 @@ const ShipmentsDrawer = ({
         ),
         type: 1,
         date: data[loadOffLocationDateAddedRoute],
+        merch: undefined,
+        merchAmount: undefined,
       });
       for (let j = 0; j < countLoadOffLocationsAddedRoute - 1; j++) {
         const name = 'loadOffLocation-' + i + '-' + j;
@@ -318,6 +361,8 @@ const ShipmentsDrawer = ({
           ),
           type: 1,
           date: data[date],
+          merch: undefined,
+          merchAmount: undefined,
         });
       }
 
@@ -325,30 +370,29 @@ const ShipmentsDrawer = ({
         new RouteDto(
           data[carrier],
           data[outcome],
+          data[outcomeCurrency].name,
           data[vehicleType].name,
           data[licencePlate],
-          data[currency].name,
-          data[status].id,
           shipmentLoadLocationAddedRoute,
           shipmentCustoms,
-          data[borderCrossings]
+          data[borderCrossings],
+          shipmentNote,
+          data[dateOfPayment]
         )
       );
     }
 
     // //TODO: srediti logiku za notes
     // // const shipmentNote = new NoteDto(data.note);
-    const shipmentNote = { id: 1, description: 'Napomena 1' };
-
     const shipment = new AddShipmentDto(
+      data.externalId,
       data.description,
       data.customer,
-      data.merch,
-      data.merchAmount,
+      data.status.id,
       data.income,
+      data.incomeCurrency.name,
       shipmentRoutes,
-      data.profit,
-      shipmentNote
+      data.profit
     );
 
     addShipment(shipment).then((response) => {

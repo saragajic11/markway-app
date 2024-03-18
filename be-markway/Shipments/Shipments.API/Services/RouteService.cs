@@ -15,8 +15,9 @@ namespace Markway.Shipments.API.Services
         private readonly IShipmentCustomService _shipmentCustomService;
         private readonly IShipmentLoadOnLocationService _shipmentLoadOnLocationService;
         private readonly IBorderCrossingService _borderCrossingService;
+        private readonly INoteService _noteService;
 
-        public RouteService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<RouteService> logger, ICarrierService carrierService, IShipmentCustomService shipmentCustomService, IShipmentLoadOnLocationService shipmentLoadOnLocationService, IBorderCrossingService borderCrossingService)
+        public RouteService(IMapper mapper, IElasticSearchService elasticSearchService, IUnitOfWork unitOfWork, ILogger<RouteService> logger, ICarrierService carrierService, IShipmentCustomService shipmentCustomService, IShipmentLoadOnLocationService shipmentLoadOnLocationService, IBorderCrossingService borderCrossingService, INoteService noteService)
             : base(logger, unitOfWork, elasticSearchService)
         {
             _mapper = mapper;
@@ -24,6 +25,7 @@ namespace Markway.Shipments.API.Services
             _shipmentCustomService = shipmentCustomService;
             _shipmentLoadOnLocationService = shipmentLoadOnLocationService;
             _borderCrossingService = borderCrossingService;
+            _noteService = noteService;
         }
 
         public async Task<ShipmentsRoute?> AddAsync(RouteDto dto)
@@ -32,6 +34,7 @@ namespace Markway.Shipments.API.Services
             {
                 Carrier carrier = await _carrierService.GetAsync((long)dto.Carrier.Id);
                 BorderCrossing borderCrossing = await _borderCrossingService.GetAsync((long)dto.BorderCrossing.Id);
+                Note note = await _noteService.GetAsync((long)dto.Note.Id);
                 List<ShipmentCustoms> listOfShipmentCustoms = new();
                 List<ShipmentLoadOnLocation> listOfShipmentLoadOnLocation = new();
 
@@ -54,6 +57,7 @@ namespace Markway.Shipments.API.Services
                 entity.BorderCrossing = borderCrossing;
                 entity.ShipmentCustoms = listOfShipmentCustoms;
                 entity.ShipmentLoadOnLocations = listOfShipmentLoadOnLocation;
+                entity.Note = note;
 
                 await base.AddAsync(entity);
 

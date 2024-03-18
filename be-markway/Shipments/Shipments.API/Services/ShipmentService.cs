@@ -12,7 +12,6 @@ namespace Markway.Shipments.API.Services
     public class ShipmentService : BaseService<Shipment>, IShipmentService
     {
         private readonly IMapper _mapper;
-        private readonly INoteService _noteService;
         private readonly ICustomerService _customerService;
         private readonly IRouteService _routeService;
         private readonly ICurrentUserService _currentUserService;
@@ -21,13 +20,11 @@ namespace Markway.Shipments.API.Services
         IUnitOfWork unitOfWork,
         ILogger<ShipmentService> logger,
         ICustomerService customerService,
-        INoteService noteService,
         IRouteService routeService,
         ICurrentUserService currentUserService)
             : base(logger, unitOfWork, elasticSearchService)
         {
             _mapper = mapper;
-            _noteService = noteService;
             _customerService = customerService;
             _routeService = routeService;
             _currentUserService = currentUserService;
@@ -40,12 +37,10 @@ namespace Markway.Shipments.API.Services
                 UserReply user = await _currentUserService.GetCurrentUserAsync();
 
                 Customer customer = await _customerService.GetAsync((long)dto.Customer.Id);
-                Note note = await _noteService.GetAsync((long)dto.Note.Id);
 
                 Shipment entity = _mapper.Map<Shipment>(dto);
                 List<ShipmentsRoute> listOfShipmentRoutes = new();
                 entity.Customer = customer;
-                entity.Note = note;
                 entity.UserId = user.Id;
 
                 if (dto.ShipmentRoutes != null)
@@ -146,6 +141,23 @@ namespace Markway.Shipments.API.Services
                 Shipment shipment = await _unitOfWork.Shipments.GetAsync(id);
                 shipment.Status = (Constants.Status)statusId;
                 Shipment updatedShipment = _unitOfWork.Shipments.Update(shipment);
+                await _unitOfWork.Complete();
+
+                return updatedShipment;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Error in EntityService in Get {e.Message} in {e.StackTrace}");
+                return null;
+            }
+        }
+
+        public async Task<Shipment> UpdateShipmentAsync(long id, ShipmentDto shipmentDto)
+        {
+            try
+            {
+                Shipment shipment = await _unitOfWork.Shipments.GetAsync(id);
+                Shipment updatedShipment = _unitOfWork.Shipments.Update(_mapper.Map(shipmentDto, shipment));
                 await _unitOfWork.Complete();
 
                 return updatedShipment;

@@ -3,5 +3,8 @@
   "eslint.run": "onSave",
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 4000,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
+  }
 }

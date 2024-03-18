@@ -1,7 +1,8 @@
 import LoadOnLocationDto from './LoadOnLocationDto';
 
-class ShipmentLoadOnLocationDto {
+class GetShipmentLoadOnLocationDto {
   constructor(
+    public id: number,
     public date: Date,
     public type: number,
     public loadOnLocation: LoadOnLocationDto,
@@ -9,5 +10,4 @@ class ShipmentLoadOnLocationDto {
     public merchAmount: number | undefined
   ) {}
 }
-
-export default ShipmentLoadOnLocationDto;
+export default GetShipmentLoadOnLocationDto;

@@ -16,7 +16,6 @@ namespace Markway.Shipments.API.Repository
         {
             return await ShipmentsContext.Shipments
                 .Include(x => x.Customer)
-                .Include(x => x.Note)
                 .Where(shipment => shipment.Id == id && !shipment.Deleted)
                 .FirstOrDefaultAsync();
         }
@@ -32,7 +31,6 @@ namespace Markway.Shipments.API.Repository
 
             return await query
                 .Include(x => x.Customer)
-                .Include(x => x.Note)
                 .Include(x => x.ShipmentRoutes)
                     .ThenInclude(route => route.Carrier)
                 .Include(x => x.ShipmentRoutes)

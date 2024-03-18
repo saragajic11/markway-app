@@ -15,7 +15,13 @@ const ActionContainer = ({
 }) => {
   return (
     <div className='action-container'>
-      <Image src={'/images/view.png'} alt='Details' width={23} height={23} />
+      <Image
+        src={'/images/view.png'}
+        alt='Details'
+        width={23}
+        height={23}
+        onClick={onClickPreview}
+      />
       <Image
         src={'/images/add-document.png'}
         alt='Add document'
@@ -23,7 +29,13 @@ const ActionContainer = ({
         height={23}
         onClick={onClickAddFile}
       />
-      <Image src={'/images/edit-icon.svg'} alt='Edit' width={23} height={23} />
+      <Image
+        src={'/images/edit-icon.svg'}
+        alt='Edit'
+        width={23}
+        height={23}
+        onClick={onClickEdit}
+      />
       <Image
         src={'/images/delete-icon.png'}
         alt='Delete'

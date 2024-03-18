@@ -141,3 +141,15 @@ export async function editShipmentStatus(id: number, statusId: any) {
     headers,
   });
 }
+
+export async function editShipment(id: number, shipment: any) {
+  const accessToken = window.localStorage.getItem('access_token');
+
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  return await request(`/shipment/${id}`, shipment, HttpMethod.PUT, {
+    headers,
+  });
+}

@@ -12,13 +12,13 @@ namespace Markway.Shipments.API.Models.DTO
 
         public CarrierDto? Carrier { get; set; }
 
-        public long Outcome { get; set; }
+        public long? Outcome { get; set; }
+
+        public string? OutcomeCurrency { get; set; }
 
         public string? VehicleType { get; set; }
 
         public string? LicencePlate { get; set; }
-
-        public string? Currency { get; set; }
 
         public long? ShipmentId { get; set; }
 
@@ -27,5 +27,11 @@ namespace Markway.Shipments.API.Models.DTO
         public IList<ShipmentCustomDto>? ShipmentCustoms { get; set; }
 
         public BorderCrossingDto? BorderCrossing { get; set; }
+
+        public long? NoteId { get; set; }
+
+        public NoteDto? Note { get; set; }
+
+        public long? DateOfPayment { get; set; }
     }
 }

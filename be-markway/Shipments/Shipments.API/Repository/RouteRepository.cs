@@ -17,6 +17,7 @@ namespace Markway.Shipments.API.Repository
             return await ShipmentsContext.ShipmentsRoutes
             .Include(x => x.Carrier)
             .Include(x => x.Shipment)
+            .Include(x => x.Note)
             .Where(route => route.Id == id && !route.Deleted)
             .FirstOrDefaultAsync();
         }
@@ -26,6 +27,7 @@ namespace Markway.Shipments.API.Repository
             return await ShipmentsContext.ShipmentsRoutes
             .Include(x => x.Carrier)
             .Include(x => x.Shipment)
+            .Include(x => x.Note)
             .Where(route => !route.Deleted)
             .ToListAsync();
         }

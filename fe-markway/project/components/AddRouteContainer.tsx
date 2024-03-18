@@ -63,35 +63,6 @@ const AddRouteContainer = ({
           valueKey={'id'}
           addCarrier={addCarrier}
         />
-        <TextFieldControl
-          label='Odliv'
-          type='number'
-          InputProps={{
-            inputProps: { min: 0 },
-          }}
-          name='outcome'
-        />
-        <SelectControl
-          name='currency'
-          value={values['currency']}
-          setValue={setValue}
-          control={control}
-          label={'Valuta'}
-          options={Currency}
-          nameKey={'name'}
-          valueKey={'id'}
-        />
-        <SelectControl
-          name='vehicleType'
-          value={values['vehicleType']}
-          setValue={setValue}
-          control={control}
-          label={'Tip vozila'}
-          options={VehicleType}
-          nameKey={'name'}
-          valueKey={'id'}
-        />
-        <TextFieldControl label='Registarske tablice' name='licencePlate' />
         <span className='load-on-limitter'>Utovar</span>
         <LoadLocationContainer
           values={values}
@@ -103,29 +74,6 @@ const AddRouteContainer = ({
           loadLocations={loadLocations}
           loadLocationType={0}
           route={''}
-        />
-        <span className='load-on-limitter'>Istovar</span>
-        <LoadLocationContainer
-          values={values}
-          setValue={setValue}
-          control={control}
-          formRules={formRules}
-          errors={errors}
-          form={form}
-          loadLocations={loadLocations}
-          loadLocationType={1}
-          route={''}
-        />
-
-        <SelectControl
-          name='importDuty'
-          value={values['importDuty']}
-          setValue={setValue}
-          control={control}
-          label={'Uvozna carina'}
-          options={customs}
-          nameKey={'name'}
-          valueKey={'id'}
         />
         <SelectControl
           name='exportDuty'
@@ -148,15 +96,68 @@ const AddRouteContainer = ({
           valueKey={'id'}
         />
         <SelectControl
-          name='status'
-          value={values['status']}
+          name='importDuty'
+          value={values['importDuty']}
           setValue={setValue}
           control={control}
-          label={'Status'}
-          options={Status}
+          label={'Uvozna carina'}
+          options={customs}
           nameKey={'name'}
           valueKey={'id'}
         />
+        <span className='load-on-limitter'>Istovar</span>
+        <LoadLocationContainer
+          values={values}
+          setValue={setValue}
+          control={control}
+          formRules={formRules}
+          errors={errors}
+          form={form}
+          loadLocations={loadLocations}
+          loadLocationType={1}
+          route={''}
+        />
+        <SelectControl
+          name='vehicleType'
+          value={values['vehicleType']}
+          setValue={setValue}
+          control={control}
+          label={'Tip vozila'}
+          options={VehicleType}
+          nameKey={'name'}
+          valueKey={'id'}
+        />
+        <TextFieldControl label='Registarske tablice' name='licencePlate' />
+        <div className='price-container'>
+          <TextFieldControl
+            className='price'
+            label='Odliv'
+            type='number'
+            InputProps={{
+              inputProps: { min: 0 },
+            }}
+            name='outcome'
+          />
+          <SelectControl
+            name='outcomeCurrency'
+            value={values['currency']}
+            setValue={setValue}
+            control={control}
+            label={'Valuta'}
+            options={Currency}
+            nameKey={'name'}
+            valueKey={'id'}
+          />
+        </div>
+        <TextFieldControl
+          label='Rok plaćanja'
+          type='number'
+          InputProps={{
+            inputProps: { min: 0 },
+          }}
+          name='dateOfPayment'
+        />
+        <TextFieldControl label='Beleške' name='note' />
         <Button
           variant='outlined'
           onClick={addNewDiv}
@@ -181,38 +182,6 @@ const AddRouteContainer = ({
               valueKey={'id'}
               addCarrier={addCarrier}
             />
-            <TextFieldControl
-              label='Odliv'
-              type='number'
-              InputProps={{
-                inputProps: { min: 0 },
-              }}
-              name={'outcome' + index}
-            />
-            <SelectControl
-              name={'currency' + index}
-              value={values['currency']}
-              setValue={setValue}
-              control={control}
-              label={'Valuta'}
-              options={Currency}
-              nameKey={'name'}
-              valueKey={'id'}
-            />
-            <SelectControl
-              name={'vehicleType' + index}
-              value={values['vehicleType']}
-              setValue={setValue}
-              control={control}
-              label={'Tip vozila'}
-              options={VehicleType}
-              nameKey={'name'}
-              valueKey={'id'}
-            />
-            <TextFieldControl
-              label='Registarske tablice'
-              name={'licencePlate' + index}
-            />
             <span className='load-on-limitter'>Utovar</span>
             <LoadLocationContainer
               values={values}
@@ -224,29 +193,6 @@ const AddRouteContainer = ({
               loadLocations={loadLocations}
               loadLocationType={0}
               route={index}
-            />
-            <span className='load-on-limitter'>Istovar</span>
-            <LoadLocationContainer
-              values={values}
-              setValue={setValue}
-              control={control}
-              formRules={formRules}
-              errors={errors}
-              form={form}
-              loadLocations={loadLocations}
-              loadLocationType={1}
-              route={index}
-            />
-
-            <SelectControl
-              name={'importDuty' + index}
-              value={values['importDuty']}
-              setValue={setValue}
-              control={control}
-              label={'Uvozna carina'}
-              options={customs}
-              nameKey={'name'}
-              valueKey={'id'}
             />
             <SelectControl
               name={'exportDuty' + index}
@@ -269,15 +215,72 @@ const AddRouteContainer = ({
               valueKey={'id'}
             />
             <SelectControl
-              name={'status' + index}
-              value={values['status']}
+              name={'importDuty' + index}
+              value={values['importDuty']}
               setValue={setValue}
               control={control}
-              label={'Status'}
-              options={Status}
+              label={'Uvozna carina'}
+              options={customs}
               nameKey={'name'}
               valueKey={'id'}
             />
+            <span className='load-on-limitter'>Istovar</span>
+            <LoadLocationContainer
+              values={values}
+              setValue={setValue}
+              control={control}
+              formRules={formRules}
+              errors={errors}
+              form={form}
+              loadLocations={loadLocations}
+              loadLocationType={1}
+              route={index}
+            />
+            <SelectControl
+              name={'vehicleType' + index}
+              value={values['vehicleType']}
+              setValue={setValue}
+              control={control}
+              label={'Tip vozila'}
+              options={VehicleType}
+              nameKey={'name'}
+              valueKey={'id'}
+            />
+            <TextFieldControl
+              label='Registarske tablice'
+              name={'licencePlate' + index}
+            />
+            <div className='price-container'>
+              <TextFieldControl
+                label='Odliv'
+                type='number'
+                InputProps={{
+                  inputProps: { min: 0 },
+                }}
+                name={'outcome' + index}
+                className='price'
+              />
+              <SelectControl
+                name={'outcomeCurrency' + index}
+                value={values['currency']}
+                setValue={setValue}
+                control={control}
+                label={'Valuta'}
+                options={Currency}
+                nameKey={'name'}
+                valueKey={'id'}
+              />
+            </div>
+            <TextFieldControl
+              label='Rok plaćanja'
+              type='number'
+              InputProps={{
+                inputProps: { min: 0 },
+              }}
+              name={'dateOfPayment' + index}
+            />
+            <TextFieldControl label='Beleške' name='note' />
+
             <Button
               variant='outlined'
               onClick={addNewDiv}

@@ -325,7 +325,16 @@ p {
 }
 .MuiDrawer-root #shipments-drawer-container #shipments-form .load-on-limitter {
   width: calc(100% - 20px);
+  margin-top: 15px;
   margin-left: 20px;
+}
+
+.price-container {
+  display: flex;
+  justify-content: space-around;
+}
+.price-container .price {
+  margin-right: 15px;
 }
 
 .carrier-dialog .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
@@ -367,11 +376,9 @@ p {
 }
 .loadLocationContainerVertical .loadLocationContainer .load-location-container-inputs {
   display: flex;
-  width: 80%;
+  flex-direction: column;
+  width: 70%;
   justify-content: space-around;
-}
-.loadLocationContainerVertical .loadLocationContainer .load-location-container-inputs .select-box {
-  width: 43%;
 }
 .loadLocationContainerVertical .loadLocationContainer .loadOnLocationButton {
   height: 30px !important;
@@ -634,6 +641,63 @@ p {
   font-weight: bold;
   height: 70px;
   margin-top: 30px;
+}
+
+.edit-shipment-form {
+  display: flex;
+  flex-direction: column;
+}
+.edit-shipment-form .select-container {
+  height: auto;
+  margin-top: 20px;
+  width: 100%;
+}
+.edit-shipment-form .select-container select {
+  width: 100%;
+  height: 50px;
+  border-radius: 4px;
+  border: 1.3px solid #353e5d;
+}
+.edit-shipment-form .select-container select:focus {
+  border: 1.3px solid #f39b03;
+  outline: none;
+}
+.edit-shipment-form .price-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.edit-shipment-form .price-container .text-input-container {
+  margin-right: 10px;
+}
+.edit-shipment-form .price-container .text-input-container input {
+  height: 48px;
+}
+.edit-shipment-form .text-input-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.edit-shipment-form .text-input-container input {
+  height: 50px;
+  border-radius: 4px;
+  border: 1.3px solid #353e5d;
+  padding: 0px 2px;
+}
+.edit-shipment-form .text-input-container input:focus {
+  border: 1.3px solid #f39b03;
+  outline: none;
+}
+.edit-shipment-form .submit-btn {
+  background-color: #f39b03;
+  color: #353e5d;
+  font-weight: bold;
+  height: 70px;
+  margin-top: 30px;
+}
+.edit-shipment-form label {
+  opacity: 0.5;
 }
 
 /*# sourceMappingURL=style.css.map */

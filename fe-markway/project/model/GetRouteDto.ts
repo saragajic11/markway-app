@@ -5,15 +5,17 @@ import ShipmentLoadOnLocationDto from './ShipmentLoadOnLocationDto';
 import ShipmentCustomsDto from './ShipmentCustomsDto';
 import BorderCrossingDto from './BorderCrossingDto';
 import NoteDto from './NoteDto';
+import GetShipmentLoadOnLocationDto from './GetShipmentLoadOnLocationDto';
 
-class RouteDto {
+class GetRouteDto {
   constructor(
+    public id: number,
     public carrier: GetCarrierDto,
     public outcome: number,
     public outcomeCurrency: typeof Currency,
     public vehicleType: typeof VehicleType,
     public licencePlate: string,
-    public shipmentLoadOnLocations: ShipmentLoadOnLocationDto[],
+    public shipmentLoadOnLocations: GetShipmentLoadOnLocationDto[],
     public shipmentCustoms: ShipmentCustomsDto[],
     public borderCrossing: BorderCrossingDto,
     public note: NoteDto,
@@ -21,4 +23,4 @@ class RouteDto {
   ) {}
 }
 
-export default RouteDto;
+export default GetRouteDto;

@@ -8,16 +8,16 @@ namespace Markway.Shipments.API.Models;
 public class Shipment : Entity
 {
     [Required]
+    public long? ExternalId { get; set; }
+
+    [Required]
     public string? Description { get; set; }
 
     [Required]
-    public string? Merch { get; set; }
-
-    [Required]
-    public long? MerchAmount { get; set; }
-
-    [Required]
     public long? Income { get; set; }
+
+    [Required]
+    public string? IncomeCurrency { get; set; }
 
     [Required]
     public long? Profit { get; set; }
@@ -30,12 +30,6 @@ public class Shipment : Entity
 
     [ForeignKey("CustomerId")]
     public Customer? Customer { get; set; }
-
-    [Required]
-    public long? NoteId { get; set; }
-
-    [ForeignKey("NoteId")]
-    public Note? Note { get; set; }
 
     [InverseProperty("Shipment")]
     public ICollection<ShipmentsRoute>? ShipmentRoutes { get; set; }

@@ -45,7 +45,7 @@ const ShipmentsDrawerContainer = ({
   return (
     <FormProvider {...form}>
       <form id='shipments-form' className='shipments-form' onSubmit={onSubmit}>
-        <TextFieldControl label='Opis' name='description' />
+        <TextFieldControl label='ID' name='externalId' />
         <SelectControl
           name='customer'
           value={values['customer']}
@@ -56,25 +56,38 @@ const ShipmentsDrawerContainer = ({
           nameKey={'name'}
           valueKey={'id'}
         />
-        {/* <TextField label="Status" /> */}
-        {/* <SelectControl value={values['listOfStatus']} setValue={setValue} name='status' control={control} label={'Status'} options={listOfStatus} nameKey='status' valueKey={'id'} /> */}
-        <TextFieldControl label='Roba' name='merch' />
-        <TextFieldControl
-          label='Količina robe'
-          type='number'
-          InputProps={{
-            inputProps: { min: 0 },
-          }}
-          name='merchAmount'
+        <TextFieldControl label='Referenca' name='description' />
+        <SelectControl
+          name='status'
+          value={values['status']}
+          setValue={setValue}
+          control={control}
+          label={'Status'}
+          options={Status}
+          nameKey={'name'}
+          valueKey={'id'}
         />
-        <TextFieldControl
-          label='Priliv'
-          type='number'
-          InputProps={{
-            inputProps: { min: 0 },
-          }}
-          name='income'
-        />
+        <div className='price-container'>
+          <TextFieldControl
+            className='price'
+            label='Priliv'
+            type='number'
+            InputProps={{
+              inputProps: { min: 0 },
+            }}
+            name='income'
+          />
+          <SelectControl
+            name={'incomeCurrency'}
+            value={values['currency']}
+            setValue={setValue}
+            control={control}
+            label={'Valuta'}
+            options={Currency}
+            nameKey={'name'}
+            valueKey={'id'}
+          />
+        </div>
         <AddRouteContainer
           values={values}
           setValue={setValue}
@@ -97,7 +110,6 @@ const ShipmentsDrawerContainer = ({
           }}
           name='profit'
         />
-        <TextFieldControl label='Beleške' name='note' />
         <Button type='submit' className='submit-btn'>
           Potvrdi
         </Button>

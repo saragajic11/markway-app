@@ -5,7 +5,6 @@ export const getDropdownOptions = (array, label, valueKey = 'id', { label: selec
     if (!array) {
         return;
     }
-
     const groups = array.reduce((groups, item) => {
         let key = item?.parent?.id ? item?.parent?.id : 'root';
         return {

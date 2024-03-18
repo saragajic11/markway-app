@@ -9,6 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import DateTimeControl from './controls/inputs/DateTimeControl';
 import dayjs from 'dayjs';
+import TextFieldControl from './controls/inputs/TextFieldControl';
 
 const LoadLocationContainer = ({
   values,
@@ -20,6 +21,16 @@ const LoadLocationContainer = ({
   loadLocations,
   loadLocationType,
   route,
+}: {
+  values: any;
+  setValue: any;
+  control: any;
+  formRules: any;
+  errors: any;
+  form: any;
+  loadLocations: any;
+  loadLocationType: any;
+  route: any;
 }) => {
   const [divs, setDivs] = useState([]);
   const [counter, setCounter] = useState(1);
@@ -96,6 +107,18 @@ const LoadLocationContainer = ({
             variant='filled'
             minDate={getCurrentDate()}
           />
+          {loadLocationType === 0 && (
+            <div>
+              <TextFieldControl
+                label='Vrsta robe'
+                name={'loadOnLocationMerch-' + route + '-'}
+              />
+              <TextFieldControl
+                label='Količina robe'
+                name={'loadOnLocationMerchAmount-' + route + '-'}
+              />
+            </div>
+          )}
         </div>
         <IconButton className='loadOnLocationButton' onClick={addNewDiv}>
           <AddIcon fontSize='small' />
@@ -151,6 +174,18 @@ const LoadLocationContainer = ({
                 variant='filled'
                 minDate={getCurrentDate()}
               />
+              {loadLocationType === 0 && (
+                <div>
+                  <TextFieldControl
+                    label='Vrsta robe'
+                    name={'loadOnLocationMerch-' + route + '-' + index}
+                  />
+                  <TextFieldControl
+                    label='Količina robe'
+                    name={'loadOnLocationMerchAmount-' + route + '-' + index}
+                  />
+                </div>
+              )}
             </div>
             <div>
               <IconButton className='loadOnLocationButton' onClick={addNewDiv}>

@@ -13,6 +13,10 @@ namespace Markway.Shipments.API.Models.DTO
 
         public CustomsType type { get; set; }
 
+        public string? Merch { get; set; }
+
+        public long? MerchAmount { get; set; }
+
         public long? RouteId { get; set; }
 
         public long? LoadOnLocationId { get; set; }

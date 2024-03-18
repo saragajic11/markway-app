@@ -1,0 +1,63 @@
+.edit-shipment-form {
+  display: flex;
+  flex-direction: column;
+
+  .select-container {
+    height: auto;
+    margin-top: 20px;
+    width: 100%;
+
+    select {
+      width: 100%;
+      height: 50px;
+      border-radius: 4px;
+      border: 1.3px solid #353e5d;
+
+      &:focus {
+        border: 1.3px solid #f39b03;
+        outline: none;
+      }
+    }
+  }
+
+  .price-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    .text-input-container {
+      margin-right: 10px;
+      input {
+        height: 48px;
+      }
+    }
+  }
+  .text-input-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+
+    input {
+      height: 50px;
+      border-radius: 4px;
+      border: 1.3px solid #353e5d;
+      padding: 0px 2px;
+
+      &:focus {
+        border: 1.3px solid #f39b03;
+        outline: none;
+      }
+    }
+  }
+  .submit-btn {
+    background-color: #f39b03;
+    color: #353e5d;
+    font-weight: bold;
+    height: 70px;
+    margin-top: 30px;
+  }
+  label {
+    opacity: 0.5;
+  }
+}

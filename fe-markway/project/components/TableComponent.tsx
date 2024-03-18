@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import ActionContainer from './ActionContainer';
 import StatusContainer from './StatusContainer';
 import ToastContext from '@/context/ToastContext';
+import GetShipmentDto from '@/model/GetShipmentDto';
 
 const TableComponent = ({
   shipments,
@@ -14,13 +15,17 @@ const TableComponent = ({
   openDeleteShipmentDialog,
   closeDeleteShipmentDialog,
   notifyParentOfStatusUpdate,
+  togglePreviewShipmentsDrawer,
+  toggleEditShipmentDrawer,
 }: {
-  shipments: ShipmentDto[];
+  shipments: GetShipmentDto[];
   openDragDropDialog: any;
   closeDragDropDialog: any;
   openDeleteShipmentDialog: any;
   closeDeleteShipmentDialog: any;
   notifyParentOfStatusUpdate: any;
+  togglePreviewShipmentsDrawer: any;
+  toggleEditShipmentDrawer: any;
 }) => {
   const [isCollapsed, setCollapsed] = useState(true);
   const value = { isCollapsed: isCollapsed, setCollapsed: setCollapsed };
@@ -36,13 +41,17 @@ const TableComponent = ({
     return format(parsedDate, 'dd.MM.yyyy. hh:mm');
   };
 
-  const onClickPreview = (id: number) => {};
+  const onClickPreview = (id: number) => {
+    togglePreviewShipmentsDrawer(id);
+  };
 
   const onClickAddFile = (id: number) => {
     openDragDropDialog(id);
   };
 
-  const onClickEdit = (id: number) => {};
+  const onClickEdit = (id: number) => {
+    toggleEditShipmentDrawer(id);
+  };
 
   const onClickDelete = (id: number) => {
     openDeleteShipmentDialog(id);
