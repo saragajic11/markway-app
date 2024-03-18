@@ -14,6 +14,6 @@ namespace Markway.Pdfs.API.Services.Core
 
         Task<Pdf?> UploadPdf(IFormFile file, PdfDto pdfDto);
 
-        Task GenerateAndUploadPdf(ShipmentMailDto dto);
+        Task GenerateAndUploadPdf(long id);
     }
 }

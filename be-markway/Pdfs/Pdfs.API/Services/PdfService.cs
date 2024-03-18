@@ -19,6 +19,7 @@ using Markway.Pdfs.API.Services.Grpc.Clients;
 using Markway.Notification.API.Grpc;
 using System.Text;
 using Newtonsoft.Json;
+using Nest;
 namespace Markway.Pdfs.API.Services
 {
     public class PdfService : BaseService<Pdf>, IPdfService
@@ -59,13 +60,15 @@ namespace Markway.Pdfs.API.Services
                 return null;
             }
         }
-
-        public async Task GenerateAndUploadPdf(ShipmentMailDto dto)
+// ShipmentMailDto
+        public async Task GenerateAndUploadPdf(long id)
         {
             UserReply user = await _currentUserService.GetCurrentUserAsync();
 
             try
             {
+                ShipmentMailDto dto = new(); // TODO _shipmentClient get shipment by id
+
                 using HttpClient httpClient = new();
                 string resolvedPdf = await ResolveMarkwayPdfTemplate(dto);
 
