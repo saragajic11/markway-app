@@ -6,6 +6,6 @@ namespace Markway.Pdfs.API.Constants
     {
         public const string HEALTH = "/health";
         public const string SEARCH_REINDEX = "reindex";
-        public const string GENERATE_PDF = "generate";
+        public const string GENERATE_PDF = "/shipments/{id}/generate-pdf";
     }
 }

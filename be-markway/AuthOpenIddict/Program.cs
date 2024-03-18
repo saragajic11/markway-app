@@ -16,6 +16,8 @@ builder.Services.AddSwaggerGen();
 
 builder.AddGrpcClients(systemConfiguration);
 
+builder.ConfigureKestrel();
+
 builder.ConfigureDatabase(systemConfiguration);
 
 // builder.ConfigureKestrel();

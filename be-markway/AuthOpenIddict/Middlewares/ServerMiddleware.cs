@@ -21,14 +21,17 @@ namespace Markway.AuthOpenIddict.Middlewares
             return systemConfiguration;
         }
 
-        // public static void ConfigureKestrel(this WebApplicationBuilder builder)
-        // {
-        //     builder.WebHost.ConfigureKestrel(options =>
-        //     {
-        //         options.ListenAnyIP(4287, o => o.Protocols = HttpProtocols.Http2);
-        //         options.ListenAnyIP(4387, o => o.Protocols = HttpProtocols.Http1);
-        //     });
-        // }
+        public static void ConfigureKestrel(this WebApplicationBuilder builder)
+        {
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.ListenAnyIP(5253, o => o.Protocols = HttpProtocols.Http2);
+                options.ListenAnyIP(5353, o =>
+                {
+                    o.Protocols = HttpProtocols.Http1;
+                });
+            });
+        }
 
         public static void ConfigureOpenIdConnect(this WebApplicationBuilder builder)
         {
