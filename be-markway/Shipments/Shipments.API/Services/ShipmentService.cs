@@ -110,6 +110,7 @@ namespace Markway.Shipments.API.Services
         {
             try
             {
+                Console.WriteLine("Piu bella cosa");
                 UserReply user = await _currentUserService.GetCurrentUserAsync();
 
                 filter.UserId = user.Id;

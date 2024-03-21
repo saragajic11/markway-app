@@ -66,7 +66,7 @@ const ShipmentsDrawer = ({
 
   useEffect(() => {
     setLoadLocations(startLoadLocations);
-  }, startLoadLocations);
+  }, [startLoadLocations]);
 
   useEffect(() => {
     setCustomers(startCustomers);

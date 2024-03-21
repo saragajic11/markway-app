@@ -49,6 +49,7 @@ services:
         condition: service_healthy
     ports:
       - '6287:6287'
+      - '6387:6387'
     environment:
       - BUILDKIT_PROGRESS=1
       - SYSTEMCONFIGURATION__JWT__AUTHORITY=${JWT_AUTHORITY}
@@ -114,8 +115,8 @@ services:
       context: .
       dockerfile: AuthOpenIddict/Dockerfile
     ports:
-      - "5253:5253"
-      - "5353:5353"
+      - '5253:5253'
+      - '5353:5353'
     depends_on:
       - postgres_db
     environment:
