@@ -6,6 +6,8 @@ import ShipmentCustomsDto from './ShipmentCustomsDto';
 import BorderCrossingDto from './BorderCrossingDto';
 import NoteDto from './NoteDto';
 import GetShipmentLoadOnLocationDto from './GetShipmentLoadOnLocationDto';
+import GetShipmentCustomsDto from './GetShipmentCustomsDto';
+import GetBorderCrossingDto from './GetBorderCrossingDto';
 
 class GetRouteDto {
   constructor(
@@ -16,8 +18,8 @@ class GetRouteDto {
     public vehicleType: typeof VehicleType,
     public licencePlate: string,
     public shipmentLoadOnLocations: GetShipmentLoadOnLocationDto[],
-    public shipmentCustoms: ShipmentCustomsDto[],
-    public borderCrossing: BorderCrossingDto,
+    public shipmentCustoms: GetShipmentCustomsDto[],
+    public borderCrossing: GetBorderCrossingDto,
     public note: NoteDto,
     public dateOfPayment: number
   ) {}

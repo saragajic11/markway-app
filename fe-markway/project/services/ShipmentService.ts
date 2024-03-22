@@ -142,7 +142,7 @@ export async function editShipmentStatus(id: number, statusId: any) {
   });
 }
 
-export async function editShipment(id: number, shipment: any) {
+export async function editShipment(id: number | undefined, shipment: any) {
   const accessToken = window.localStorage.getItem('access_token');
 
   const headers = {

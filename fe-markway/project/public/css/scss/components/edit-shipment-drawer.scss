@@ -60,4 +60,20 @@
   label {
     opacity: 0.5;
   }
+
+  .add-route-btn {
+    margin-top: 20px;
+    justify-content: center;
+    max-width: 150px;
+    color: #353e5d;
+    border-color: #353e5d;
+    min-height: 52px;
+    max-height: 52px;
+  }
+
+  hr {
+    border: 1px solid #353e5d;
+    width: 100%;
+    margin-top: 25px;
+  }
 }

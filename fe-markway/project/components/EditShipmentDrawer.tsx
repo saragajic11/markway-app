@@ -1,10 +1,14 @@
 import GetCustomerDto from '@/model/GetCustomerDto';
 import GetShipmentDto from '@/model/GetShipmentDto';
 import { Drawer } from '@mui/material';
-import { FormEvent, Fragment, useContext } from 'react';
+import { Fragment, useContext } from 'react';
 import EditShipmentDrawerContainer from './EditShipmentDrawerContainer';
-import { useForm, useFormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import EditShipmentDrawerContext from '@/context/EditShipmentDrawerContext';
+import { editShipment } from '@/services/ShipmentService';
+import ToastContext from '@/context/ToastContext';
+import CustomsDto from '@/model/CustomsDto';
+import GetBorderCrossingDto from '@/model/GetBorderCrossingDto';
 
 const EditShipmentDrawer = ({
   shipment,
@@ -13,15 +17,18 @@ const EditShipmentDrawer = ({
   borderCrossings,
   customs,
   loadLocations,
+  openAddCarrierDialog,
 }: {
   shipment: GetShipmentDto | undefined;
   customers: GetCustomerDto[] | [];
   carriers: any;
-  borderCrossings: any;
-  customs: any;
+  borderCrossings: GetBorderCrossingDto[] | [];
+  customs: CustomsDto[] | [];
   loadLocations: any;
+  openAddCarrierDialog: any;
 }) => {
   const form = useForm();
+  const { setToastOpened } = useContext(ToastContext);
   const { setValue, getValues, control, handleSubmit, trigger, register } =
     form;
   const { isOpened, setOpened } = useContext(EditShipmentDrawerContext);
@@ -39,7 +46,16 @@ const EditShipmentDrawer = ({
     };
 
   const onSubmitEditShipmentForm = (data: any) => {
-    console.log('Mijao', data);
+    console.log('?ne razumem', data);
+    editShipment(shipment?.id, data).then((response) => {
+      if (response?.status === 200) {
+        //TODO: implementirati refresh stranice u slucaju uspesnog dodavanja klijenta
+        setToastOpened(true, true, 'Uspešno izmenjen prevoznik');
+      } else {
+        setToastOpened(true, false, 'Greška prilikom izmene prevoznika');
+      }
+      setOpened(false);
+    });
   };
 
   const drawer = (
@@ -53,7 +69,7 @@ const EditShipmentDrawer = ({
               setValue={setValue}
               shipment={shipment}
               customers={customers}
-              onSubmit={handleSubmit(onSubmitEditShipmentForm)}
+              onSubmit={onSubmitEditShipmentForm}
               values={getValues()}
               listOfCarriers={carriers}
               borderCrossings={borderCrossings}
@@ -62,6 +78,8 @@ const EditShipmentDrawer = ({
               control={control}
               trigger={trigger}
               register={register}
+              openAddCarrierDialog={openAddCarrierDialog}
+              carriers={carriers}
             />
           </div>
         </Drawer>

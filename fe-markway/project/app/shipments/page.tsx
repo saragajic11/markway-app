@@ -234,6 +234,7 @@ export default function Shipments() {
           borderCrossings={borderCrossings}
           customs={customs}
           loadLocations={loadLocations}
+          openAddCarrierDialog={openAddCarrierDialog}
         />
       </EditShipmentDrawerContext.Provider>
       <CarrierDialogContext.Provider value={valueCarrier}>
